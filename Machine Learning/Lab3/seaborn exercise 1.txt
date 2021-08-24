@@ -1,0 +1,196 @@
+import seaborn as sb
+
+import seaborn as sb
+​
+INBUILT DATASETS
+print(sb.get_dataset_names())
+​
+['anagrams', 'anscombe', 'attention', 'brain_networks', 'car_crashes', 'diamonds', 'dots', 'exercise', 'flights', 'fmri', 'gammas', 'geyser', 'iris', 'mpg', 'penguins', 'planets', 'tips', 'titanic']
+df1 = sb.load_dataset("flights")
+df1.info()
+df1.head()
+​
+​
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 144 entries, 0 to 143
+Data columns (total 3 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   year        144 non-null    int64   
+ 1   month       144 non-null    category
+ 2   passengers  144 non-null    int64   
+dtypes: category(1), int64(2)
+memory usage: 2.9 KB
+year	month	passengers
+0	1949	Jan	112
+1	1949	Feb	118
+2	1949	Mar	132
+3	1949	Apr	129
+4	1949	May	121
+​
+import matplotlib.pyplot as plt
+#plt.figure(figsize=(2,2))
+plt.scatter(df1['year'],df1['passengers'])
+plt.show()
+
+huevector or key in data
+Grouping variable that will produce elements with different colors. Can be either categorical or numeric, although color mapping will behave differently in latter case.
+
+sb.relplot(x="year",y="passengers",data=df1,kind="line",hue="month")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d1015de190>
+
+sb.relplot(x="year",y="passengers",data=df1,kind="line",col="month")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d1015a7880>
+
+import numpy as np
+df2 = np.random.randint(5,size=(2,5)) 
+print(df2)
+sb.heatmap(df2,annot=True)
+[[3 0 0 4 1]
+ [4 1 4 4 4]]
+<AxesSubplot:>
+
+import seaborn as sns
+tips = sns.load_dataset("tips")
+tips.head()
+total_bill	tip	sex	smoker	day	time	size
+0	16.99	1.01	Female	No	Sun	Dinner	2
+1	10.34	1.66	Male	No	Sun	Dinner	3
+2	21.01	3.50	Male	No	Sun	Dinner	3
+3	23.68	3.31	Male	No	Sun	Dinner	2
+4	24.59	3.61	Female	No	Sun	Dinner	4
+sns.relplot(data=tips, x="total_bill", y="tip", hue="day")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10a3278b0>
+
+sns.relplot(data=tips, x="total_bill", y="tip", hue="day", col="time")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10a37cca0>
+
+sns.relplot(data=tips, x="total_bill", y="tip", hue="day", col="time", row="sex")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10a417970>
+
+sns.relplot(data=tips, x="total_bill", y="tip", hue="time", col="day", col_wrap=2)
+​
+<seaborn.axisgrid.FacetGrid at 0x2533e776400>
+
+seaborn.catplot¶
+This function provides access to several axes-level functions that show the relationship between a numerical and one or more categorical variables using one of several visual representations.
+
+import seaborn as sns
+sns.set_theme(style="ticks")
+exercise = sns.load_dataset("exercise")
+g = sns.catplot(x="time", y="pulse", hue="kind", data=exercise)
+
+tips = sns.load_dataset("tips")
+sns.catplot(x="day", y="total_bill", data=tips)
+<seaborn.axisgrid.FacetGrid at 0x2d10a448f10>
+
+The second approach adjusts the points along the categorical axis using an algorithm that prevents them from overlapping.
+It can give a better representation of the distribution of observations, although it only works well for relatively small datasets. This kind of plot is sometimes called a “beeswarm” and is drawn in seaborn by swarmplot(), which is activated by setting kind="swarm" in catplot():
+
+sns.catplot(x="day", y="total_bill", kind="swarm", data=tips)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10b030fd0>
+
+Similar to the relational plots, it’s possible to add another dimension to a categorical plot by using a hue semantic.
+(The categorical plots do not currently support size or style semantics). Each different categorical plotting function handles the hue semantic differently. For the scatter plots, it is only necessary to change the color of the points:
+
+sns.catplot(x="day", y="total_bill", hue="sex", kind="swarm", data=tips)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10ae3fd30>
+
+sns.catplot(x="size", y="total_bill", data=tips)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10ae796d0>
+
+sns.catplot(x="smoker", y="tip", order=["No", "Yes"], data=tips)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10af041f0>
+
+sns.catplot(x="total_bill", y="day", hue="time", kind="swarm", data=tips)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10aea43d0>
+
+Box Plot is the visual representation of the depicting groups of numerical data through their quartiles.
+A box plot consist of 5 things.
+
+Minimum First Quartile or 25% Median (Second Quartile) or 50% Third Quartile or 75% Maximum
+
+Bottom black horizontal line of blue box plot is minimum value First black horizontal line of rectangle shape of blue box plot is First quartile or 25% Second black horizontal line of rectangle shape of blue box plot is Second quartile or 50% or median. Third black horizontal line of rectangle shape of blue box plot is third quartile or 75% Top black horizontal line of rectangle shape of blue box plot is maximum value. Small diamond shape of blue box plot is outlier data or erroneous data.
+
+sns.catplot(x="day", y="total_bill", kind="box", data=tips)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10afca0a0>
+
+sns.catplot(x="day", y="total_bill", hue="smoker", kind="box", data=tips)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10c28b0a0>
+
+Bar plots
+A familiar style of plot that accomplishes this goal is a bar plot. In seaborn, the barplot() function operates on a full dataset and applies a function to obtain the estimate (taking the mean by default). When there are multiple observations in each category, it also uses bootstrapping to compute a confidence interval around the estimate, which is plotted using error bars:
+
+titanic = sns.load_dataset("titanic")
+sns.catplot(x="sex", y="survived", hue="class", kind="bar", data=titanic)
+<seaborn.axisgrid.FacetGrid at 0x2d10c329910>
+
+Point plots
+An alternative style for visualizing the same information is offered by the pointplot() function. This function also encodes the value of the estimate with height on the other axis, but rather than showing a full bar, it plots the point estimate and confidence interval.
+
+sns.catplot(x="sex", y="survived", hue="class", kind="point", data=titanic)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10c496550>
+
+sns.catplot(x="day", y="total_bill", hue="smoker",
+            col="time",aspect=.7,
+            kind="swarm", data=tips)
+<seaborn.axisgrid.FacetGrid at 0x2d10c55cf10>
+
+Visualizing distributions of data¶
+One example of a situation where defaults fail is when the variable takes a relatively small number of integer values.
+In that case, the default bin width may be too small, creating awkward gaps in the distribution:
+
+tips = sns.load_dataset("tips")
+sns.displot(tips, x="size")
+<seaborn.axisgrid.FacetGrid at 0x2d10d6b1280>
+
+One approach would be to specify the precise bin breaks by passing an array to bins:
+sns.displot(tips, x="size", bins=[1, 2, 3, 4, 5, 6, 7])
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10c510790>
+
+This can also be accomplished by setting discrete=True,
+which chooses bin breaks that represent the unique values in a dataset with bars that are centered on their corresponding value.
+
+sns.displot(tips, x="size", discrete=True)
+​
+<seaborn.axisgrid.FacetGrid at 0x27397189490>
+
+sns.displot(tips, x="day", shrink=.90)
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10adec8b0>
+
+Conditioning on other variables
+Once you understand the distribution of a variable, the next step is often to ask whether features of that distribution differ across other variables in the dataset.
+
+sns.displot(penguins, x="flipper_length_mm", hue="species")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10aded220>
+
+sns.displot(penguins, x="flipper_length_mm", hue="species", multiple="stack")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10af62850>
+
+Visualizing bivariate distributions¶
+All of the examples so far have considered univariate distributions: distributions of a single variable, perhaps conditional on a second variable assigned to hue. Assigning a second variable to y, however, will plot a bivariate distribution:
+
+sns.displot(penguins, x="bill_length_mm", y="bill_depth_mm")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10dbf2220>
+
+sns.displot(penguins, x="bill_length_mm", y="bill_depth_mm", hue="species")
+​
+<seaborn.axisgrid.FacetGrid at 0x2d10adeb2e0>

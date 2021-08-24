@@ -1,0 +1,365 @@
+
+# import pandas as pd
+import pandas as pd
+
+# list of strings
+lst = ['Soon', 'For', 'Good', 'is', 
+            'portal', 'for', 'Good']
+ 
+# Calling DataFrame constructor on list
+df = pd.DataFrame(lst)
+print(df)
+        0
+0    Soon
+1     For
+2    Good
+3      is
+4  portal
+5     for
+6    Good
+# intialise data of lists.
+data = {'Name':['Tom', 'nick', 'krish', 'jack'],
+        'Age':[20, 21, 19, 18]}
+ 
+# Create DataFrame
+df = pd.DataFrame(data)
+ 
+# Print the output.
+print(df)
+    Name  Age
+0    Tom   20
+1   nick   21
+2  krish   19
+3   jack   18
+# Define a dictionary containing employee data
+data = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
+        'Age':[27, 24, 22, 32],
+        'Address':['Delhi', 'Kanpur', 'Allahabad', 'Kannauj'],
+        'Qualification':['Msc', 'MA', 'MCA', 'Phd']}
+ 
+# Convert the dictionary into DataFrame 
+df = pd.DataFrame(data)
+ 
+# select two columns
+print(df[['Name', 'Qualification']])
+     Name Qualification
+0     Jai           Msc
+1  Princi            MA
+2  Gaurav           MCA
+3    Anuj           Phd
+# making data frame from csv file
+data = pd.read_csv("nba.csv", index_col ="Name")
+ 
+# retrieving row by loc method
+first = data.loc["Avery Bradley"]
+second = data.loc["R.J. Hunter"]
+ 
+ 
+print(first, "\n\n\n", second)
+Team        Boston Celtics
+Number                 0.0
+Position                PG
+Age                   25.0
+Height                 6-2
+Weight               180.0
+College              Texas
+Salary           7730337.0
+Name: Avery Bradley, dtype: object 
+
+
+ Team        Boston Celtics
+Number                28.0
+Position                SG
+Age                   22.0
+Height                 6-5
+Weight               185.0
+College      Georgia State
+Salary           1148640.0
+Name: R.J. Hunter, dtype: object
+# making data frame from csv file
+data = pd.read_csv("nba.csv", index_col ="Name")
+ 
+# retrieving columns by indexing operator
+first = data["Age"]
+ 
+ 
+ 
+print(first)
+Name
+Avery Bradley    25.0
+Jae Crowder      25.0
+John Holland     27.0
+R.J. Hunter      22.0
+Jonas Jerebko    29.0
+                 ... 
+Shelvin Mack     26.0
+Raul Neto        24.0
+Tibor Pleiss     26.0
+Jeff Withey      26.0
+NaN               NaN
+Name: Age, Length: 458, dtype: float64
+import pandas as pd
+ 
+# making data frame from csv file
+data = pd.read_csv("nba.csv", index_col ="Name")
+ 
+ 
+# retrieving rows by iloc method 
+row2 = data.iloc[3] 
+ 
+ 
+ 
+print(row2)
+Team        Boston Celtics
+Number                28.0
+Position                SG
+Age                   22.0
+Height                 6-5
+Weight               185.0
+College      Georgia State
+Salary           1148640.0
+Name: R.J. Hunter, dtype: object
+In order to check missing values in Pandas DataFrame, we use a function isnull() and notnull(). Both function help in checking whether a value is NaN or not. These function can also be used in Pandas Series in order to find null values in a series.
+# importing pandas as pd
+import pandas as pd
+ 
+# importing numpy as np
+import numpy as np
+ 
+# dictionary of lists
+dict = {'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, 45, 56, np.nan],
+        'Third Score':[np.nan, 40, 80, 98]}
+ 
+# creating a dataframe from list
+df = pd.DataFrame(dict)
+ 
+# using isnull() function  
+df.isnull()
+First Score	Second Score	Third Score
+0	False	False	True
+1	False	False	False
+2	True	False	False
+3	False	True	False
+Filling missing values using fillna(), replace() and interpolate() :
+In order to fill null values in a datasets, we use fillna(), replace() and interpolate() function these function replace NaN values with some value of their own. All these function help in filling a null values in datasets of a DataFrame. Interpolate() function is basically used to fill NA values in the dataframe but it uses various interpolation technique to fill the missing values rather than hard-coding the value.
+
+# importing pandas as pd
+import pandas as pd
+ 
+# importing numpy as np
+import numpy as np
+ 
+# dictionary of lists
+dict = {'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, 45, 56, np.nan],
+        'Third Score':[np.nan, 40, 80, 98]}
+ 
+# creating a dataframe from dictionary
+df = pd.DataFrame(dict)
+ 
+# filling missing value using fillna()  
+df.fillna(0)
+First Score	Second Score	Third Score
+0	100.0	30.0	0.0
+1	90.0	45.0	40.0
+2	0.0	56.0	80.0
+3	95.0	0.0	98.0
+# importing pandas as pd
+import pandas as pd
+ 
+# importing numpy as np
+import numpy as np
+ 
+# dictionary of lists
+dict = {'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, np.nan, 45, 56],
+        'Third Score':[52, 40, 80, 98],
+        'Fourth Score':[np.nan, np.nan, np.nan, 65]}
+ 
+# creating a dataframe from dictionary
+df = pd.DataFrame(dict)
+df.dropna()
+First Score	Second Score	Third Score	Fourth Score
+3	95.0	56.0	98	65.0
+Iterating over rows :
+In order to iterate over rows, we can use three function iteritems(), iterrows(), itertuples() . These three function will help in iteration over rows.
+
+# importing pandas as pd
+import pandas as pd
+  
+# dictionary of lists
+dict = {'name':["aparna", "pankaj", "sudhir", "Geeku"],
+        'degree': ["MBA", "BCA", "M.Tech", "MBA"],
+        'score':[90, 40, 80, 98]}
+ 
+# creating a dataframe from a dictionary 
+df = pd.DataFrame(dict)
+ 
+print(df)
+     name  degree  score
+0  aparna     MBA     90
+1  pankaj     BCA     40
+2  sudhir  M.Tech     80
+3   Geeku     MBA     98
+# importing pandas as pd
+import pandas as pd
+  
+# dictionary of lists
+dict = {'name':["aparna", "pankaj", "sudhir", "Geeku"],
+        'degree': ["MBA", "BCA", "M.Tech", "MBA"],
+        'score':[90, 40, 80, 98]}
+ 
+# creating a dataframe from a dictionary 
+df = pd.DataFrame(dict)
+ 
+# iterating over rows using iterrows() function 
+for i, j in df.iterrows():
+    print(i, j)
+    print()
+0 name      aparna
+degree       MBA
+score         90
+Name: 0, dtype: object
+
+1 name      pankaj
+degree       BCA
+score         40
+Name: 1, dtype: object
+
+2 name      sudhir
+degree    M.Tech
+score         80
+Name: 2, dtype: object
+
+3 name      Geeku
+degree      MBA
+score        98
+Name: 3, dtype: object
+
+Iterating over Columns :
+In order to iterate over columns, we need to create a list of dataframe columns and then iterating through that list to pull out the dataframe columns.
+
+# importing pandas as pd
+import pandas as pd
+   
+# dictionary of lists
+dict = {'name':["aparna", "pankaj", "sudhir", "Geeku"],
+        'degree': ["MBA", "BCA", "M.Tech", "MBA"],
+        'score':[90, 40, 80, 98]}
+  
+# creating a dataframe from a dictionary 
+df = pd.DataFrame(dict)
+ 
+print(df)
+     name  degree  score
+0  aparna     MBA     90
+1  pankaj     BCA     40
+2  sudhir  M.Tech     80
+3   Geeku     MBA     98
+# creating a list of dataframe columns
+columns = list(df)
+ 
+for i in columns:
+ 
+    # printing the third element of the column
+    print (df[i][2])
+​
+sudhir
+M.Tech
+80
+​
+df2 = pd.read_csv("nba.csv")
+df2.head()
+Name	Team	Number	Position	Age	Height	Weight	College	Salary
+0	Avery Bradley	Boston Celtics	0.0	PG	25.0	6-2	180.0	Texas	7730337.0
+1	Jae Crowder	Boston Celtics	99.0	SF	25.0	6-6	235.0	Marquette	6796117.0
+2	John Holland	Boston Celtics	30.0	SG	27.0	6-5	205.0	Boston University	NaN
+3	R.J. Hunter	Boston Celtics	28.0	SG	22.0	6-5	185.0	Georgia State	1148640.0
+4	Jonas Jerebko	Boston Celtics	8.0	PF	29.0	6-10	231.0	NaN	5000000.0
+df2.tail()
+Name	Team	Number	Position	Age	Height	Weight	College	Salary
+453	Shelvin Mack	Utah Jazz	8.0	PG	26.0	6-3	203.0	Butler	2433333.0
+454	Raul Neto	Utah Jazz	25.0	PG	24.0	6-1	179.0	NaN	900000.0
+455	Tibor Pleiss	Utah Jazz	21.0	C	26.0	7-3	256.0	NaN	2900000.0
+456	Jeff Withey	Utah Jazz	24.0	C	26.0	7-0	231.0	Kansas	947276.0
+457	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN
+print(df2.head)
+<bound method NDFrame.head of               Name            Team  Number Position   Age Height  Weight  \
+0    Avery Bradley  Boston Celtics     0.0       PG  25.0    6-2   180.0   
+1      Jae Crowder  Boston Celtics    99.0       SF  25.0    6-6   235.0   
+2     John Holland  Boston Celtics    30.0       SG  27.0    6-5   205.0   
+3      R.J. Hunter  Boston Celtics    28.0       SG  22.0    6-5   185.0   
+4    Jonas Jerebko  Boston Celtics     8.0       PF  29.0   6-10   231.0   
+..             ...             ...     ...      ...   ...    ...     ...   
+453   Shelvin Mack       Utah Jazz     8.0       PG  26.0    6-3   203.0   
+454      Raul Neto       Utah Jazz    25.0       PG  24.0    6-1   179.0   
+455   Tibor Pleiss       Utah Jazz    21.0        C  26.0    7-3   256.0   
+456    Jeff Withey       Utah Jazz    24.0        C  26.0    7-0   231.0   
+457            NaN             NaN     NaN      NaN   NaN    NaN     NaN   
+
+               College     Salary  
+0                Texas  7730337.0  
+1            Marquette  6796117.0  
+2    Boston University        NaN  
+3        Georgia State  1148640.0  
+4                  NaN  5000000.0  
+..                 ...        ...  
+453             Butler  2433333.0  
+454                NaN   900000.0  
+455                NaN  2900000.0  
+456             Kansas   947276.0  
+457                NaN        NaN  
+
+[458 rows x 9 columns]>
+print("Type:\n",type(df2))
+print("Information about the dataframe:",df2.info)
+Type:
+ <class 'pandas.core.frame.DataFrame'>
+Information about the dataframe: <bound method DataFrame.info of               Name            Team  Number Position   Age Height  Weight  \
+0    Avery Bradley  Boston Celtics     0.0       PG  25.0    6-2   180.0   
+1      Jae Crowder  Boston Celtics    99.0       SF  25.0    6-6   235.0   
+2     John Holland  Boston Celtics    30.0       SG  27.0    6-5   205.0   
+3      R.J. Hunter  Boston Celtics    28.0       SG  22.0    6-5   185.0   
+4    Jonas Jerebko  Boston Celtics     8.0       PF  29.0   6-10   231.0   
+..             ...             ...     ...      ...   ...    ...     ...   
+453   Shelvin Mack       Utah Jazz     8.0       PG  26.0    6-3   203.0   
+454      Raul Neto       Utah Jazz    25.0       PG  24.0    6-1   179.0   
+455   Tibor Pleiss       Utah Jazz    21.0        C  26.0    7-3   256.0   
+456    Jeff Withey       Utah Jazz    24.0        C  26.0    7-0   231.0   
+457            NaN             NaN     NaN      NaN   NaN    NaN     NaN   
+
+               College     Salary  
+0                Texas  7730337.0  
+1            Marquette  6796117.0  
+2    Boston University        NaN  
+3        Georgia State  1148640.0  
+4                  NaN  5000000.0  
+..                 ...        ...  
+453             Butler  2433333.0  
+454                NaN   900000.0  
+455                NaN  2900000.0  
+456             Kansas   947276.0  
+457                NaN        NaN  
+
+[458 rows x 9 columns]>
+print("Shape of datafframe:",df2.shape)
+df2.drop_duplicates()
+print(df2.shape)
+Shape of datafframe: (458, 9)
+(458, 9)
+print("Columns of dataframe:\t",df2.columns)
+​
+Columns of dataframe:	 Index(['Name', 'Team', 'Number', 'Position', 'Age', 'Height', 'Weight',
+       'College', 'Salary'],
+      dtype='object')
+print(df2.describe())
+           Number         Age      Weight        Salary
+count  457.000000  457.000000  457.000000  4.460000e+02
+mean    17.678337   26.938731  221.522976  4.842684e+06
+std     15.966090    4.404016   26.368343  5.229238e+06
+min      0.000000   19.000000  161.000000  3.088800e+04
+25%      5.000000   24.000000  200.000000  1.044792e+06
+50%     13.000000   26.000000  220.000000  2.839073e+06
+75%     25.000000   30.000000  240.000000  6.500000e+06
+max     99.000000   40.000000  307.000000  2.500000e+07

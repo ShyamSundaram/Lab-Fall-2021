@@ -1,0 +1,791 @@
+In [2]:
+import pandas as pd
+Building DataFrames with Pandas
+From Python Dictionaries
+In [7]:
+list1 = ['S1','S2','S3','S4']
+English = [89,90,78,98]
+Maths = [67,90,100,100]
+Science = [78,89,90,89]
+
+titles = ['ID', 'English','Maths','Science']
+values = [list1,English,Maths,Science]
+result = list(zip(titles,values))
+result
+Out[7]:
+[('ID', ['S1', 'S2', 'S3', 'S4']),
+ ('English', [89, 90, 78, 98]),
+ ('Maths', [67, 90, 100, 100]),
+ ('Science', [78, 89, 90, 89])]
+In [8]:
+result1 = dict(result)
+df1 = pd.DataFrame(result1)
+print(df1)
+   ID  English  Maths  Science
+0  S1       89     67       78
+1  S2       90     90       89
+2  S3       78    100       90
+3  S4       98    100       89
+Importing data
+Dataframes from CSV files
+In [3]:
+df2 = pd.read_csv('E:\\ML online\\Session - IV\\Pandas\\got-character-deaths.csv')
+df2.head()
+Out[3]:
+Name	Allegiances	Death Year	Book of Death	Death Chapter	Book Intro Chapter	Gender	Nobility	GoT	CoK	SoS	FfC	DwD
+0	Addam Marbrand	Lannister	NaN	NaN	NaN	56.0	1	1	1	1	1	1	0
+1	Aegon Frey (Jinglebell)	None	299.0	3.0	51.0	49.0	1	1	0	0	1	0	0
+2	Aegon Targaryen	House Targaryen	NaN	NaN	NaN	5.0	1	1	0	0	0	0	1
+3	Adrack Humble	House Greyjoy	300.0	5.0	20.0	20.0	1	1	0	0	0	0	1
+4	Aemon Costayne	Lannister	NaN	NaN	NaN	NaN	1	1	0	0	1	0	0
+In [13]:
+df2.tail()
+Out[13]:
+Name	Allegiances	Death Year	Book of Death	Death Chapter	Book Intro Chapter	Gender	Nobility	GoT	CoK	SoS	FfC	DwD
+912	Zollo	None	NaN	NaN	NaN	21.0	1	0	0	0	1	0	0
+913	Yurkhaz zo Yunzak	None	300.0	5.0	59.0	47.0	1	0	0	0	0	0	1
+914	Yezzan Zo Qaggaz	None	300.0	5.0	57.0	25.0	1	1	0	0	0	0	1
+915	Torwynd the Tame	Wildling	300.0	5.0	73.0	73.0	1	0	0	0	1	0	0
+916	Talbert Serry	Tyrell	300.0	4.0	29.0	29.0	1	1	0	0	0	1	0
+Try by yourself...
+In [ ]:
+###  Remove headers from the csv file and import
+###  Then,add header to it
+
+Display first 10 lines of the file
+Saving processed data frames
+To CSV File
+In [14]:
+df2.to_csv('E:\\ML Online\\Session - IV\\Pandas\\result.csv')
+Try Yourselves....
+In [ ]:
+### Open a file with xls as extension and save it back as a csv file
+Pandas - Operations
+Creating index for entities...
+In [15]:
+#df2.set_index("Gender",inplace=True)
+print(df2.head)
+<bound method NDFrame.head of                                   Name      Allegiances  Death Year  \
+0                       Addam Marbrand        Lannister         NaN   
+1              Aegon Frey (Jinglebell)             None       299.0   
+2                      Aegon Targaryen  House Targaryen         NaN   
+3                        Adrack Humble    House Greyjoy       300.0   
+4                       Aemon Costayne        Lannister         NaN   
+5                      Aemon Estermont        Baratheon         NaN   
+6    Aemon Targaryen (son of Maekar I)    Night's Watch       300.0   
+7                           Aenys Frey             None       300.0   
+8                        Aeron Greyjoy    House Greyjoy         NaN   
+9                               Aethan    Night's Watch         NaN   
+10                               Aggar    House Greyjoy       299.0   
+11                                Aggo  House Targaryen         NaN   
+12                       Alan of Rosby    Night's Watch       300.0   
+13                             Alayaya             None         NaN   
+14                         Albar Royce            Arryn         NaN   
+15                              Albett    Night's Watch         NaN   
+16                            Alebelly      House Stark       299.0   
+17                    Alerie Hightower     House Tyrell         NaN   
+18                  Alesander Staedmon        Baratheon         NaN   
+19                     Alester Florent        Baratheon       300.0   
+20                     Alia of Braavos             None         NaN   
+21                         Alla Tyrell     House Tyrell         NaN   
+22                     Allard Seaworth        Baratheon       299.0   
+23                      Alliser Thorne    Night's Watch         NaN   
+24                                Alyn      House Stark       298.0   
+25                        Alyn Ambrose           Tyrell         NaN   
+26                      Alyn Estermont        Baratheon         NaN   
+27                     Alyn Stackspear        Lannister         NaN   
+28                       Alys Karstark            Stark         NaN   
+29                     Alysane Mormont            Stark         NaN   
+..                                 ...              ...         ...   
+887                             Willit        Lannister         NaN   
+888                   Willow Witch-eye         Wildling       300.0   
+889                             Willum            Tully         NaN   
+890                               Woth    Night's Watch       299.0   
+891                              Wulfe    House Greyjoy         NaN   
+892                Wun Weg Wun Dar Wun         Wildling         NaN   
+893                        Wyl (guard)      House Stark       298.0   
+894                   Wyl the Whittler             None       299.0   
+895                     Wylis Manderly            Stark         NaN   
+896                     Wylla Manderly            Stark         NaN   
+897                     Wyman Manderly            Stark         NaN   
+898                  Wynafryd Manderly            Stark         NaN   
+899                       Wynton Stout    Night's Watch         NaN   
+900                   Xaro Xhoan Daxos             None         NaN   
+901                             Xhondo             None         NaN   
+902                             Yandry  House Targaryen         NaN   
+903                        Yellow Dick             None       300.0   
+904                       Ygon Farwynd          Greyjoy         NaN   
+905                            Ygritte         Wildling       299.0   
+906                       Yohn Farwynd          Greyjoy         NaN   
+907                         Yohn Royce            Arryn         NaN   
+908                              Yoren    Night's Watch       299.0   
+909                        Young Henly    Night's Watch       299.0   
+910                             Ysilla  House Targaryen         NaN   
+911                                Zei            Stark         NaN   
+912                              Zollo             None         NaN   
+913                  Yurkhaz zo Yunzak             None       300.0   
+914                   Yezzan Zo Qaggaz             None       300.0   
+915                   Torwynd the Tame         Wildling       300.0   
+916                      Talbert Serry           Tyrell       300.0   
+
+     Book of Death  Death Chapter  Book Intro Chapter  Gender  Nobility  GoT  \
+0              NaN            NaN                56.0       1         1    1   
+1              3.0           51.0                49.0       1         1    0   
+2              NaN            NaN                 5.0       1         1    0   
+3              5.0           20.0                20.0       1         1    0   
+4              NaN            NaN                 NaN       1         1    0   
+5              NaN            NaN                 NaN       1         1    0   
+6              4.0           35.0                21.0       1         1    1   
+7              5.0            NaN                59.0       0         1    1   
+8              NaN            NaN                11.0       1         1    0   
+9              NaN            NaN                 0.0       1         0    0   
+10             2.0           56.0                50.0       1         0    0   
+11             NaN            NaN                54.0       1         0    1   
+12             5.0            4.0                18.0       1         1    0   
+13             NaN            NaN                15.0       0         0    0   
+14             NaN            NaN                38.0       1         1    1   
+15             NaN            NaN                26.0       1         0    1   
+16             2.0           46.0                 4.0       1         0    0   
+17             NaN            NaN                 6.0       0         1    0   
+18             NaN            NaN                65.0       1         1    0   
+19             4.0            NaN                36.0       1         1    0   
+20             NaN            NaN                28.0       0         0    1   
+21             NaN            NaN                 6.0       0         1    0   
+22             2.0           10.0                10.0       1         1    0   
+23             NaN            NaN                19.0       1         0    1   
+24             3.0           34.0                12.0       1         0    1   
+25             NaN            NaN                59.0       1         1    0   
+26             NaN            NaN                 NaN       1         1    0   
+27             NaN            NaN                16.0       1         1    0   
+28             NaN            NaN                44.0       0         1    0   
+29             NaN            NaN                35.0       0         1    0   
+..             ...            ...                 ...     ...       ...  ...   
+887            NaN            NaN                65.0       1         0    0   
+888            5.0           69.0                37.0       0         0    0   
+889            NaN            NaN                43.0       1         0    1   
+890            2.0           14.0                14.0       1         0    0   
+891            NaN            NaN                29.0       1         0    0   
+892            NaN            NaN                35.0       1         0    0   
+893            1.0           35.0                35.0       1         0    1   
+894            3.0           34.0                34.0       1         0    0   
+895            NaN            NaN                55.0       1         1    1   
+896            NaN            NaN                19.0       0         1    0   
+897            NaN            NaN                16.0       1         1    0   
+898            NaN            NaN                19.0       1         1    0   
+899            NaN            NaN                41.0       1         0    0   
+900            NaN            NaN                12.0       1         1    0   
+901            NaN            NaN                26.0       1         0    0   
+902            NaN            NaN                 8.0       1         0    0   
+903            5.0           46.0                12.0       1         0    0   
+904            NaN            NaN                19.0       1         1    0   
+905            3.0           55.0                51.0       0         0    0   
+906            NaN            NaN                19.0       1         1    0   
+907            NaN            NaN                29.0       1         1    1   
+908            2.0           19.0                13.0       1         0    1   
+909            3.0           55.0                55.0       1         0    0   
+910            NaN            NaN                 8.0       1         0    0   
+911            NaN            NaN                64.0       0         0    0   
+912            NaN            NaN                21.0       1         0    0   
+913            5.0           59.0                47.0       1         0    0   
+914            5.0           57.0                25.0       1         1    0   
+915            5.0           73.0                73.0       1         0    0   
+916            4.0           29.0                29.0       1         1    0   
+
+     CoK  SoS  FfC  DwD  
+0      1    1    1    0  
+1      0    1    0    0  
+2      0    0    0    1  
+3      0    0    0    1  
+4      0    1    0    0  
+5      1    1    0    0  
+6      0    1    1    0  
+7      1    1    0    1  
+8      1    0    1    0  
+9      0    1    0    0  
+10     1    0    0    0  
+11     1    1    0    1  
+12     1    1    0    1  
+13     1    0    0    0  
+14     0    0    1    0  
+15     0    0    0    0  
+16     1    0    0    0  
+17     0    1    1    0  
+18     1    0    0    0  
+19     1    1    0    0  
+20     0    0    0    0  
+21     0    1    1    0  
+22     1    0    0    0  
+23     1    1    0    1  
+24     0    0    0    0  
+25     1    0    1    0  
+26     1    1    0    0  
+27     0    0    1    0  
+28     0    0    0    1  
+29     0    0    0    1  
+..   ...  ...  ...  ...  
+887    1    0    0    0  
+888    0    0    0    1  
+889    0    0    0    0  
+890    1    0    0    0  
+891    0    0    1    1  
+892    0    0    0    1  
+893    0    0    0    0  
+894    0    1    0    0  
+895    1    0    1    0  
+896    0    0    0    1  
+897    1    0    0    1  
+898    0    0    0    1  
+899    0    1    0    0  
+900    1    0    0    1  
+901    0    0    1    0  
+902    0    0    0    1  
+903    0    0    0    1  
+904    0    0    1    0  
+905    1    1    0    0  
+906    0    0    1    0  
+907    0    0    1    0  
+908    1    0    0    0  
+909    0    1    0    0  
+910    0    0    0    1  
+911    0    1    0    0  
+912    0    1    0    0  
+913    0    0    0    1  
+914    0    0    0    1  
+915    0    1    0    0  
+916    0    0    1    0  
+
+[917 rows x 13 columns]>
+Type and information about dataframe
+In [16]:
+print("Type:\n",type(df2))
+print("Information about the dataframe:",df2.info)
+Type:
+ <class 'pandas.core.frame.DataFrame'>
+Information about the dataframe: <bound method DataFrame.info of                                   Name      Allegiances  Death Year  \
+0                       Addam Marbrand        Lannister         NaN   
+1              Aegon Frey (Jinglebell)             None       299.0   
+2                      Aegon Targaryen  House Targaryen         NaN   
+3                        Adrack Humble    House Greyjoy       300.0   
+4                       Aemon Costayne        Lannister         NaN   
+5                      Aemon Estermont        Baratheon         NaN   
+6    Aemon Targaryen (son of Maekar I)    Night's Watch       300.0   
+7                           Aenys Frey             None       300.0   
+8                        Aeron Greyjoy    House Greyjoy         NaN   
+9                               Aethan    Night's Watch         NaN   
+10                               Aggar    House Greyjoy       299.0   
+11                                Aggo  House Targaryen         NaN   
+12                       Alan of Rosby    Night's Watch       300.0   
+13                             Alayaya             None         NaN   
+14                         Albar Royce            Arryn         NaN   
+15                              Albett    Night's Watch         NaN   
+16                            Alebelly      House Stark       299.0   
+17                    Alerie Hightower     House Tyrell         NaN   
+18                  Alesander Staedmon        Baratheon         NaN   
+19                     Alester Florent        Baratheon       300.0   
+20                     Alia of Braavos             None         NaN   
+21                         Alla Tyrell     House Tyrell         NaN   
+22                     Allard Seaworth        Baratheon       299.0   
+23                      Alliser Thorne    Night's Watch         NaN   
+24                                Alyn      House Stark       298.0   
+25                        Alyn Ambrose           Tyrell         NaN   
+26                      Alyn Estermont        Baratheon         NaN   
+27                     Alyn Stackspear        Lannister         NaN   
+28                       Alys Karstark            Stark         NaN   
+29                     Alysane Mormont            Stark         NaN   
+..                                 ...              ...         ...   
+887                             Willit        Lannister         NaN   
+888                   Willow Witch-eye         Wildling       300.0   
+889                             Willum            Tully         NaN   
+890                               Woth    Night's Watch       299.0   
+891                              Wulfe    House Greyjoy         NaN   
+892                Wun Weg Wun Dar Wun         Wildling         NaN   
+893                        Wyl (guard)      House Stark       298.0   
+894                   Wyl the Whittler             None       299.0   
+895                     Wylis Manderly            Stark         NaN   
+896                     Wylla Manderly            Stark         NaN   
+897                     Wyman Manderly            Stark         NaN   
+898                  Wynafryd Manderly            Stark         NaN   
+899                       Wynton Stout    Night's Watch         NaN   
+900                   Xaro Xhoan Daxos             None         NaN   
+901                             Xhondo             None         NaN   
+902                             Yandry  House Targaryen         NaN   
+903                        Yellow Dick             None       300.0   
+904                       Ygon Farwynd          Greyjoy         NaN   
+905                            Ygritte         Wildling       299.0   
+906                       Yohn Farwynd          Greyjoy         NaN   
+907                         Yohn Royce            Arryn         NaN   
+908                              Yoren    Night's Watch       299.0   
+909                        Young Henly    Night's Watch       299.0   
+910                             Ysilla  House Targaryen         NaN   
+911                                Zei            Stark         NaN   
+912                              Zollo             None         NaN   
+913                  Yurkhaz zo Yunzak             None       300.0   
+914                   Yezzan Zo Qaggaz             None       300.0   
+915                   Torwynd the Tame         Wildling       300.0   
+916                      Talbert Serry           Tyrell       300.0   
+
+     Book of Death  Death Chapter  Book Intro Chapter  Gender  Nobility  GoT  \
+0              NaN            NaN                56.0       1         1    1   
+1              3.0           51.0                49.0       1         1    0   
+2              NaN            NaN                 5.0       1         1    0   
+3              5.0           20.0                20.0       1         1    0   
+4              NaN            NaN                 NaN       1         1    0   
+5              NaN            NaN                 NaN       1         1    0   
+6              4.0           35.0                21.0       1         1    1   
+7              5.0            NaN                59.0       0         1    1   
+8              NaN            NaN                11.0       1         1    0   
+9              NaN            NaN                 0.0       1         0    0   
+10             2.0           56.0                50.0       1         0    0   
+11             NaN            NaN                54.0       1         0    1   
+12             5.0            4.0                18.0       1         1    0   
+13             NaN            NaN                15.0       0         0    0   
+14             NaN            NaN                38.0       1         1    1   
+15             NaN            NaN                26.0       1         0    1   
+16             2.0           46.0                 4.0       1         0    0   
+17             NaN            NaN                 6.0       0         1    0   
+18             NaN            NaN                65.0       1         1    0   
+19             4.0            NaN                36.0       1         1    0   
+20             NaN            NaN                28.0       0         0    1   
+21             NaN            NaN                 6.0       0         1    0   
+22             2.0           10.0                10.0       1         1    0   
+23             NaN            NaN                19.0       1         0    1   
+24             3.0           34.0                12.0       1         0    1   
+25             NaN            NaN                59.0       1         1    0   
+26             NaN            NaN                 NaN       1         1    0   
+27             NaN            NaN                16.0       1         1    0   
+28             NaN            NaN                44.0       0         1    0   
+29             NaN            NaN                35.0       0         1    0   
+..             ...            ...                 ...     ...       ...  ...   
+887            NaN            NaN                65.0       1         0    0   
+888            5.0           69.0                37.0       0         0    0   
+889            NaN            NaN                43.0       1         0    1   
+890            2.0           14.0                14.0       1         0    0   
+891            NaN            NaN                29.0       1         0    0   
+892            NaN            NaN                35.0       1         0    0   
+893            1.0           35.0                35.0       1         0    1   
+894            3.0           34.0                34.0       1         0    0   
+895            NaN            NaN                55.0       1         1    1   
+896            NaN            NaN                19.0       0         1    0   
+897            NaN            NaN                16.0       1         1    0   
+898            NaN            NaN                19.0       1         1    0   
+899            NaN            NaN                41.0       1         0    0   
+900            NaN            NaN                12.0       1         1    0   
+901            NaN            NaN                26.0       1         0    0   
+902            NaN            NaN                 8.0       1         0    0   
+903            5.0           46.0                12.0       1         0    0   
+904            NaN            NaN                19.0       1         1    0   
+905            3.0           55.0                51.0       0         0    0   
+906            NaN            NaN                19.0       1         1    0   
+907            NaN            NaN                29.0       1         1    1   
+908            2.0           19.0                13.0       1         0    1   
+909            3.0           55.0                55.0       1         0    0   
+910            NaN            NaN                 8.0       1         0    0   
+911            NaN            NaN                64.0       0         0    0   
+912            NaN            NaN                21.0       1         0    0   
+913            5.0           59.0                47.0       1         0    0   
+914            5.0           57.0                25.0       1         1    0   
+915            5.0           73.0                73.0       1         0    0   
+916            4.0           29.0                29.0       1         1    0   
+
+     CoK  SoS  FfC  DwD  
+0      1    1    1    0  
+1      0    1    0    0  
+2      0    0    0    1  
+3      0    0    0    1  
+4      0    1    0    0  
+5      1    1    0    0  
+6      0    1    1    0  
+7      1    1    0    1  
+8      1    0    1    0  
+9      0    1    0    0  
+10     1    0    0    0  
+11     1    1    0    1  
+12     1    1    0    1  
+13     1    0    0    0  
+14     0    0    1    0  
+15     0    0    0    0  
+16     1    0    0    0  
+17     0    1    1    0  
+18     1    0    0    0  
+19     1    1    0    0  
+20     0    0    0    0  
+21     0    1    1    0  
+22     1    0    0    0  
+23     1    1    0    1  
+24     0    0    0    0  
+25     1    0    1    0  
+26     1    1    0    0  
+27     0    0    1    0  
+28     0    0    0    1  
+29     0    0    0    1  
+..   ...  ...  ...  ...  
+887    1    0    0    0  
+888    0    0    0    1  
+889    0    0    0    0  
+890    1    0    0    0  
+891    0    0    1    1  
+892    0    0    0    1  
+893    0    0    0    0  
+894    0    1    0    0  
+895    1    0    1    0  
+896    0    0    0    1  
+897    1    0    0    1  
+898    0    0    0    1  
+899    0    1    0    0  
+900    1    0    0    1  
+901    0    0    1    0  
+902    0    0    0    1  
+903    0    0    0    1  
+904    0    0    1    0  
+905    1    1    0    0  
+906    0    0    1    0  
+907    0    0    1    0  
+908    1    0    0    0  
+909    0    1    0    0  
+910    0    0    0    1  
+911    0    1    0    0  
+912    0    1    0    0  
+913    0    0    0    1  
+914    0    0    0    1  
+915    0    1    0    0  
+916    0    0    1    0  
+
+[917 rows x 13 columns]>
+In [17]:
+print("Shape of datafframe:",df2.shape)
+df2.drop_duplicates()
+print(df2.shape)
+Shape of datafframe: (917, 13)
+(917, 13)
+Try Yourselves ...
+In [ ]:
+### Append same data in df2 to df2 itself using append function
+### print its shape
+### Use drop_duplicates to remove duplicate
+### print shape again
+In [18]:
+print("Columns of dataframe:\t",df2.columns)
+Columns of dataframe:	 Index(['Name', 'Allegiances', 'Death Year', 'Book of Death', 'Death Chapter',
+       'Book Intro Chapter', 'Gender', 'Nobility', 'GoT', 'CoK', 'SoS', 'FfC',
+       'DwD'],
+      dtype='object')
+In [19]:
+df2.rename(columns={'Book of Death':'BoD'},inplace=True)
+print("Columns of dataframe:\t",df2.columns)
+Columns of dataframe:	 Index(['Name', 'Allegiances', 'Death Year', 'BoD', 'Death Chapter',
+       'Book Intro Chapter', 'Gender', 'Nobility', 'GoT', 'CoK', 'SoS', 'FfC',
+       'DwD'],
+      dtype='object')
+In [20]:
+print(df2.describe())
+       Death Year         BoD  Death Chapter  Book Intro Chapter      Gender  \
+count  305.000000  307.000000     299.000000          905.000000  917.000000   
+mean   299.157377    2.928339      40.070234           28.861878    0.828790   
+std      0.703483    1.326482      20.470270           20.165788    0.376898   
+min    297.000000    1.000000       0.000000            0.000000    0.000000   
+25%    299.000000    2.000000      25.500000           11.000000    1.000000   
+50%    299.000000    3.000000      39.000000           27.000000    1.000000   
+75%    300.000000    4.000000      57.000000           43.000000    1.000000   
+max    300.000000    5.000000      80.000000           80.000000    1.000000   
+
+         Nobility         GoT         CoK         SoS         FfC         DwD  
+count  917.000000  917.000000  917.000000  917.000000  917.000000  917.000000  
+mean     0.468920    0.272628    0.353326    0.424209    0.272628    0.284624  
+std      0.499305    0.445554    0.478264    0.494492    0.445554    0.451481  
+min      0.000000    0.000000    0.000000    0.000000    0.000000    0.000000  
+25%      0.000000    0.000000    0.000000    0.000000    0.000000    0.000000  
+50%      0.000000    0.000000    0.000000    0.000000    0.000000    0.000000  
+75%      1.000000    1.000000    1.000000    1.000000    1.000000    1.000000  
+max      1.000000    1.000000    1.000000    1.000000    1.000000    1.000000  
+In [21]:
+print("No. of chapters talking about death:\t",df2['Death Chapter'].count())
+print("No. of unique chapters talking about death:\t",df2['Death Chapter'].nunique())
+print("Unique chapters talking about death:\t",df2['Death Chapter'].unique())
+No. of chapters talking about death:	 299
+No. of unique chapters talking about death:	 71
+Unique chapters talking about death:	 [nan 51. 20. 35. 56.  4. 46. 10. 34. 47. 41. 21. 33. 39. 52. 37. 24. 31.
+ 27. 62. 65.  7. 49. 50. 42. 30. 66. 64. 29.  0. 53. 58. 76. 63. 55. 14.
+ 61. 12. 68. 69. 80. 36.  1. 19. 72. 59. 43. 70. 75. 11.  3. 60. 26. 44.
+ 67. 45. 18. 23. 57. 25. 16. 17. 48.  9.  2.  6. 32. 77. 74. 40. 38. 73.]
+Accessing using Index - .iloc
+Argument can be,
+integer -> 3
+list of integers -> [3,5,7,8]
+slice objects -> 0:9
+Eg:
+
+data-frame.iloc[4] -> Gets row 4
+data-frame.iloc[[2,3,4,5], [2,4]] -> Gets rows 2,3,4,5 with columns 2 and 4
+data-frame.iloc[:5, 1:3] -> Gets rows 0 to 4 with columns 1 to 2
+Note - if slice is a:b, then a is included, b is excluded
+
+In [22]:
+print("First five values of 'Allegiances' column\t:\n",df2.iloc[0:5,0])
+First five values of 'Allegiances' column	:
+ 0             Addam Marbrand
+1    Aegon Frey (Jinglebell)
+2            Aegon Targaryen
+3              Adrack Humble
+4             Aemon Costayne
+Name: Name, dtype: object
+Accessing using location - .loc[ ]
+In [47]:
+#print(df2.head())
+df2.set_index('Name',inplace=True)
+print(df2.head())
+print("\n\nUsing loc method:\t",df2.loc['Adrack Humble','Death Year'])
+                             Allegiances  Death Year  Book of Death  \
+Name                                                                  
+Addam Marbrand                 Lannister         NaN            NaN   
+Aegon Frey (Jinglebell)             None       299.0            3.0   
+Aegon Targaryen          House Targaryen         NaN            NaN   
+Adrack Humble              House Greyjoy       300.0            5.0   
+Aemon Costayne                 Lannister         NaN            NaN   
+
+                         Death Chapter  Book Intro Chapter  Gender  Nobility  \
+Name                                                                           
+Addam Marbrand                     NaN                56.0       1         1   
+Aegon Frey (Jinglebell)           51.0                49.0       1         1   
+Aegon Targaryen                    NaN                 5.0       1         1   
+Adrack Humble                     20.0                20.0       1         1   
+Aemon Costayne                     NaN                 NaN       1         1   
+
+                         GoT  CoK  SoS  FfC  DwD  
+Name                                              
+Addam Marbrand             1    1    1    1    0  
+Aegon Frey (Jinglebell)    0    0    1    0    0  
+Aegon Targaryen            0    0    0    0    1  
+Adrack Humble              0    0    0    0    1  
+Aemon Costayne             0    0    1    0    0  
+
+
+Using loc method:	 300.0
+Creating subsets using relational operators
+In [49]:
+df3 = df2['Death Year']<400
+#print(df3)
+df4 = df2[df3]
+print(df4)
+                                       Allegiances  Death Year  Book of Death  \
+Name                                                                            
+Aegon Frey (Jinglebell)                       None       299.0            3.0   
+Adrack Humble                        House Greyjoy       300.0            5.0   
+Aemon Targaryen (son of Maekar I)    Night's Watch       300.0            4.0   
+Aenys Frey                                    None       300.0            5.0   
+Aggar                                House Greyjoy       299.0            2.0   
+Alan of Rosby                        Night's Watch       300.0            5.0   
+Alebelly                               House Stark       299.0            2.0   
+Alester Florent                          Baratheon       300.0            4.0   
+Allard Seaworth                          Baratheon       299.0            2.0   
+Alyn                                   House Stark       298.0            3.0   
+Amory Lorch                        House Lannister       299.0            2.0   
+Anvil Ryn                                     None       299.0            3.0   
+Aron Santagar                            Lannister       299.0            2.0   
+Arys Oakheart                            Lannister       300.0            4.0   
+Bannen                               Night's Watch       299.0            3.0   
+Barra                                         None       299.0            2.0   
+Barsena                                       None       300.0            5.0   
+Becca the Baker                               None       299.0            3.0   
+Benfred Tallhart                             Stark       299.0            2.0   
+Benfrey Frey                                  None       299.0            5.0   
+Benjen Stark                         Night's Watch       298.0            1.0   
+Bennet                                        None       300.0            4.0   
+Beric Dondarrion                              None       300.0            4.0   
+Biter                                         None       300.0            4.0   
+Brown Bernarr                        Night's Watch       299.0            3.0   
+Bryan Fossoway                           Baratheon       299.0            2.0   
+Bryce Caron                              Baratheon       299.0            2.0   
+Bryen Farring                            Baratheon       300.0            5.0   
+Burton Crakehall                         Lannister       299.0            2.0   
+Byam Flint                           Night's Watch       299.0            3.0   
+...                                            ...         ...            ...   
+Ulf the Ill                          House Greyjoy       299.0            2.0   
+Urreg                                Night's Watch       299.0            2.0   
+Utt                                           None       299.0            3.0   
+Varamyr                                   Wildling       300.0            5.0   
+Vardis Egen                                  Arryn       298.0            1.0   
+Vargo Hoat                                    None       300.0            3.0   
+Vayon Poole                                  Stark       298.0            1.0   
+Viserys Targaryen                  House Targaryen       298.0            1.0   
+Wallen                                    Wildling       298.0            1.0   
+Watt                                 Night's Watch       299.0            3.0   
+Waymar Royce                         Night's Watch       297.0            1.0   
+Weese                                    Lannister       299.0            2.0   
+Wendel Manderly                              Stark       299.0            3.0   
+Werlag                               House Greyjoy       299.0            2.0   
+Wilbert                                      Stark       298.0            3.0   
+Will                                 Night's Watch       297.0            1.0   
+Willam Wells                               Martell       300.0            5.0   
+Willem Lannister                   House Lannister       299.0            3.0   
+Willow Witch-eye                          Wildling       300.0            5.0   
+Woth                                 Night's Watch       299.0            2.0   
+Wyl (guard)                            House Stark       298.0            1.0   
+Wyl the Whittler                              None       299.0            3.0   
+Yellow Dick                                   None       300.0            5.0   
+Ygritte                                   Wildling       299.0            3.0   
+Yoren                                Night's Watch       299.0            2.0   
+Young Henly                          Night's Watch       299.0            3.0   
+Yurkhaz zo Yunzak                             None       300.0            5.0   
+Yezzan Zo Qaggaz                              None       300.0            5.0   
+Torwynd the Tame                          Wildling       300.0            5.0   
+Talbert Serry                               Tyrell       300.0            4.0   
+
+                                   Death Chapter  Book Intro Chapter  Gender  \
+Name                                                                           
+Aegon Frey (Jinglebell)                     51.0                49.0       1   
+Adrack Humble                               20.0                20.0       1   
+Aemon Targaryen (son of Maekar I)           35.0                21.0       1   
+Aenys Frey                                   NaN                59.0       0   
+Aggar                                       56.0                50.0       1   
+Alan of Rosby                                4.0                18.0       1   
+Alebelly                                    46.0                 4.0       1   
+Alester Florent                              NaN                36.0       1   
+Allard Seaworth                             10.0                10.0       1   
+Alyn                                        34.0                12.0       1   
+Amory Lorch                                 47.0                14.0       1   
+Anvil Ryn                                   34.0                34.0       1   
+Aron Santagar                               41.0                18.0       1   
+Arys Oakheart                               21.0                57.0       1   
+Bannen                                      33.0                 0.0       1   
+Barra                                       39.0                35.0       0   
+Barsena                                     52.0                11.0       0   
+Becca the Baker                             34.0                34.0       0   
+Benfred Tallhart                            37.0                16.0       1   
+Benfrey Frey                                51.0                51.0       1   
+Benjen Stark                                24.0                 5.0       1   
+Bennet                                      31.0                31.0       1   
+Beric Dondarrion                            27.0                42.0       1   
+Biter                                       37.0                 1.0       1   
+Brown Bernarr                               33.0                23.0       1   
+Bryan Fossoway                              62.0                42.0       1   
+Bryce Caron                                 65.0                29.0       1   
+Bryen Farring                               62.0                10.0       1   
+Burton Crakehall                             7.0                55.0       1   
+Byam Flint                                  33.0                33.0       1   
+...                                          ...                 ...     ...   
+Ulf the Ill                                 66.0                66.0       1   
+Urreg                                       19.0                14.0       1   
+Utt                                         39.0                30.0       1   
+Varamyr                                      0.0                15.0       1   
+Vardis Egen                                 40.0                34.0       1   
+Vargo Hoat                                  20.0                30.0       1   
+Vayon Poole                                 21.0                 7.0       1   
+Viserys Targaryen                           46.0                 3.0       1   
+Wallen                                      37.0                37.0       1   
+Watt                                        75.0                69.0       1   
+Waymar Royce                                 0.0                 0.0       1   
+Weese                                       38.0                26.0       1   
+Wendel Manderly                             51.0                55.0       1   
+Werlag                                      66.0                37.0       1   
+Wilbert                                     29.0                29.0       1   
+Will                                         0.0                 0.0       1   
+Willam Wells                                 6.0                 6.0       1   
+Willem Lannister                            20.0                19.0       1   
+Willow Witch-eye                            69.0                37.0       0   
+Woth                                        14.0                14.0       1   
+Wyl (guard)                                 35.0                35.0       1   
+Wyl the Whittler                            34.0                34.0       1   
+Yellow Dick                                 46.0                12.0       1   
+Ygritte                                     55.0                51.0       0   
+Yoren                                       19.0                13.0       1   
+Young Henly                                 55.0                55.0       1   
+Yurkhaz zo Yunzak                           59.0                47.0       1   
+Yezzan Zo Qaggaz                            57.0                25.0       1   
+Torwynd the Tame                            73.0                73.0       1   
+Talbert Serry                               29.0                29.0       1   
+
+                                   Nobility  GoT  CoK  SoS  FfC  DwD  
+Name                                                                  
+Aegon Frey (Jinglebell)                   1    0    0    1    0    0  
+Adrack Humble                             1    0    0    0    0    1  
+Aemon Targaryen (son of Maekar I)         1    1    0    1    1    0  
+Aenys Frey                                1    1    1    1    0    1  
+Aggar                                     0    0    1    0    0    0  
+Alan of Rosby                             1    0    1    1    0    1  
+Alebelly                                  0    0    1    0    0    0  
+Alester Florent                           1    0    1    1    0    0  
+Allard Seaworth                           1    0    1    0    0    0  
+Alyn                                      0    1    0    0    0    0  
+Amory Lorch                               1    0    1    0    0    0  
+Anvil Ryn                                 0    0    0    1    0    0  
+Aron Santagar                             1    1    1    0    0    0  
+Arys Oakheart                             1    1    1    0    1    0  
+Bannen                                    0    0    0    1    0    0  
+Barra                                     0    1    0    0    0    0  
+Barsena                                   0    0    0    0    0    1  
+Becca the Baker                           0    0    0    1    0    0  
+Benfred Tallhart                          1    0    1    0    0    0  
+Benfrey Frey                              1    0    0    1    0    0  
+Benjen Stark                              1    1    0    0    0    0  
+Bennet                                    0    0    0    0    1    0  
+Beric Dondarrion                          1    1    0    1    0    0  
+Biter                                     0    0    1    0    1    0  
+Brown Bernarr                             0    0    1    1    0    0  
+Bryan Fossoway                            1    1    1    0    0    0  
+Bryce Caron                               1    1    1    0    0    0  
+Bryen Farring                             1    0    1    0    0    1  
+Burton Crakehall                          1    1    1    0    0    0  
+Byam Flint                                0    0    0    1    0    0  
+...                                     ...  ...  ...  ...  ...  ...  
+Ulf the Ill                               0    0    1    0    0    0  
+Urreg                                     0    0    1    0    0    0  
+Utt                                       0    0    1    1    0    0  
+Varamyr                                   0    0    0    1    0    1  
+Vardis Egen                               0    1    0    0    0    0  
+Vargo Hoat                                0    0    1    1    0    0  
+Vayon Poole                               0    1    1    0    0    0  
+Viserys Targaryen                         1    1    0    0    0    0  
+Wallen                                    0    1    0    0    0    0  
+Watt                                      0    0    0    1    0    0  
+Waymar Royce                              1    1    0    0    0    0  
+Weese                                     0    0    1    0    0    0  
+Wendel Manderly                           1    1    1    1    0    0  
+Werlag                                    0    0    1    0    0    0  
+Wilbert                                   0    0    0    1    0    0  
+Will                                      0    1    0    0    0    0  
+Willam Wells                              0    0    0    0    0    1  
+Willem Lannister                          1    0    0    1    0    0  
+Willow Witch-eye                          0    0    0    0    0    1  
+Woth                                      0    0    1    0    0    0  
+Wyl (guard)                               0    1    0    0    0    0  
+Wyl the Whittler                          0    0    0    1    0    0  
+Yellow Dick                               0    0    0    0    0    1  
+Ygritte                                   0    0    1    1    0    0  
+Yoren                                     0    1    1    0    0    0  
+Young Henly                               0    0    0    1    0    0  
+Yurkhaz zo Yunzak                         0    0    0    0    0    1  
+Yezzan Zo Qaggaz                          1    0    0    0    0    1  
+Torwynd the Tame                          0    0    0    1    0    0  
+Talbert Serry                             1    0    0    0    1    0  
+
+[305 rows x 12 columns]
+using groupby
+In [7]:
+#print(df2['Death Year'].nunique)
+df5 = df2.groupby('Death Year').count()
+import numpy as np
+In [16]:
+#df = df.groupby("date").agg({"duration": np.sum, "user_id": pd.Series.nunique})
+import numpy as np
+df5 = df2.groupby("Death Year").agg({"Death Year":np.sum,"Gender":np.sum})
+print(df5)
+            Death Year  Gender
+Death Year                    
+297.0            891.0       3
+298.0          13708.0      43
+299.0          46644.0     141
+300.0          30000.0      82
+Visualization
+data-frame.plot(x = 'x-column', y = 'y-column') -> line plot by default
+data-frame.plot(x = 'x-column', y = 'y-column', kind = 'scatter') -> scatter plot
+  arguements for kind - 
+      ‘line’ : line plot (default)
+      ‘bar’ : vertical bar plot
+      ‘hist’ : histogram
+      ‘box’ : boxplot
+      ‘pie’ : pie plot
+      ‘scatter’ : scatter plot
+In [18]:
+df5.plot(x='Death Year',y='Gender',kind='scatter')
+Out[18]:
+<matplotlib.axes._subplots.AxesSubplot at 0x1ceeb20d588>
