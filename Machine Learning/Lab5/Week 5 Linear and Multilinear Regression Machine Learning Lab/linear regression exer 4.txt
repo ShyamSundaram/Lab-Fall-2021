@@ -1,0 +1,170 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+%matplotlib inline
+
+# Create our own data
+
+
+datafile = pd.DataFrame()
+datafile[0] = np.arange(2000,2020)
+datafile[1] = [50,54,62,78,65,69,72,77,85,98,75,80,82,85,88,75,90,93,95,98]
+#datafile[0] = [1,3,5]
+datafile1 = pd.DataFrame()
+datafile1[0] = np.arange(2000,2020)
+#datafile1[1] = [50,54,62,65,68,70,71,74,76,80,82,84,86,90,91,93,94,95,98,100]
+datafile1[1] = [ 
+#datafile[1] = [22,34,50]
+datafile.columns =["Year","Placement"]
+datafile1.columns =["Year","Placement"]
+print(datafile)
+print(datafile1)
+
+plt.scatter(datafile['Year'],datafile['Placement'])
+plt.title("Placement plot")
+plt.xlim(2000,2020)
+plt.ylim(45,100)
+plt.xticks(np.arange(2000,2020,2))
+plt.legend()
+plt.xlabel("Year")
+plt.ylabel("Placement")
+plt.show()
+
+# Correlation
+
+import seaborn as sb
+data_corr = datafile.corr()
+sb.heatmap(data_corr,annot=True)
+
+from sklearn import linear_model
+regress = linear_model.LinearRegression()
+
+train_x = np.asanyarray(datafile[['Year']])
+train_y = np.asanyarray(datafile[['Placement']])
+print(train_x)
+print(train_y)
+
+regress.fit (train_x,train_y)
+# The coefficients
+print ('Coefficients: ', regress.coef_)
+print ('Intercept: ',regress.intercept_)
+
+
+
+# calculating y=mx+c
+
+plt.scatter(datafile.Year, datafile.Placement,  color='blue',label="Actual")
+plt.plot(train_x, regress.coef_[0][0]*train_x + regress.intercept_[0], '-r',label="Predicted")
+plt.title("Placement plot")
+plt.xlim(2000,2020)
+plt.ylim(45,100)
+plt.xticks(np.arange(2000,2020,2))
+plt.legend()
+plt.xlabel("Year")
+plt.ylabel("Placement")
+plt.show()
+
+
+from sklearn import linear_model
+regress = linear_model.LinearRegression()
+
+regress1 = linear_model.LinearRegression()
+train_x1 = np.asanyarray(datafile1[['Year']])
+train_y1 = np.asanyarray(datafile1[['Placement']])
+print(train_x)
+print(train_y)
+
+regress1.fit (train_x1,train_y1)
+# The coefficients
+print ('Coefficients: ', regress1.coef_)
+print ('Intercept: ',regress1.intercept_)
+
+
+
+
+
+plt.scatter(datafile1.Year, datafile1.Placement,  color='blue',label="Actual")
+plt.plot(train_x, regress1.coef_[0][0]*train_x1 + regress1.intercept_[0], '-r',label="Predicted")
+plt.title("Placement plot")
+plt.xlim(2000,2020)
+plt.ylim(45,100)
+plt.xticks(np.arange(2000,2020,2))
+plt.legend()
+plt.xlabel("Year")
+plt.ylabel("Placement")
+plt.show()
+
+# Predicted Values
+
+y_predicted = regress.predict(train_x)
+for i in range(0,len(train_x)):
+    print(train_y[i],y_predicted[i])
+datafile['Predicted'] = y_predicted
+print(y_predicted)
+print(datafile.head())
+
+# Performance measurement
+Any of the following metrics may be used:
+
+Mean absolute error: It is the average of the absolute value of all the errors.
+
+Mean Squared Error (MSE): Mean Squared Error (MSE) is the mean of the squared error. This is efficient since the focus is on large errors and doesnot consider sign of error.
+
+
+Root Mean Squared Error (RMSE): This is a metric to calculate the accuracy of the model. It represents how close the data are to the fitted regression line. The higher the R-squared, the better the model fits your data. Best possible score is 1.0 and it can be negative (because the model can be arbitrarily worse).
+
+
+
+
+accuracy - 10/20 is the accu==50%
+
+loss ---total errors happened in the system.
+
+
+ reduce the loss automatically the model becomes more accurate
+
+
+
+from sklearn import metrics
+print('Mean Absolute Error:', metrics.mean_absolute_error(train_y, y_predicted))
+print('Mean Squared Error:', metrics.mean_squared_error(train_y, y_predicted))
+print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(train_y, y_predicted)))
+
+
+from sklearn.metrics import r2_score
+
+test_x = np.asanyarray(datafile[['Year']])
+test_y = np.asanyarray(datafile[['Placement']])
+test_y_predicted = regress.predict(test_x)
+
+print("Mean absolute error (MAE):" , np.mean(np.absolute(test_y_predicted - test_y)))
+print("Mean square error (MSE): " , np.mean((test_y_predicted - test_y) ** 2))
+print("R2-score: %.2f (RMSE):" , r2_score(test_y, test_y_predicted) )
+
+# Using training and testing data¶
+
+
+from sklearn.model_selection import train_test_split
+
+train_x, test_x, train_y, test_y = train_test_split(datafile[['Year']], datafile[['Placement']], test_size=0.30, random_state=42)
+print(train_x)
+print("Testing")
+print(test_x)
+
+from sklearn import linear_model
+regress = linear_model.LinearRegression()
+regress.fit (train_x,train_y)
+# The coefficients
+print ('Coefficients: ', regress.coef_)
+print ('Intercept: ',regress.intercept_)
+
+y_predicted = regress.predict(test_x)
+print(test_x)
+print(test_y)
+print(y_predicted)
+
+from sklearn import metrics
+print('Mean Absolute Error:', metrics.mean_absolute_error(test_y, y_predicted))
+print('Mean Squared Error:', metrics.mean_squared_error(test_y, y_predicted))
+print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(test_y, y_predicted)))
+
