@@ -1,0 +1,83 @@
+---
+title: "Exercise 4: DataFrrames and Tables in R"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 30th August, 2021
+### Dr. B. Radhika Selvamani
+<br>
+
+```{r}
+data<-read.csv("poker.data",header=FALSE)
+head(data,10)
+```
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Question 1](#q1) <br>
+2. [Question 2](#q2) <br>
+3. [Question 3](#q3) <br>
+4. [Question 4](#q4)
+
+## <a name="q1"></a> Question 1
+<hr/>
+
+Create a new data frame from the given .csv file where the 1st, 3rd, 5th , 7th and 9th columns
+are factors with the levels “Heart, Spade, Diamond, Club” for values {1,2,3,4} Display the
+data frame.
+```{r}
+colnames(data)<-c("S1","R1","S2","R2","S3","R3","S4","R4","S5","R5","Hand")
+head(data,15)
+co<-c("S1","S2","S3","S4","S5")
+data$S1<-as.factor(data$S1)
+data$S2<-as.factor(data$S2)
+data$S3<-as.factor(data$S3)
+data$S4<-as.factor(data$S4)
+data$S5<-as.factor(data$S5)
+str(data)
+lev<-c("Heart","Spade","Diamond","Club")
+levels(data$S1)<-lev
+levels(data$S2)<-lev
+levels(data$S3)<-lev
+levels(data$S4)<-lev
+levels(data$S5)<-lev
+head(data,15)
+```
+## <a name="q2"></a> Question 2
+<hr/>
+Convert the last column into a factor where the numbers are labelled as below
+0: Nothing in hand; not a recognized poker hand
+1: One pair; one pair of equal ranks within five cards
+2: Two pairs; two pairs of equal ranks within five cards
+3: Three of a kind; three equal ranks within five cards
+4: Straight; five cards, sequentially ranked with no gaps
+5: Flush; five cards with the same suit
+6: Full house; pair + different rank three of a kind
+7: Four of a kind; four equal ranks within five cards
+8: Straight flush; straight + flush
+9: Royal flush; {Ace, King, Queen, Jack, Ten} + flush
+Display the data frame
+```{r}
+data$Hand<-as.factor(data$Hand)
+levels(data$Hand)<-c("Nothing in Hand","One Pair","Two Pairs","Three of a kind","Straight; five cards","Flush","Full house","Four of a kind","Straight flush","Royal flush")
+head(data,15)
+```
+## <a name="q3"></a> Question 3
+<hr/>
+Display all the Three of a kind cards.
+```{r}
+data[data$Hand=="Three of a kind",]
+```
+## <a name="q4"></a> Question 4
+<hr/>
+Display all cards which are “Nothing in Hand” or One Pair or Two Pairs
+```{r}
+data[data$Hand=="Nothing in Hand" | data$Hand=="One Pair" | data$Hand=="Two Pairs",]
+```
+

@@ -1,0 +1,48 @@
+---
+title: "LabEx2-Data frame Basics & Indexing"
+output:
+  html_document:
+    fig_height: 4
+    highlight: pygments
+    theme: spacelab
+  pdf_document: default
+---
+### Reg. No: 16bce1001
+
+### Name:xxxx
+
+## Setup
+
+
+### Load packages if any using library(packagename)
+
+
+### Load data
+```{r}
+data(iris) #A sample is shown here
+head(iris)
+```
+
+
+Make sure your data and R Markdown files are in the same directory. Delete this note when before you submit your work. 
+
+
+
+* * *
+
+## Part 1: Data (Chosen Dataset, Description of dataset, basic commands to describe dataset)
+
+* * *
+
+## Part 2: Selected Questions and Corresponding Code & Output
+
+
+
+* * *
+
+
+NOTE: Insert code chunks as needed by clicking on the "Insert a new code chunk" 
+button (green button) above. Make sure that your code is visible
+in the project you submit. Delete this note when before you submit your work.
+
+
