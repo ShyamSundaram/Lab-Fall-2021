@@ -47,7 +47,7 @@ levels(data$S2)<-lev
 levels(data$S3)<-lev
 levels(data$S4)<-lev
 levels(data$S5)<-lev
-head(data,15)
+data
 ```
 ## <a name="q2"></a> Question 2
 <hr/>
@@ -66,7 +66,7 @@ Display the data frame
 ```{r}
 data$Hand<-as.factor(data$Hand)
 levels(data$Hand)<-c("Nothing in Hand","One Pair","Two Pairs","Three of a kind","Straight; five cards","Flush","Full house","Four of a kind","Straight flush","Royal flush")
-head(data,15)
+data
 ```
 ## <a name="q3"></a> Question 3
 <hr/>
