@@ -1,0 +1,87 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<omp.h>
+
+#define R 2500
+#define C 250
+
+int main()
+{
+    int chunk = 10;
+    int thread[]={1,2,4,8,16,32,64,128,256,512};
+    
+    printf("Name: Shyam Sundaram\nReg num: 19BCE1560\nPDC Lab:\n\n");
+
+    float a[R][C], b[C][C], c[R][C];
+
+    for(int i=0;i<R;++i)
+    for(int j=0;j<C;++j)
+    a[i][j]=10*j+i;
+
+    for(int i=0;i<C;++i)
+    for(int j=0;j<C;++j)
+    b[i][j]=10*i+j;
+
+    for(int i=0;i<R;++i)
+    for(int j=0;j<C;++j)
+    c[i][j]=0;
+
+    
+    for(int t=0;t<10;++t)
+    {
+        omp_set_num_threads(thread[t]);
+        float start=omp_get_wtime();
+        int chunk=10;
+        int i,j,k;
+        #pragma omp parallel private(i,j,k) shared(a,b) reduction(+:c)
+        {
+            #pragma omp for collapse(3) schedule(static,chunk)
+            for(i=0;i<R;++i)
+                for(j=0;j<C;++j)
+                    for(k=0;k<C;++k)
+                        c[i][j]+=a[i][k]*b[k][j];
+            
+        }
+        
+        float end=omp_get_wtime();
+        float exec=end-start;
+        printf("Thread count: %d Time taken is: %f\n",thread[t],exec);
+    }
+    
+    return 0;
+}
+////////static chunk 10
+Thread count: 1 Time taken is: 2.781616
+Thread count: 2 Time taken is: 1.394653
+Thread count: 4 Time taken is: 1.094727
+Thread count: 8 Time taken is: 0.482178
+Thread count: 16 Time taken is: 0.166504
+Thread count: 32 Time taken is: 0.186768
+Thread count: 64 Time taken is: 0.205444
+Thread count: 128 Time taken is: 0.249146
+Thread count: 256 Time taken is: 0.349365
+Thread count: 512 Time taken is: 0.625122
+
+/////////////dynamic chunk 10
+Thread count: 1 Time taken is: 0.828857
+Thread count: 2 Time taken is: 0.653564
+Thread count: 4 Time taken is: 0.472900
+Thread count: 8 Time taken is: 0.395264
+Thread count: 16 Time taken is: 0.406250
+Thread count: 32 Time taken is: 0.499268
+Thread count: 64 Time taken is: 0.432373
+Thread count: 128 Time taken is: 0.485107
+Thread count: 256 Time taken is: 0.540283
+Thread count: 512 Time taken is: 0.655273
+
+///////////default
+Thread count: 1 Time taken is: 2.557129
+Thread count: 2 Time taken is: 1.264160
+Thread count: 4 Time taken is: 0.811768
+Thread count: 8 Time taken is: 0.745850
+Thread count: 16 Time taken is: 0.738037
+Thread count: 32 Time taken is: 0.559326
+Thread count: 64 Time taken is: 0.185547
+Thread count: 128 Time taken is: 0.235352
+Thread count: 256 Time taken is: 0.352783
+Thread count: 512 Time taken is: 0.536133

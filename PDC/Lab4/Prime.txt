@@ -1,0 +1,201 @@
+///////Code
+#include<stdio.h>
+#include<stdlib.h>
+#include<omp.h>
+
+int sieve(int x)
+{
+    for(int i=2;i*i<=x;++i)
+    {
+        if(x%i==0)
+        return -1;
+    }
+    return 1;
+}
+
+int main()
+{
+    int N[]={1000,10000,100000,1000000};
+    int chunk = 10;
+    int thread[]={1,2,4,8,16,32,64,128,256,512};
+    
+    printf("Name: Shyam Sundaram\nReg num: 19BCE1560\nPDC Lab:\n\n");
+
+
+    for(int i=0;i<4;++i)
+    {
+        printf("-------\nN: %d\n",N[i]);
+        for(int t=0;t<10;++t)
+        {
+            omp_set_num_threads(thread[t]);
+            float start=omp_get_wtime();
+            int cnt=0;
+            int n=N[i];
+            #pragma omp parallel for schedule(dynamic,chunk) reduction(+:cnt)
+            for(int j=2;j<n;++j)
+            {
+                if(sieve(j)==1)
+                cnt+=1;
+            }
+            
+            float end=omp_get_wtime();
+            float exec=end-start;
+            printf("Count: %d Thread count: %d Time taken is: %f\n",cnt,thread[t],exec);
+        }
+    }
+    return 0;
+}
+
+////////////Static chunk 10
+shyam@shyam-Inspiron-14-5408:~/Academics/Labs/PDC/Lab4$ gcc -fopenmp prime.c
+shyam@shyam-Inspiron-14-5408:~/Academics/Labs/PDC/Lab4$ ./a.out
+Name: Shyam Sundaram
+Reg num: 19BCE1560
+PDC Lab:
+
+-------
+N: 1000
+Count: 168 Thread count: 1 Time taken is: 0.000000
+Count: 168 Thread count: 2 Time taken is: 0.000977
+Count: 168 Thread count: 4 Time taken is: 0.004883
+Count: 168 Thread count: 8 Time taken is: 0.023438
+Count: 168 Thread count: 16 Time taken is: 0.014648
+Count: 168 Thread count: 32 Time taken is: 0.004883
+Count: 168 Thread count: 64 Time taken is: 0.006836
+Count: 168 Thread count: 128 Time taken is: 0.010742
+Count: 168 Thread count: 256 Time taken is: 0.015625
+Count: 168 Thread count: 512 Time taken is: 0.036133
+-------
+N: 10000
+Count: 1229 Thread count: 1 Time taken is: 0.005859
+Count: 1229 Thread count: 2 Time taken is: 0.019531
+Count: 1229 Thread count: 4 Time taken is: 0.057617
+Count: 1229 Thread count: 8 Time taken is: 0.058594
+Count: 1229 Thread count: 16 Time taken is: 0.026367
+Count: 1229 Thread count: 32 Time taken is: 0.003906
+Count: 1229 Thread count: 64 Time taken is: 0.005859
+Count: 1229 Thread count: 128 Time taken is: 0.011719
+Count: 1229 Thread count: 256 Time taken is: 0.017578
+Count: 1229 Thread count: 512 Time taken is: 0.028320
+-------
+N: 100000
+Count: 9592 Thread count: 1 Time taken is: 0.043945
+Count: 9592 Thread count: 2 Time taken is: 0.030273
+Count: 9592 Thread count: 4 Time taken is: 0.027344
+Count: 9592 Thread count: 8 Time taken is: 0.048828
+Count: 9592 Thread count: 16 Time taken is: 0.048828
+Count: 9592 Thread count: 32 Time taken is: 0.012695
+Count: 9592 Thread count: 64 Time taken is: 0.012695
+Count: 9592 Thread count: 128 Time taken is: 0.023438
+Count: 9592 Thread count: 256 Time taken is: 0.033203
+Count: 9592 Thread count: 512 Time taken is: 0.043945
+-------
+N: 1000000
+Count: 78498 Thread count: 1 Time taken is: 0.834961
+Count: 78498 Thread count: 2 Time taken is: 0.399414
+Count: 78498 Thread count: 4 Time taken is: 0.293945
+Count: 78498 Thread count: 8 Time taken is: 0.258789
+Count: 78498 Thread count: 16 Time taken is: 0.232422
+Count: 78498 Thread count: 32 Time taken is: 0.227539
+Count: 78498 Thread count: 64 Time taken is: 0.211914
+Count: 78498 Thread count: 128 Time taken is: 0.221680
+Count: 78498 Thread count: 256 Time taken is: 0.242188
+Count: 78498 Thread count: 512 Time taken is: 0.254883
+
+//dynamic chunk 10
+N: 1000
+Count: 168 Thread count: 1 Time taken is: 0.000000
+Count: 168 Thread count: 2 Time taken is: 0.000000
+Count: 168 Thread count: 4 Time taken is: 0.000000
+Count: 168 Thread count: 8 Time taken is: 0.013672
+Count: 168 Thread count: 16 Time taken is: 0.012695
+Count: 168 Thread count: 32 Time taken is: 0.002930
+Count: 168 Thread count: 64 Time taken is: 0.005859
+Count: 168 Thread count: 128 Time taken is: 0.008789
+Count: 168 Thread count: 256 Time taken is: 0.018555
+Count: 168 Thread count: 512 Time taken is: 0.035156
+-------
+N: 10000
+Count: 1229 Thread count: 1 Time taken is: 0.005859
+Count: 1229 Thread count: 2 Time taken is: 0.009766
+Count: 1229 Thread count: 4 Time taken is: 0.041016
+Count: 1229 Thread count: 8 Time taken is: 0.015625
+Count: 1229 Thread count: 16 Time taken is: 0.019531
+Count: 1229 Thread count: 32 Time taken is: 0.006836
+Count: 1229 Thread count: 64 Time taken is: 0.006836
+Count: 1229 Thread count: 128 Time taken is: 0.007812
+Count: 1229 Thread count: 256 Time taken is: 0.014648
+Count: 1229 Thread count: 512 Time taken is: 0.024414
+-------
+N: 100000
+Count: 9592 Thread count: 1 Time taken is: 0.042969
+Count: 9592 Thread count: 2 Time taken is: 0.032227
+Count: 9592 Thread count: 4 Time taken is: 0.039062
+Count: 9592 Thread count: 8 Time taken is: 0.014648
+Count: 9592 Thread count: 16 Time taken is: 0.027344
+Count: 9592 Thread count: 32 Time taken is: 0.013672
+Count: 9592 Thread count: 64 Time taken is: 0.013672
+Count: 9592 Thread count: 128 Time taken is: 0.015625
+Count: 9592 Thread count: 256 Time taken is: 0.022461
+Count: 9592 Thread count: 512 Time taken is: 0.044922
+-------
+N: 1000000
+Count: 78498 Thread count: 1 Time taken is: 1.013672
+Count: 78498 Thread count: 2 Time taken is: 0.526367
+Count: 78498 Thread count: 4 Time taken is: 0.283203
+Count: 78498 Thread count: 8 Time taken is: 0.256836
+Count: 78498 Thread count: 16 Time taken is: 0.216797
+Count: 78498 Thread count: 32 Time taken is: 0.240234
+Count: 78498 Thread count: 64 Time taken is: 0.246094
+Count: 78498 Thread count: 128 Time taken is: 0.245117
+Count: 78498 Thread count: 256 Time taken is: 0.240234
+Count: 78498 Thread count: 512 Time taken is: 0.246094
+
+////////default
+N: 1000
+Count: 168 Thread count: 1 Time taken is: 0.000977
+Count: 168 Thread count: 2 Time taken is: 0.000000
+Count: 168 Thread count: 4 Time taken is: 0.000977
+Count: 168 Thread count: 8 Time taken is: 0.010742
+Count: 168 Thread count: 16 Time taken is: 0.006836
+Count: 168 Thread count: 32 Time taken is: 0.001953
+Count: 168 Thread count: 64 Time taken is: 0.011719
+Count: 168 Thread count: 128 Time taken is: 0.008789
+Count: 168 Thread count: 256 Time taken is: 0.015625
+Count: 168 Thread count: 512 Time taken is: 0.033203
+-------
+N: 10000
+Count: 1229 Thread count: 1 Time taken is: 0.005859
+Count: 1229 Thread count: 2 Time taken is: 0.008789
+Count: 1229 Thread count: 4 Time taken is: 0.048828
+Count: 1229 Thread count: 8 Time taken is: 0.011719
+Count: 1229 Thread count: 16 Time taken is: 0.014648
+Count: 1229 Thread count: 32 Time taken is: 0.002930
+Count: 1229 Thread count: 64 Time taken is: 0.003906
+Count: 1229 Thread count: 128 Time taken is: 0.005859
+Count: 1229 Thread count: 256 Time taken is: 0.013672
+Count: 1229 Thread count: 512 Time taken is: 0.028320
+-------
+N: 100000
+Count: 9592 Thread count: 1 Time taken is: 0.052734
+Count: 9592 Thread count: 2 Time taken is: 0.039062
+Count: 9592 Thread count: 4 Time taken is: 0.034180
+Count: 9592 Thread count: 8 Time taken is: 0.056641
+Count: 9592 Thread count: 16 Time taken is: 0.016602
+Count: 9592 Thread count: 32 Time taken is: 0.016602
+Count: 9592 Thread count: 64 Time taken is: 0.019531
+Count: 9592 Thread count: 128 Time taken is: 0.015625
+Count: 9592 Thread count: 256 Time taken is: 0.022461
+Count: 9592 Thread count: 512 Time taken is: 0.041992
+-------
+N: 1000000
+Count: 78498 Thread count: 1 Time taken is: 1.002930
+Count: 78498 Thread count: 2 Time taken is: 0.528320
+Count: 78498 Thread count: 4 Time taken is: 0.322266
+Count: 78498 Thread count: 8 Time taken is: 0.260742
+Count: 78498 Thread count: 16 Time taken is: 0.215820
+Count: 78498 Thread count: 32 Time taken is: 0.201172
+Count: 78498 Thread count: 64 Time taken is: 0.200195
+Count: 78498 Thread count: 128 Time taken is: 0.226562
+Count: 78498 Thread count: 256 Time taken is: 0.262695
+Count: 78498 Thread count: 512 Time taken is: 0.254883
