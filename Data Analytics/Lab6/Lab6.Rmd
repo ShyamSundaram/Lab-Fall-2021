@@ -1,0 +1,42 @@
+---
+title: "Lab6"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 30th August, 2021
+### Dr. B. Radhika Selvamani
+<br>
+
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Question 1](#q1) <br>
+2. [Question 2](#q2) <br>
+3. [Question 3](#q3) <br>
+4. [Question 4](#q4)
+
+## <a name="q1"></a> Question 1
+<hr/>
+
+The students attendance sheet as registered in Microsoft teams is provided as an excel sheet. Read the data and store it in a dataframe. Please note that the dates and time in the data need to be stored in the inbuilt Posixct format. Display the dataframe. Identify how many students attended the class. Assume the class duration is 90 minutes.
+
+```{r}
+library("lubridate")
+data<-read.csv("meetingAttendanceList.csv",sep="\t", fileEncoding = "UTF-16LE")
+head(data,10)
+colnames(data)
+str(data)
+
+data$Timestamp<-as.POSIXct(data$Timestamp,format='%m/%d/%Y, %I:%M:%S %p')
+str(data)
+head(data,10)
+
+
+```
+
