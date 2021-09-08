@@ -197,43 +197,295 @@ pre code {
 ## 
 ##     date, intersect, setdiff, union</code></pre>
 <pre class="r"><code>data&lt;-read.csv(&quot;meetingAttendanceList.csv&quot;,sep=&quot;\t&quot;, fileEncoding = &quot;UTF-16LE&quot;)
-head(data,10)</code></pre>
-<pre><code>##                  Full.Name   User.Action             Timestamp
-## 1       Radhika  Selvamani        Joined 8/30/2021, 4:52:30 PM
-## 2           DASARI ANIRUDH Joined before 8/30/2021, 4:52:30 PM
-## 3           SHREYA AGRAWAL Joined before 8/30/2021, 4:52:30 PM
-## 4           SHREYA AGRAWAL          Left 8/30/2021, 4:52:44 PM
-## 5           SHREYA AGRAWAL        Joined 8/30/2021, 4:52:54 PM
-## 6  MOHAMAD FASIL ANSAARY M Joined before 8/30/2021, 4:52:30 PM
-## 7            TEJASWI KUMAR Joined before 8/30/2021, 4:52:30 PM
-## 8   ADITYA RAJDEEP AGRAWAL Joined before 8/30/2021, 4:52:30 PM
-## 9           akshara magesh Joined before 8/30/2021, 4:52:30 PM
-## 10               ANIRUDH S Joined before 8/30/2021, 4:52:30 PM</code></pre>
-<pre class="r"><code>colnames(data)</code></pre>
-<pre><code>## [1] &quot;Full.Name&quot;   &quot;User.Action&quot; &quot;Timestamp&quot;</code></pre>
-<pre class="r"><code>str(data)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    68 obs. of  3 variables:
-##  $ Full.Name  : chr  &quot;Radhika  Selvamani&quot; &quot;DASARI ANIRUDH&quot; &quot;SHREYA AGRAWAL&quot; &quot;SHREYA AGRAWAL&quot; ...
-##  $ User.Action: chr  &quot;Joined&quot; &quot;Joined before&quot; &quot;Joined before&quot; &quot;Left&quot; ...
-##  $ Timestamp  : chr  &quot;8/30/2021, 4:52:30 PM&quot; &quot;8/30/2021, 4:52:30 PM&quot; &quot;8/30/2021, 4:52:30 PM&quot; &quot;8/30/2021, 4:52:44 PM&quot; ...</code></pre>
-<pre class="r"><code>data$Timestamp&lt;-as.POSIXct(data$Timestamp,format=&#39;%m/%d/%Y, %I:%M:%S %p&#39;)
-str(data)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    68 obs. of  3 variables:
-##  $ Full.Name  : chr  &quot;Radhika  Selvamani&quot; &quot;DASARI ANIRUDH&quot; &quot;SHREYA AGRAWAL&quot; &quot;SHREYA AGRAWAL&quot; ...
-##  $ User.Action: chr  &quot;Joined&quot; &quot;Joined before&quot; &quot;Joined before&quot; &quot;Left&quot; ...
-##  $ Timestamp  : POSIXct, format: &quot;2021-08-30 16:52:30&quot; &quot;2021-08-30 16:52:30&quot; ...</code></pre>
-<pre class="r"><code>head(data,10)</code></pre>
-<pre><code>##                  Full.Name   User.Action           Timestamp
-## 1       Radhika  Selvamani        Joined 2021-08-30 16:52:30
-## 2           DASARI ANIRUDH Joined before 2021-08-30 16:52:30
-## 3           SHREYA AGRAWAL Joined before 2021-08-30 16:52:30
-## 4           SHREYA AGRAWAL          Left 2021-08-30 16:52:44
-## 5           SHREYA AGRAWAL        Joined 2021-08-30 16:52:54
-## 6  MOHAMAD FASIL ANSAARY M Joined before 2021-08-30 16:52:30
-## 7            TEJASWI KUMAR Joined before 2021-08-30 16:52:30
-## 8   ADITYA RAJDEEP AGRAWAL Joined before 2021-08-30 16:52:30
-## 9           akshara magesh Joined before 2021-08-30 16:52:30
-## 10               ANIRUDH S Joined before 2021-08-30 16:52:30</code></pre>
+#data=transform(data,User.Action=ifelse(User.Action==&quot;Joined before&quot; || User.Action==&quot;Joined&quot;,&quot;Joined&quot;,&quot;Left&quot;))
+# head(data,10)
+# colnames(data)
+# str(data)
+data$Timestamp&lt;-as.POSIXct(data$Timestamp,format=&#39;%m/%d/%Y, %I:%M:%S %p&#39;)
+length(unique(data$Full.Name))</code></pre>
+<pre><code>## [1] 62</code></pre>
+</div>
+<div id="question-2" class="section level2">
+<h2><a name="q2"></a> Question 2</h2>
+<hr />
+<p>Create two tables where one has the student intime and the other has the student out time. Find the student who came first to the class Find the student who came last</p>
+<pre class="r"><code>intime=data[which(data$User.Action==&quot;Joined&quot;),]
+intime2=data[which(data$User.Action==&quot;Joined before&quot;),]
+intime&lt;-rbind(intime,intime2)
+intime</code></pre>
+<pre><code>##                            Full.Name   User.Action           Timestamp
+## 1                 Radhika  Selvamani        Joined 2021-08-30 16:52:30
+## 5                     SHREYA AGRAWAL        Joined 2021-08-30 16:52:54
+## 14                         ANKAN ROY        Joined 2021-08-30 16:53:50
+## 54                    Jeevesh Nandan        Joined 2021-08-30 17:06:51
+## 58                 ATUL SURESH KUMAR        Joined 2021-08-30 16:52:52
+## 59                    VIKRAM SURYA R        Joined 2021-08-30 16:53:06
+## 60           LAKSHMI SAI RAM KAKARLA        Joined 2021-08-30 16:53:15
+## 61                   SHRAVAN SREERAM        Joined 2021-08-30 16:53:25
+## 62                   KSHITIJ LARIWAL        Joined 2021-08-30 16:53:46
+## 63                   Vedang Sawarkar        Joined 2021-08-30 16:55:47
+## 64                    Tejas Vaichole        Joined 2021-08-30 16:55:50
+## 65                   Sanika Kulkarni        Joined 2021-08-30 16:55:55
+## 66                        shaik saif        Joined 2021-08-30 16:56:26
+## 67                          DINESH R        Joined 2021-08-30 16:58:41
+## 68                    BELIDA KARTHIK        Joined 2021-08-30 17:00:24
+## 2                     DASARI ANIRUDH Joined before 2021-08-30 16:52:30
+## 3                     SHREYA AGRAWAL Joined before 2021-08-30 16:52:30
+## 6            MOHAMAD FASIL ANSAARY M Joined before 2021-08-30 16:52:30
+## 7                      TEJASWI KUMAR Joined before 2021-08-30 16:52:30
+## 8             ADITYA RAJDEEP AGRAWAL Joined before 2021-08-30 16:52:30
+## 9                     akshara magesh Joined before 2021-08-30 16:52:30
+## 10                         ANIRUDH S Joined before 2021-08-30 16:52:30
+## 11                  Swadeep Chalwade Joined before 2021-08-30 16:52:30
+## 12                         ANKAN ROY Joined before 2021-08-30 16:52:30
+## 15                         ANUPAMA V Joined before 2021-08-30 16:52:30
+## 16 KOVVURI UDAY SURYA DEVESWAR REDDY Joined before 2021-08-30 16:52:30
+## 17                      hari prasath Joined before 2021-08-30 16:52:30
+## 18              DIVYANSH SHRIVASTAVA Joined before 2021-08-30 16:52:30
+## 19                  Tanmay Deshpande Joined before 2021-08-30 16:52:30
+## 20                      ABHINAV NAIR Joined before 2021-08-30 16:52:30
+## 21                          SANJAY R Joined before 2021-08-30 16:52:30
+## 22                        P SUBIKSHA Joined before 2021-08-30 16:52:30
+## 23           HANDE ATHARRVA DEVENDRA Joined before 2021-08-30 16:52:30
+## 24                        DHUSHYANTH Joined before 2021-08-30 16:52:30
+## 25             VINU KEVIN DIESEL S P Joined before 2021-08-30 16:52:30
+## 26                     ANMOL GAIROLA Joined before 2021-08-30 16:52:30
+## 27                     MOHIT KAUSHIK Joined before 2021-08-30 16:52:30
+## 28                    DIVYANU BAHETI Joined before 2021-08-30 16:52:30
+## 29           DEVATI NAGA SAI KOWSHIK Joined before 2021-08-30 16:52:30
+## 30                ABU KALAM BABUJI S Joined before 2021-08-30 16:52:30
+## 31                          RANJAN S Joined before 2021-08-30 16:52:30
+## 32                     BRIJU DEMEL B Joined before 2021-08-30 16:52:30
+## 33                 SANJAY SUNDARESAN Joined before 2021-08-30 16:52:30
+## 34                         HRIDHAY V Joined before 2021-08-30 16:52:30
+## 35                   SHREE VARSHAN V Joined before 2021-08-30 16:52:30
+## 36                   MADDUKURI NIVAS Joined before 2021-08-30 16:52:30
+## 37                  BHEEMISETTY NEHA Joined before 2021-08-30 16:52:30
+## 38             MATTAPALLY SAI NITHIN Joined before 2021-08-30 16:52:30
+## 39         VALIPISHETTY SAI PREETHAM Joined before 2021-08-30 16:52:30
+## 40                  S SHYAM SUNDARAM Joined before 2021-08-30 16:52:30
+## 41               K V SAI RAGHAVENDRA Joined before 2021-08-30 16:52:30
+## 42           BALDHA NANDAN VINODBHAI Joined before 2021-08-30 16:52:30
+## 43                        Likith M D Joined before 2021-08-30 16:52:30
+## 44                    ASHWANI PRASAD Joined before 2021-08-30 16:52:30
+## 45                      SAHIL SALUJA Joined before 2021-08-30 16:52:30
+## 46                         C ADITTYA Joined before 2021-08-30 16:52:30
+## 47                 Manoghn Kandiraju Joined before 2021-08-30 16:52:30
+## 48                       Clivin John Joined before 2021-08-30 16:52:30
+## 49                      NAVANSH GOEL Joined before 2021-08-30 16:52:30
+## 50                Suyash Shrivastava Joined before 2021-08-30 16:52:30
+## 51                        SPARSH RAJ Joined before 2021-08-30 16:52:30
+## 52                    Jeevesh Nandan Joined before 2021-08-30 16:52:30
+## 55          NAGIREDDY ABHISHEK REDDY Joined before 2021-08-30 16:52:30
+## 56               Revanth Bhargava .B Joined before 2021-08-30 16:52:30
+## 57                         J GAUTHUM Joined before 2021-08-30 16:52:30</code></pre>
+<pre class="r"><code>outtime=data[which(data$User.Action==&quot;Left&quot;),]
+outtime</code></pre>
+<pre><code>##         Full.Name User.Action           Timestamp
+## 4  SHREYA AGRAWAL        Left 2021-08-30 16:52:44
+## 13      ANKAN ROY        Left 2021-08-30 16:53:44
+## 53 Jeevesh Nandan        Left 2021-08-30 17:05:11</code></pre>
+<pre class="r"><code>mintime=min(intime$Timestamp)
+maxtime=max(intime$Timestamp)</code></pre>
+<p>Students who joined earliest.</p>
+<pre class="r"><code>intime[which(intime$Timestamp==mintime),]</code></pre>
+<pre><code>##                            Full.Name   User.Action           Timestamp
+## 1                 Radhika  Selvamani        Joined 2021-08-30 16:52:30
+## 2                     DASARI ANIRUDH Joined before 2021-08-30 16:52:30
+## 3                     SHREYA AGRAWAL Joined before 2021-08-30 16:52:30
+## 6            MOHAMAD FASIL ANSAARY M Joined before 2021-08-30 16:52:30
+## 7                      TEJASWI KUMAR Joined before 2021-08-30 16:52:30
+## 8             ADITYA RAJDEEP AGRAWAL Joined before 2021-08-30 16:52:30
+## 9                     akshara magesh Joined before 2021-08-30 16:52:30
+## 10                         ANIRUDH S Joined before 2021-08-30 16:52:30
+## 11                  Swadeep Chalwade Joined before 2021-08-30 16:52:30
+## 12                         ANKAN ROY Joined before 2021-08-30 16:52:30
+## 15                         ANUPAMA V Joined before 2021-08-30 16:52:30
+## 16 KOVVURI UDAY SURYA DEVESWAR REDDY Joined before 2021-08-30 16:52:30
+## 17                      hari prasath Joined before 2021-08-30 16:52:30
+## 18              DIVYANSH SHRIVASTAVA Joined before 2021-08-30 16:52:30
+## 19                  Tanmay Deshpande Joined before 2021-08-30 16:52:30
+## 20                      ABHINAV NAIR Joined before 2021-08-30 16:52:30
+## 21                          SANJAY R Joined before 2021-08-30 16:52:30
+## 22                        P SUBIKSHA Joined before 2021-08-30 16:52:30
+## 23           HANDE ATHARRVA DEVENDRA Joined before 2021-08-30 16:52:30
+## 24                        DHUSHYANTH Joined before 2021-08-30 16:52:30
+## 25             VINU KEVIN DIESEL S P Joined before 2021-08-30 16:52:30
+## 26                     ANMOL GAIROLA Joined before 2021-08-30 16:52:30
+## 27                     MOHIT KAUSHIK Joined before 2021-08-30 16:52:30
+## 28                    DIVYANU BAHETI Joined before 2021-08-30 16:52:30
+## 29           DEVATI NAGA SAI KOWSHIK Joined before 2021-08-30 16:52:30
+## 30                ABU KALAM BABUJI S Joined before 2021-08-30 16:52:30
+## 31                          RANJAN S Joined before 2021-08-30 16:52:30
+## 32                     BRIJU DEMEL B Joined before 2021-08-30 16:52:30
+## 33                 SANJAY SUNDARESAN Joined before 2021-08-30 16:52:30
+## 34                         HRIDHAY V Joined before 2021-08-30 16:52:30
+## 35                   SHREE VARSHAN V Joined before 2021-08-30 16:52:30
+## 36                   MADDUKURI NIVAS Joined before 2021-08-30 16:52:30
+## 37                  BHEEMISETTY NEHA Joined before 2021-08-30 16:52:30
+## 38             MATTAPALLY SAI NITHIN Joined before 2021-08-30 16:52:30
+## 39         VALIPISHETTY SAI PREETHAM Joined before 2021-08-30 16:52:30
+## 40                  S SHYAM SUNDARAM Joined before 2021-08-30 16:52:30
+## 41               K V SAI RAGHAVENDRA Joined before 2021-08-30 16:52:30
+## 42           BALDHA NANDAN VINODBHAI Joined before 2021-08-30 16:52:30
+## 43                        Likith M D Joined before 2021-08-30 16:52:30
+## 44                    ASHWANI PRASAD Joined before 2021-08-30 16:52:30
+## 45                      SAHIL SALUJA Joined before 2021-08-30 16:52:30
+## 46                         C ADITTYA Joined before 2021-08-30 16:52:30
+## 47                 Manoghn Kandiraju Joined before 2021-08-30 16:52:30
+## 48                       Clivin John Joined before 2021-08-30 16:52:30
+## 49                      NAVANSH GOEL Joined before 2021-08-30 16:52:30
+## 50                Suyash Shrivastava Joined before 2021-08-30 16:52:30
+## 51                        SPARSH RAJ Joined before 2021-08-30 16:52:30
+## 52                    Jeevesh Nandan Joined before 2021-08-30 16:52:30
+## 55          NAGIREDDY ABHISHEK REDDY Joined before 2021-08-30 16:52:30
+## 56               Revanth Bhargava .B Joined before 2021-08-30 16:52:30
+## 57                         J GAUTHUM Joined before 2021-08-30 16:52:30</code></pre>
+<p>Students who joined last.</p>
+<pre class="r"><code>intime[which(intime$Timestamp==maxtime),]</code></pre>
+<pre><code>##         Full.Name User.Action           Timestamp
+## 54 Jeevesh Nandan      Joined 2021-08-30 17:06:51</code></pre>
+</div>
+<div id="question-3" class="section level2">
+<h2><a name="q3"></a> Question 3</h2>
+<hr />
+<p>Calculate the duration of each student attending the class. Here you need to consider the case where a student may be disconnected in between.</p>
+<p>Convert chr column to Date type. Then set the datetime of end of the class. The datetime is then converted to numeric, which represents the number of seconds since UNIX Epoch.</p>
+<pre class="r"><code># data$Timestamp&lt;-as.POSIXct(data$Timestamp,format=&#39;%m/%d/%Y, %I:%M:%S %p&#39;)
+
+da=&quot;8/30/2021, 6:22:30 PM&quot;
+da=as.POSIXct(da,format=&#39;%m/%d/%Y, %I:%M:%S %p&#39;)
+da=as.numeric(da)
+
+data=transform(data,Time=as.numeric(Timestamp))</code></pre>
+<p>Find out the time duration for which each student attended the class in minutes. For records without a “left” time, corresponding to a “joined” time,we add the end time of class. ‘x’ is the duration for which they attended in minutes.</p>
+<pre class="r"><code>data=transform(data,Time=ifelse(User.Action==&quot;Left&quot;,Time,-1*Time))
+
+ppl=aggregate(data$Time,by=list(Name=data$Full.Name),FUN=sum)
+ppl&lt;-as.data.frame(ppl)
+ppl=transform(ppl,x=ifelse(x&lt;0,(da+x)/60,x/60))
+ppl</code></pre>
+<pre><code>##                                 Name        x
+## 1                       ABHINAV NAIR 90.00000
+## 2                 ABU KALAM BABUJI S 90.00000
+## 3             ADITYA RAJDEEP AGRAWAL 90.00000
+## 4                     akshara magesh 90.00000
+## 5                          ANIRUDH S 90.00000
+## 6                          ANKAN ROY 89.90000
+## 7                      ANMOL GAIROLA 90.00000
+## 8                          ANUPAMA V 90.00000
+## 9                     ASHWANI PRASAD 90.00000
+## 10                 ATUL SURESH KUMAR 89.63333
+## 11           BALDHA NANDAN VINODBHAI 90.00000
+## 12                    BELIDA KARTHIK 82.10000
+## 13                  BHEEMISETTY NEHA 90.00000
+## 14                     BRIJU DEMEL B 90.00000
+## 15                         C ADITTYA 90.00000
+## 16                       Clivin John 90.00000
+## 17                    DASARI ANIRUDH 90.00000
+## 18           DEVATI NAGA SAI KOWSHIK 90.00000
+## 19                        DHUSHYANTH 90.00000
+## 20                          DINESH R 83.81667
+## 21              DIVYANSH SHRIVASTAVA 90.00000
+## 22                    DIVYANU BAHETI 90.00000
+## 23           HANDE ATHARRVA DEVENDRA 90.00000
+## 24                      hari prasath 90.00000
+## 25                         HRIDHAY V 90.00000
+## 26                         J GAUTHUM 90.00000
+## 27                    Jeevesh Nandan 88.33333
+## 28               K V SAI RAGHAVENDRA 90.00000
+## 29 KOVVURI UDAY SURYA DEVESWAR REDDY 90.00000
+## 30                   KSHITIJ LARIWAL 88.73333
+## 31           LAKSHMI SAI RAM KAKARLA 89.25000
+## 32                        Likith M D 90.00000
+## 33                   MADDUKURI NIVAS 90.00000
+## 34                 Manoghn Kandiraju 90.00000
+## 35             MATTAPALLY SAI NITHIN 90.00000
+## 36           MOHAMAD FASIL ANSAARY M 90.00000
+## 37                     MOHIT KAUSHIK 90.00000
+## 38          NAGIREDDY ABHISHEK REDDY 90.00000
+## 39                      NAVANSH GOEL 90.00000
+## 40                        P SUBIKSHA 90.00000
+## 41                Radhika  Selvamani 90.00000
+## 42                          RANJAN S 90.00000
+## 43               Revanth Bhargava .B 90.00000
+## 44                  S SHYAM SUNDARAM 90.00000
+## 45                      SAHIL SALUJA 90.00000
+## 46                   Sanika Kulkarni 86.58333
+## 47                          SANJAY R 90.00000
+## 48                 SANJAY SUNDARESAN 90.00000
+## 49                        shaik saif 86.06667
+## 50                   SHRAVAN SREERAM 89.08333
+## 51                   SHREE VARSHAN V 90.00000
+## 52                    SHREYA AGRAWAL 89.83333
+## 53                        SPARSH RAJ 90.00000
+## 54                Suyash Shrivastava 90.00000
+## 55                  Swadeep Chalwade 90.00000
+## 56                  Tanmay Deshpande 90.00000
+## 57                    Tejas Vaichole 86.66667
+## 58                     TEJASWI KUMAR 90.00000
+## 59         VALIPISHETTY SAI PREETHAM 90.00000
+## 60                   Vedang Sawarkar 86.71667
+## 61                    VIKRAM SURYA R 89.40000
+## 62             VINU KEVIN DIESEL S P 90.00000</code></pre>
+<p>Number of students that attended the whole class.</p>
+<pre class="r"><code>sum(ppl$x==90)</code></pre>
+<pre><code>## [1] 48</code></pre>
+</div>
+<div id="question-4" class="section level2">
+<h2><a name="q4"></a> Question 4</h2>
+<hr />
+<p>Find the student who attended the maximum duration</p>
+<pre class="r"><code>ppl[which(ppl$x==max(ppl$x)),]</code></pre>
+<pre><code>##                                 Name  x
+## 1                       ABHINAV NAIR 90
+## 2                 ABU KALAM BABUJI S 90
+## 3             ADITYA RAJDEEP AGRAWAL 90
+## 4                     akshara magesh 90
+## 5                          ANIRUDH S 90
+## 7                      ANMOL GAIROLA 90
+## 8                          ANUPAMA V 90
+## 9                     ASHWANI PRASAD 90
+## 11           BALDHA NANDAN VINODBHAI 90
+## 13                  BHEEMISETTY NEHA 90
+## 14                     BRIJU DEMEL B 90
+## 15                         C ADITTYA 90
+## 16                       Clivin John 90
+## 17                    DASARI ANIRUDH 90
+## 18           DEVATI NAGA SAI KOWSHIK 90
+## 19                        DHUSHYANTH 90
+## 21              DIVYANSH SHRIVASTAVA 90
+## 22                    DIVYANU BAHETI 90
+## 23           HANDE ATHARRVA DEVENDRA 90
+## 24                      hari prasath 90
+## 25                         HRIDHAY V 90
+## 26                         J GAUTHUM 90
+## 28               K V SAI RAGHAVENDRA 90
+## 29 KOVVURI UDAY SURYA DEVESWAR REDDY 90
+## 32                        Likith M D 90
+## 33                   MADDUKURI NIVAS 90
+## 34                 Manoghn Kandiraju 90
+## 35             MATTAPALLY SAI NITHIN 90
+## 36           MOHAMAD FASIL ANSAARY M 90
+## 37                     MOHIT KAUSHIK 90
+## 38          NAGIREDDY ABHISHEK REDDY 90
+## 39                      NAVANSH GOEL 90
+## 40                        P SUBIKSHA 90
+## 41                Radhika  Selvamani 90
+## 42                          RANJAN S 90
+## 43               Revanth Bhargava .B 90
+## 44                  S SHYAM SUNDARAM 90
+## 45                      SAHIL SALUJA 90
+## 47                          SANJAY R 90
+## 48                 SANJAY SUNDARESAN 90
+## 51                   SHREE VARSHAN V 90
+## 53                        SPARSH RAJ 90
+## 54                Suyash Shrivastava 90
+## 55                  Swadeep Chalwade 90
+## 56                  Tanmay Deshpande 90
+## 58                     TEJASWI KUMAR 90
+## 59         VALIPISHETTY SAI PREETHAM 90
+## 62             VINU KEVIN DIESEL S P 90</code></pre>
 </div>
 
 

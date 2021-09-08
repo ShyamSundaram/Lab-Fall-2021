@@ -29,14 +29,74 @@ The students attendance sheet as registered in Microsoft teams is provided as an
 ```{r}
 library("lubridate")
 data<-read.csv("meetingAttendanceList.csv",sep="\t", fileEncoding = "UTF-16LE")
-head(data,10)
-colnames(data)
-str(data)
-
+#data=transform(data,User.Action=ifelse(User.Action=="Joined before" || User.Action=="Joined","Joined","Left"))
+# head(data,10)
+# colnames(data)
+# str(data)
 data$Timestamp<-as.POSIXct(data$Timestamp,format='%m/%d/%Y, %I:%M:%S %p')
-str(data)
-head(data,10)
-
-
+length(unique(data$Full.Name))
 ```
 
+## <a name="q2"></a> Question 2
+<hr/>
+
+Create two tables where one has the student intime and the other has the student out time.
+Find the student who came first to the class
+Find the student who came last
+
+```{r}
+intime=data[which(data$User.Action=="Joined"),]
+intime2=data[which(data$User.Action=="Joined before"),]
+intime<-rbind(intime,intime2)
+intime
+outtime=data[which(data$User.Action=="Left"),]
+outtime
+
+mintime=min(intime$Timestamp)
+maxtime=max(intime$Timestamp)
+```
+Students who joined earliest.
+```{r}
+intime[which(intime$Timestamp==mintime),]
+```
+Students who joined last.
+```{r}
+intime[which(intime$Timestamp==maxtime),]
+```
+
+## <a name="q3"></a> Question 3
+<hr/>
+Calculate the duration of each student attending the class. Here you need to consider the case where a student may be disconnected in between.
+
+Convert chr column to Date type. Then set the datetime of end of the class. The datetime is then converted to numeric, which represents the number of seconds since UNIX Epoch.
+```{r}
+# data$Timestamp<-as.POSIXct(data$Timestamp,format='%m/%d/%Y, %I:%M:%S %p')
+
+da="8/30/2021, 6:22:30 PM"
+da=as.POSIXct(da,format='%m/%d/%Y, %I:%M:%S %p')
+da=as.numeric(da)
+
+data=transform(data,Time=as.numeric(Timestamp))
+```
+
+
+Find out the time duration for which each student attended the class in minutes. For records without a "left" time, corresponding to a "joined" time,we add the end time of class. 'x' is the duration for which they attended in minutes.
+```{r}
+data=transform(data,Time=ifelse(User.Action=="Left",Time,-1*Time))
+
+ppl=aggregate(data$Time,by=list(Name=data$Full.Name),FUN=sum)
+ppl<-as.data.frame(ppl)
+ppl=transform(ppl,x=ifelse(x<0,(da+x)/60,x/60))
+ppl
+```
+Number of students that attended the whole class.
+```{r}
+sum(ppl$x==90)
+```
+## <a name="q4"></a> Question 4
+<hr/>
+Find the student who attended the maximum duration
+
+```{r}
+ppl[which(ppl$x==max(ppl$x)),]
+```
