@@ -174,8 +174,8 @@ pre code {
 <div id="bce1560" class="section level3">
 <h3>19BCE1560</h3>
 </div>
-<div id="th-august-2021" class="section level3">
-<h3>30th August, 2021</h3>
+<div id="th-september-2021" class="section level3">
+<h3>6th September, 2021</h3>
 </div>
 <div id="dr.-b.-radhika-selvamani" class="section level3">
 <h3>Dr. B. Radhika Selvamani</h3>
@@ -189,7 +189,10 @@ pre code {
 <div id="question-1" class="section level2">
 <h2><a name="q1"></a> Question 1</h2>
 <hr />
-<p>The students attendance sheet as registered in Microsoft teams is provided as an excel sheet. Read the data and store it in a dataframe. Please note that the dates and time in the data need to be stored in the inbuilt Posixct format. Display the dataframe. Identify how many students attended the class. Assume the class duration is 90 minutes.</p>
+<p>Q. The students attendance sheet as registered in Microsoft teams is provided as an excel sheet. Read the data and store it in a dataframe. Please note that the dates and time in the data need to be stored in the inbuilt Posixct format. Display the dataframe. Identify how many students attended the class. Assume the class duration is 90 minutes.</p>
+<ol style="list-style-type: upper-alpha">
+<li></li>
+</ol>
 <pre class="r"><code>library(&quot;lubridate&quot;)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;lubridate&#39;</code></pre>
@@ -197,10 +200,7 @@ pre code {
 ## 
 ##     date, intersect, setdiff, union</code></pre>
 <pre class="r"><code>data&lt;-read.csv(&quot;meetingAttendanceList.csv&quot;,sep=&quot;\t&quot;, fileEncoding = &quot;UTF-16LE&quot;)
-#data=transform(data,User.Action=ifelse(User.Action==&quot;Joined before&quot; || User.Action==&quot;Joined&quot;,&quot;Joined&quot;,&quot;Left&quot;))
-# head(data,10)
-# colnames(data)
-# str(data)
+
 data$Timestamp&lt;-as.POSIXct(data$Timestamp,format=&#39;%m/%d/%Y, %I:%M:%S %p&#39;)
 length(unique(data$Full.Name))</code></pre>
 <pre><code>## [1] 62</code></pre>
@@ -208,7 +208,8 @@ length(unique(data$Full.Name))</code></pre>
 <div id="question-2" class="section level2">
 <h2><a name="q2"></a> Question 2</h2>
 <hr />
-<p>Create two tables where one has the student intime and the other has the student out time. Find the student who came first to the class Find the student who came last</p>
+<p>Q. Create two tables where one has the student intime and the other has the student out time. Find the student who came first to the class Find the student who came last.</p>
+<p>A. The table ‘intime’ has the in time details and ‘outtime’ has out time details.</p>
 <pre class="r"><code>intime=data[which(data$User.Action==&quot;Joined&quot;),]
 intime2=data[which(data$User.Action==&quot;Joined before&quot;),]
 intime&lt;-rbind(intime,intime2)
@@ -349,8 +350,8 @@ maxtime=max(intime$Timestamp)</code></pre>
 <div id="question-3" class="section level2">
 <h2><a name="q3"></a> Question 3</h2>
 <hr />
-<p>Calculate the duration of each student attending the class. Here you need to consider the case where a student may be disconnected in between.</p>
-<p>Convert chr column to Date type. Then set the datetime of end of the class. The datetime is then converted to numeric, which represents the number of seconds since UNIX Epoch.</p>
+<p>Q. Calculate the duration of each student attending the class. Here you need to consider the case where a student may be disconnected in between.</p>
+<p>A. Convert chr column to Date type. Then set the datetime of end of the class. The datetime is then converted to numeric, which represents the number of seconds since UNIX Epoch.</p>
 <pre class="r"><code># data$Timestamp&lt;-as.POSIXct(data$Timestamp,format=&#39;%m/%d/%Y, %I:%M:%S %p&#39;)
 
 da=&quot;8/30/2021, 6:22:30 PM&quot;
@@ -435,7 +436,10 @@ ppl</code></pre>
 <div id="question-4" class="section level2">
 <h2><a name="q4"></a> Question 4</h2>
 <hr />
-<p>Find the student who attended the maximum duration</p>
+<p>Q. Find the student who attended the maximum duration</p>
+<ol style="list-style-type: upper-alpha">
+<li></li>
+</ol>
 <pre class="r"><code>ppl[which(ppl$x==max(ppl$x)),]</code></pre>
 <pre><code>##                                 Name  x
 ## 1                       ABHINAV NAIR 90

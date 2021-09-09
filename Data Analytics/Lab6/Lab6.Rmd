@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### S Shyam Sundaram
 ### 19BCE1560
-### 30th August, 2021
+### 6th September, 2021
 ### Dr. B. Radhika Selvamani
 <br>
 
@@ -24,15 +24,13 @@ Click to go to the respective Question <br>
 ## <a name="q1"></a> Question 1
 <hr/>
 
-The students attendance sheet as registered in Microsoft teams is provided as an excel sheet. Read the data and store it in a dataframe. Please note that the dates and time in the data need to be stored in the inbuilt Posixct format. Display the dataframe. Identify how many students attended the class. Assume the class duration is 90 minutes.
+Q. The students attendance sheet as registered in Microsoft teams is provided as an excel sheet. Read the data and store it in a dataframe. Please note that the dates and time in the data need to be stored in the inbuilt Posixct format. Display the dataframe. Identify how many students attended the class. Assume the class duration is 90 minutes.
 
+A.
 ```{r}
 library("lubridate")
 data<-read.csv("meetingAttendanceList.csv",sep="\t", fileEncoding = "UTF-16LE")
-#data=transform(data,User.Action=ifelse(User.Action=="Joined before" || User.Action=="Joined","Joined","Left"))
-# head(data,10)
-# colnames(data)
-# str(data)
+
 data$Timestamp<-as.POSIXct(data$Timestamp,format='%m/%d/%Y, %I:%M:%S %p')
 length(unique(data$Full.Name))
 ```
@@ -40,9 +38,11 @@ length(unique(data$Full.Name))
 ## <a name="q2"></a> Question 2
 <hr/>
 
-Create two tables where one has the student intime and the other has the student out time.
+Q. Create two tables where one has the student intime and the other has the student out time.
 Find the student who came first to the class
-Find the student who came last
+Find the student who came last.
+
+A. The table 'intime' has the in time details and 'outtime' has out time details.
 
 ```{r}
 intime=data[which(data$User.Action=="Joined"),]
@@ -55,10 +55,12 @@ outtime
 mintime=min(intime$Timestamp)
 maxtime=max(intime$Timestamp)
 ```
+
 Students who joined earliest.
 ```{r}
 intime[which(intime$Timestamp==mintime),]
 ```
+
 Students who joined last.
 ```{r}
 intime[which(intime$Timestamp==maxtime),]
@@ -66,9 +68,9 @@ intime[which(intime$Timestamp==maxtime),]
 
 ## <a name="q3"></a> Question 3
 <hr/>
-Calculate the duration of each student attending the class. Here you need to consider the case where a student may be disconnected in between.
+Q. Calculate the duration of each student attending the class. Here you need to consider the case where a student may be disconnected in between.
 
-Convert chr column to Date type. Then set the datetime of end of the class. The datetime is then converted to numeric, which represents the number of seconds since UNIX Epoch.
+A. Convert chr column to Date type. Then set the datetime of end of the class. The datetime is then converted to numeric, which represents the number of seconds since UNIX Epoch.
 ```{r}
 # data$Timestamp<-as.POSIXct(data$Timestamp,format='%m/%d/%Y, %I:%M:%S %p')
 
@@ -95,8 +97,9 @@ sum(ppl$x==90)
 ```
 ## <a name="q4"></a> Question 4
 <hr/>
-Find the student who attended the maximum duration
+Q. Find the student who attended the maximum duration
 
+A.
 ```{r}
 ppl[which(ppl$x==max(ppl$x)),]
 ```
