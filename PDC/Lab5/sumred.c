@@ -1,8 +1,9 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<omp.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <omp.h>
 
-#define N 800000
+#define N 900000
+
 int main()
 {
     int chunk =10;
@@ -17,28 +18,24 @@ int main()
 
     int s=N;
     printf("Size of array: %d------------\n",s);
-    
+
     for(int t=0;t<10;++t)
     {
         omp_set_num_threads(thread[t]);
-        int *sum=(int*)malloc(thread[t]*sizeof(int));
-        for(int i=0;i<thread[t];++i)
-        sum[i]=0;
-        long s=0;
-        int chunk=20;
+        int sum=0;
+                
         int i;
+
         float start=omp_get_wtime();
-        #pragma omp parallel for schedule(static,chunk) shared(sum) private(i)
+        #pragma omp parallel for private(i) reduction(+:sum)
         for(i=0;i<N;++i)
-        sum[omp_get_thread_num()]+=a[i];
-        
-        for(int i=0;i<thread[t];++i)
-        s+=sum[i];
+            sum+=a[i];
+
         float end=omp_get_wtime();
         float exec=end-start;
         //printf("%ld\n",s);
         printf("Thread count: %d Time taken is: %f\n",thread[t],exec);
-        free(sum);
+        
     }
     return 0;
 }

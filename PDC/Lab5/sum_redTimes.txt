@@ -1,0 +1,37 @@
+++++++++++++++++++++Size 900000
+
+---------------------static chunk 10-------------------------
+Thread count: 1 Time taken is: 0.009155
+Thread count: 2 Time taken is: 0.004517
+Thread count: 4 Time taken is: 0.002930
+Thread count: 8 Time taken is: 0.023682
+Thread count: 16 Time taken is: 0.004150
+Thread count: 32 Time taken is: 0.005615
+Thread count: 64 Time taken is: 0.006470
+Thread count: 128 Time taken is: 0.008545
+Thread count: 256 Time taken is: 0.012329
+Thread count: 512 Time taken is: 0.021118
+
+-------------------------------dynamic chunk 10----------------
+Thread count: 1 Time taken is: 0.015137
+Thread count: 2 Time taken is: 0.015503
+Thread count: 4 Time taken is: 0.014526
+Thread count: 8 Time taken is: 0.018677
+Thread count: 16 Time taken is: 0.024780
+Thread count: 32 Time taken is: 0.015747
+Thread count: 64 Time taken is: 0.016113
+Thread count: 128 Time taken is: 0.017334
+Thread count: 256 Time taken is: 0.018921
+Thread count: 512 Time taken is: 0.029297
+
+-------------------------------------default--------------------
+Thread count: 1 Time taken is: 0.010620
+Thread count: 2 Time taken is: 0.007080
+Thread count: 4 Time taken is: 0.004028
+Thread count: 8 Time taken is: 0.043579
+Thread count: 16 Time taken is: 0.009033
+Thread count: 32 Time taken is: 0.003784
+Thread count: 64 Time taken is: 0.005737
+Thread count: 128 Time taken is: 0.009644
+Thread count: 256 Time taken is: 0.011841
+Thread count: 512 Time taken is: 0.022095
