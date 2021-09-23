@@ -1,0 +1,35 @@
+Dynamic chunk 10 -------------------------------------------------
+Thread count: 1 Time taken is: 3.932495
+Thread count: 2 Time taken is: 0.694580
+Thread count: 4 Time taken is: 0.556641
+Thread count: 8 Time taken is: 0.403564
+Thread count: 16 Time taken is: 0.422852
+Thread count: 32 Time taken is: 0.562988
+Thread count: 64 Time taken is: 0.446167
+Thread count: 128 Time taken is: 0.521118
+Thread count: 256 Time taken is: 0.675415
+Thread count: 512 Time taken is: 0.898926
+
+static chunk 10-------------------------------------------------
+Thread count: 1 Time taken is: 3.125854
+Thread count: 2 Time taken is: 1.551147
+Thread count: 4 Time taken is: 0.840210
+Thread count: 8 Time taken is: 0.825928
+Thread count: 16 Time taken is: 0.893799
+Thread count: 32 Time taken is: 0.492432
+Thread count: 64 Time taken is: 0.213135
+Thread count: 128 Time taken is: 0.281494
+Thread count: 256 Time taken is: 0.428101
+Thread count: 512 Time taken is: 0.773926
+
+default chunk 10----------------------------------------------
+Thread count: 1 Time taken is: 2.965149
+Thread count: 2 Time taken is: 1.499512
+Thread count: 4 Time taken is: 0.798767
+Thread count: 8 Time taken is: 0.743347
+Thread count: 16 Time taken is: 0.806763
+Thread count: 32 Time taken is: 0.812683
+Thread count: 64 Time taken is: 0.784302
+Thread count: 128 Time taken is: 0.269714
+Thread count: 256 Time taken is: 0.395447
+Thread count: 512 Time taken is: 0.637573
