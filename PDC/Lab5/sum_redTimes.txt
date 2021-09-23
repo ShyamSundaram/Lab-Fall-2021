@@ -1,37 +1,76 @@
-++++++++++++++++++++Size 900000
+++++++++++++++++++++Size 1000000
 
 ---------------------static chunk 10-------------------------
-Thread count: 1 Time taken is: 0.009155
-Thread count: 2 Time taken is: 0.004517
+Thread count: 1 Time taken is: 0.011108
+Thread count: 2 Time taken is: 0.005615
 Thread count: 4 Time taken is: 0.002930
-Thread count: 8 Time taken is: 0.023682
+Thread count: 8 Time taken is: 0.014282
 Thread count: 16 Time taken is: 0.004150
-Thread count: 32 Time taken is: 0.005615
-Thread count: 64 Time taken is: 0.006470
-Thread count: 128 Time taken is: 0.008545
-Thread count: 256 Time taken is: 0.012329
-Thread count: 512 Time taken is: 0.021118
+Thread count: 32 Time taken is: 0.003906
+Thread count: 64 Time taken is: 0.004761
+Thread count: 128 Time taken is: 0.008057
+Thread count: 256 Time taken is: 0.013672
+Thread count: 512 Time taken is: 0.024658
 
 -------------------------------dynamic chunk 10----------------
-Thread count: 1 Time taken is: 0.015137
-Thread count: 2 Time taken is: 0.015503
-Thread count: 4 Time taken is: 0.014526
-Thread count: 8 Time taken is: 0.018677
-Thread count: 16 Time taken is: 0.024780
-Thread count: 32 Time taken is: 0.015747
-Thread count: 64 Time taken is: 0.016113
-Thread count: 128 Time taken is: 0.017334
-Thread count: 256 Time taken is: 0.018921
-Thread count: 512 Time taken is: 0.029297
+Thread count: 1 Time taken is: 0.014526
+Thread count: 2 Time taken is: 0.016113
+Thread count: 4 Time taken is: 0.011475
+Thread count: 8 Time taken is: 0.046631
+Thread count: 16 Time taken is: 0.016479
+Thread count: 32 Time taken is: 0.018188
+Thread count: 64 Time taken is: 0.012451
+Thread count: 128 Time taken is: 0.018555
+Thread count: 256 Time taken is: 0.021362
+Thread count: 512 Time taken is: 0.033447
 
 -------------------------------------default--------------------
-Thread count: 1 Time taken is: 0.010620
-Thread count: 2 Time taken is: 0.007080
-Thread count: 4 Time taken is: 0.004028
-Thread count: 8 Time taken is: 0.043579
-Thread count: 16 Time taken is: 0.009033
-Thread count: 32 Time taken is: 0.003784
-Thread count: 64 Time taken is: 0.005737
-Thread count: 128 Time taken is: 0.009644
-Thread count: 256 Time taken is: 0.011841
-Thread count: 512 Time taken is: 0.022095
+Thread count: 1 Time taken is: 0.006958
+Thread count: 2 Time taken is: 0.003418
+Thread count: 4 Time taken is: 0.001831
+Thread count: 8 Time taken is: 0.010742
+Thread count: 16 Time taken is: 0.010254
+Thread count: 32 Time taken is: 0.001099
+Thread count: 64 Time taken is: 0.001221
+Thread count: 128 Time taken is: 0.002197
+Thread count: 256 Time taken is: 0.003052
+Thread count: 512 Time taken is: 0.005615
+
+
+++++++++++++++++++++Size 10000000
+
+---------------------static chunk 10-------------------------
+Thread count: 1 Time taken is: 0.110962
+Thread count: 2 Time taken is: 0.057373
+Thread count: 4 Time taken is: 0.027954
+Thread count: 8 Time taken is: 0.044434
+Thread count: 16 Time taken is: 0.031250
+Thread count: 32 Time taken is: 0.023071
+Thread count: 64 Time taken is: 0.024292
+Thread count: 128 Time taken is: 0.024658
+Thread count: 256 Time taken is: 0.033447
+Thread count: 512 Time taken is: 0.035889
+
+-------------------------------dynamic chunk 10----------------
+Thread count: 1 Time taken is: 0.140991
+Thread count: 2 Time taken is: 0.153809
+Thread count: 4 Time taken is: 0.120239
+Thread count: 8 Time taken is: 0.092896
+Thread count: 16 Time taken is: 0.094482
+Thread count: 32 Time taken is: 0.147339
+Thread count: 64 Time taken is: 0.095825
+Thread count: 128 Time taken is: 0.098999
+Thread count: 256 Time taken is: 0.109863
+Thread count: 512 Time taken is: 0.118896
+
+-------------------------------------default--------------------
+Thread count: 1 Time taken is: 0.120605
+Thread count: 2 Time taken is: 0.062622
+Thread count: 4 Time taken is: 0.031738
+Thread count: 8 Time taken is: 0.046631
+Thread count: 16 Time taken is: 0.039551
+Thread count: 32 Time taken is: 0.025024
+Thread count: 64 Time taken is: 0.025024
+Thread count: 128 Time taken is: 0.024780
+Thread count: 256 Time taken is: 0.029907
+Thread count: 512 Time taken is: 0.037354

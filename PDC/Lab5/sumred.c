@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <omp.h>
 
-#define N 900000
+#define N 10000000
 
 int main()
 {
@@ -11,10 +11,10 @@ int main()
     
     printf("Name: Shyam Sundaram\nReg num: 19BCE1560\nPDC Lab:\n\n");
 
-    int a[N];
+    // int a[N];
     
-    for(int i=0;i<N;++i)
-    a[i]=1;
+    // for(int i=0;i<N;++i)
+    // a[i]=1;
 
     int s=N;
     printf("Size of array: %d------------\n",s);
@@ -29,7 +29,7 @@ int main()
         float start=omp_get_wtime();
         #pragma omp parallel for private(i) reduction(+:sum)
         for(i=0;i<N;++i)
-            sum+=a[i];
+            sum+=i;
 
         float end=omp_get_wtime();
         float exec=end-start;
