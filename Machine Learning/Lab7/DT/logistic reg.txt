@@ -1,0 +1,641 @@
+When to apply Logistic Regression
+Is the dataset supervised ? (having output column?)
+
+Is the input data numeric?
+
+Is the input data linear?
+
+Is the output column categorical?
+
+Is the output column probabilistic? We should have finite no of class labels..
+
+Yes!... you may use logistic regression
+
+Is the dataset Linear? ways to identify linearity
+
+Use Correlation
+
+Plot scatter chart
+
+may use pair plots
+
+import numpy as np
+import pandas as pd
+import seaborn as sb
+from sklearn import linear_model
+from sklearn import metrics
+import matplotlib.pyplot as plt
+%matplotlib inline
+download
+https://www.kaggle.com/mohansacharya/graduate-admissions?select=Admission_Predict.csv
+
+df = pd.read_csv("C:\\Users\\Admin\\Desktop\\ML PYTHON\\Admission_Predict.csv")
+print(df.shape)
+print(df.info())
+print(df.head())
+​
+(400, 9)
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 400 entries, 0 to 399
+Data columns (total 9 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   Serial No.         400 non-null    int64  
+ 1   GRE Score          400 non-null    int64  
+ 2   TOEFL Score        400 non-null    int64  
+ 3   University Rating  400 non-null    int64  
+ 4   SOP                400 non-null    float64
+ 5   LOR                400 non-null    float64
+ 6   CGPA               400 non-null    float64
+ 7   Research           400 non-null    int64  
+ 8   Chance of Admit    400 non-null    object 
+dtypes: float64(3), int64(5), object(1)
+memory usage: 28.2+ KB
+None
+   Serial No.  GRE Score  TOEFL Score  University Rating  SOP  LOR   CGPA  \
+0           1        337          118                  4  4.5   4.5  9.65   
+1           2        324          107                  4  4.0   4.5  8.87   
+2           3        316          104                  3  3.0   3.5  8.00   
+3           4        322          110                  3  3.5   2.5  8.67   
+4           5        314          103                  2  2.0   3.0  8.21   
+
+   Research Chance of Admit  
+0         1             yes  
+1         1             yes  
+2         1             yes  
+3         1             yes  
+4         0             yes  
+how many has got admissions out of 400
+print(df[df['Chance of Admit']=='yes'].count())
+Serial No.           367
+GRE Score            367
+TOEFL Score          367
+University Rating    367
+SOP                  367
+LOR                  367
+CGPA                 367
+Research             367
+Chance of Admit      367
+dtype: int64
+Lot of linearity exsist between the columns so LR is suited
+sb.pairplot(df)
+​
+<seaborn.axisgrid.PairGrid at 0x1fcb9e142b0>
+
+df1  = df.corr()
+print(df1)
+sb.heatmap(df1,annot=True)
+                   Serial No.  GRE Score  TOEFL Score  University Rating  \
+Serial No.           1.000000  -0.097526    -0.147932          -0.169948   
+GRE Score           -0.097526   1.000000     0.835977           0.668976   
+TOEFL Score         -0.147932   0.835977     1.000000           0.695590   
+University Rating   -0.169948   0.668976     0.695590           1.000000   
+SOP                 -0.166932   0.612831     0.657981           0.734523   
+LOR                 -0.088221   0.557555     0.567721           0.660123   
+CGPA                -0.045608   0.833060     0.828417           0.746479   
+Research            -0.063138   0.580391     0.489858           0.447783   
+
+                        SOP      LOR       CGPA  Research  
+Serial No.        -0.166932 -0.088221 -0.045608 -0.063138  
+GRE Score          0.612831  0.557555  0.833060  0.580391  
+TOEFL Score        0.657981  0.567721  0.828417  0.489858  
+University Rating  0.734523  0.660123  0.746479  0.447783  
+SOP                1.000000  0.729593  0.718144  0.444029  
+LOR                0.729593  1.000000  0.670211  0.396859  
+CGPA               0.718144  0.670211  1.000000  0.521654  
+Research           0.444029  0.396859  0.521654  1.000000  
+<AxesSubplot:>
+
+Removing the serial no and retaining it
+df.drop(columns=['Serial No.'],inplace=True)
+df.head()
+GRE Score	TOEFL Score	University Rating	SOP	LOR	CGPA	Research	Chance of Admit
+0	337	118	4	4.5	4.5	9.65	1	yes
+1	324	107	4	4.0	4.5	8.87	1	yes
+2	316	104	3	3.0	3.5	8.00	1	yes
+3	322	110	3	3.5	2.5	8.67	1	yes
+4	314	103	2	2.0	3.0	8.21	0	yes
+checking the missing values
+df.isnull().sum()
+​
+GRE Score            0
+TOEFL Score          0
+University Rating    0
+SOP                  0
+LOR                  0
+CGPA                 0
+Research             0
+Chance of Admit      0
+dtype: int64
+train and test
+from sklearn import linear_model
+regress = linear_model.LogisticRegression()
+df2 = df.values
+#print(df2)
+train_x = (df2[:,0:7])
+train_y = df2[:,7]
+print(train_x)
+print(train_y)
+[[337 118 4 ... 4.5 9.65 1]
+ [324 107 4 ... 4.5 8.87 1]
+ [316 104 3 ... 3.5 8.0 1]
+ ...
+ [330 116 4 ... 4.5 9.45 1]
+ [312 103 3 ... 4.0 8.78 0]
+ [333 117 4 ... 4.0 9.66 1]]
+['yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'no' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'no' 'no' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'no' 'no' 'no' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'no' 'no' 'no' 'no'
+ 'no' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'no' 'no' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'no' 'no' 'no' 'no' 'no' 'no' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'no' 'no' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'no' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'no' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'no' 'no' 'no' 'no' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes'
+ 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'no'
+ 'no' 'no' 'no' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'no' 'yes'
+ 'no' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes' 'yes']
+min max normalization
+from sklearn.preprocessing import MinMaxScaler
+​
+ms = MinMaxScaler()
+train_x = ms.fit_transform(train_x)
+print(train_x)
+[[0.94       0.92857143 0.75       ... 0.875      0.91346154 1.        ]
+ [0.68       0.53571429 0.75       ... 0.875      0.66346154 1.        ]
+ [0.52       0.42857143 0.5        ... 0.625      0.38461538 1.        ]
+ ...
+ [0.8        0.85714286 0.75       ... 0.875      0.84935897 1.        ]
+ [0.44       0.39285714 0.5        ... 0.75       0.63461538 0.        ]
+ [0.86       0.89285714 0.75       ... 0.75       0.91666667 1.        ]]
+Regression line fitting¶
+In Linear reg we give the calculated value as such
+
+In log reg we go for sigmodial funct over the computed value and we say prob of placing the particular instance is on Class A or Class B
+
+regress.fit (train_x,train_y)
+# The coefficients y= m0x0+m1x1+...m11x11+c
+print ('Coefficients: ', regress.coef_)
+print ('Intercept: ',regress.intercept_)
+Coefficients:  [[ 1.84653573  1.95483918  0.24428078 -0.02699547  1.5526433   2.61487109
+   0.44589894]]
+Intercept:  [-1.47821059]
+Prediction¶
+y_predicted = regress.predict(train_x)
+for i in range(0,len(train_x)):
+    print(train_y[i],y_predicted[i])
+df['Pred']=y_predicted
+df
+df.to_csv("log_result_1.csv")
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+no no
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+no yes
+no yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+no yes
+no yes
+no yes
+no yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+no no
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+no yes
+no yes
+no yes
+no yes
+no yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+no yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no no
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no no
+no yes
+no yes
+no no
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+no yes
+no yes
+no yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+no yes
+yes yes
+no yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+yes yes
+plt.scatter(df['Chance of Admit'],df['GRE Score'],color='red',label='Actual')
+plt.scatter(df['Pred'],df['GRE Score'],color = 'blue',label = 'Predicted' )
+plt.xlabel('Chance of Admit')
+plt.ylabel('GRE Score')
+plt.legend()
+plt.show()
+
+from sklearn import metrics
+print('Accucary:', metrics.accuracy_score(train_y, y_predicted))
+print('Confusion Matrix\n',metrics.confusion_matrix(train_y,y_predicted))
+Accucary: 0.93
+Confusion Matrix
+ [[  5  28]
+ [  0 367]]
+plt.figure(figsize=(4,4))
+sb.heatmap(metrics.confusion_matrix(train_y,y_predicted), annot=True, fmt=".1f", linewidths=.90, square = True, cmap = 'Blues_r');
+plt.ylabel('Actual label');
+plt.xlabel('Predicted label');
+all_sample_title = 'Accuracy Score: {0}'.format(metrics.accuracy_score(train_y, y_predicted))
+plt.title(all_sample_title, size = 15);
+
+from sklearn.metrics import classification_report
+print(classification_report(train_y,y_predicted))
+              precision    recall  f1-score   support
+
+          no       1.00      0.15      0.26        33
+         yes       0.93      1.00      0.96       367
+
+    accuracy                           0.93       400
+   macro avg       0.96      0.58      0.61       400
+weighted avg       0.93      0.93      0.91       400

@@ -1,0 +1,80 @@
+
+
+import pandas as pd 
+import numpy as np 
+from sklearn.tree import DecisionTreeClassifier 
+#to draw the graph
+from sklearn.tree import export_graphviz
+from six import StringIO
+from IPython.display import Image
+import pydotplus 
+ 
+=================
+# download the dataset and storing it in iris_df
+data_url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+iris_df = pd.read_csv(data_url,
+                   names = ['sepal_l',
+                             'sepal_w',
+                              'petal_l',
+                            'petal_w',
+                           'class'])
+iris_df.head(100)
+# different class labels avaliable
+iris_df['class'].unique()
+
+====================================
+classes = {
+    
+    'Iris-setosa': 0,
+    'Iris-versicolor' : 1,
+    'Iris-virginica' : 2
+    }
+iris_df = iris_df.replace({'class': classes})
+iris_df.head(100)
+======================================
+
+X = iris_df.iloc[:,:4]
+Y = iris_df.iloc[:,4]
+#converting it into an array
+X = np.array (X)
+Y = np.array (Y)
+=========================
+
+X
+===========================
+Y
+=================================
+iris_df.shape
+==================
+# not splitting into training and testing 
+
+tree = DecisionTreeClassifier(criterion = 'entropy')
+#4 levels of splitting will occur
+#bec we are not leeting the tree to construct to grow till the max effic there is is recution in accuracy
+#tree = DecisionTreeClassifier(criterion='entropy', max_depth = 4)
+#minimum 50 samples are required to split the tree
+#tree = DecisionTreeClassifier(criterion='entropy', min_samples_leaf = 50)
+#how many samples tree need to have to split
+#tree = DecisionTreeClassifier(criterion='entropy',min_samples_split = 10)
+tree.fit(X, Y)
+=====================================
+#conda install graphviz
+import os
+os.environ["PATH"] += os.pathsep + r'C:\Users\Admin\anaconda3\Library\bin\graphviz'
+
+===========================================
+
+#storing it into the var dot_data
+dot_data = StringIO()
+export_graphviz(tree, out_file=dot_data, filled=True, rounded=True, special_characters=True)
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
+Image(graph.create_png(), width=300, height=10)
+============================================
+
+predict = tree.predict(X)
+predict
+====================
+from sklearn import metrics
+print('Accuracy:', metrics.accuracy_score(Y, predict))
+
+===============================
