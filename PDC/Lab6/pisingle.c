@@ -3,7 +3,7 @@
 #include <omp.h>
 #include <math.h>
 
-#define terms 10000000
+#define terms 1000000
 
 int main()
 {
@@ -19,13 +19,16 @@ int main()
         double sum=4;
         double ps;
         float start=omp_get_wtime();
-        #pragma omp parallel for schedule(guided,chunk) private(i,ps) shared(sum)
-        for(i=3;i<2*terms;i+=2)
+        #pragma omp parallel private(i,ps) shared(sum)
         {
-            ps=((pow(-1,i/2)*4)/i);
+            #pragma omp for schedule(guided,chunk) 
+            for(i=3;i<2*terms;i+=2)
+            {
+                ps=((pow(-1,i/2)*4)/i);
 
-            #pragma omp critical
-            sum=sum+ps;
+                #pragma omp critical
+                sum=sum+ps;
+            }
         }
         printf("sum= %f ",sum);
         float end=omp_get_wtime();

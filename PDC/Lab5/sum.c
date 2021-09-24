@@ -11,7 +11,7 @@ int main()
     printf("Name: Shyam Sundaram\nReg num: 19BCE1560\nPDC Lab:\n\n");
 
     
-    printf("Size of array: %d------------\n",s);
+    printf("Size of array: %d------------\n",N);
     
     for(int t=0;t<10;++t)
     {
