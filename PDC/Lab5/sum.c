@@ -10,12 +10,7 @@ int main()
     
     printf("Name: Shyam Sundaram\nReg num: 19BCE1560\nPDC Lab:\n\n");
 
-    // int a[N];
     
-    // for(int i=0;i<N;++i)
-    // a[i]=1;
-
-    int s=N;
     printf("Size of array: %d------------\n",s);
     
     for(int t=0;t<10;++t)

@@ -11,11 +11,6 @@ int main()
     
     printf("Name: Shyam Sundaram\nReg num: 19BCE1560\nPDC Lab:\n\n");
 
-    // int a[N];
-    
-    // for(int i=0;i<N;++i)
-    // a[i]=1;
-
     int s=N;
     printf("Size of array: %d------------\n",s);
 
@@ -33,7 +28,6 @@ int main()
 
         float end=omp_get_wtime();
         float exec=end-start;
-        //printf("%ld\n",s);
         printf("Thread count: %d Time taken is: %f\n",thread[t],exec);
         
     }
