@@ -1,0 +1,25 @@
++++++++++++++++++++size 10000
+
+Thread count: 1 Time taken is: 0.631226
+Thread count: 2 Time taken is: 0.313477
+Thread count: 4 Time taken is: 0.158936
+Thread count: 8 Time taken is: 0.122437
+Thread count: 16 Time taken is: 0.114624
+Thread count: 32 Time taken is: 0.112793
+Thread count: 64 Time taken is: 0.116211
+Thread count: 128 Time taken is: 0.116943
+Thread count: 256 Time taken is: 0.120850
+Thread count: 512 Time taken is: 0.140259
+
++++++++++++++++++++size 100000
+
+Thread count: 1 Time taken is: 62.195312
+Thread count: 2 Time taken is: 11.663574
+Thread count: 4 Time taken is: 3.312744
+Thread count: 8 Time taken is: 2.457520
+Thread count: 16 Time taken is: 2.562988
+Thread count: 32 Time taken is: 2.609131
+Thread count: 64 Time taken is: 2.686035
+Thread count: 128 Time taken is: 2.756348
+Thread count: 256 Time taken is: 2.803711
+Thread count: 512 Time taken is: 2.859375
