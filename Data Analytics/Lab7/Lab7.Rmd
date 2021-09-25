@@ -1,0 +1,123 @@
+---
+title: "Lab7"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 20th September, 2021
+### Dr. B. Radhika Selvamani
+<br>
+
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Question 1](#q1) <br>
+2. [Question 2](#q2) <br>
+3. [Question 3](#q3) <br>
+4. [Question 4](#q4)
+
+## <a name="q1"></a> Question 1
+<hr/>
+
+Q. In the realtime data available on European Exports, identify the total Export Volume in tonnes.
+Find the percentage exported from India
+
+A.
+```{r}
+data=read.csv("EuropeanImportsFromOtherCountries.csv",stringsAsFactors = FALSE)
+head(data,1)
+data$Volume=as.numeric(gsub(",","",data$Volume))
+totalImports=sum(data$Volume)
+totalImports
+```
+Total imports are thus seen above.
+```{r}
+ind=sum(data[data$ExportCountry=="India",]$Volume)
+#ind
+(ind/totalImports)*100
+```
+
+## <a name="q2"></a> Question 2
+<hr/>
+
+Q. Plot the percentage export volume of all the countries which exceed 5%. Find the global rank of India in exporting products to Europe.
+
+A.
+```{r}
+library(data.table)
+globtab = data.table(data$ExportCountry,data$Crop,data$Volume)
+names(globtab)=c("ExportCountry","Crop","Volume")
+globExpPer = globtab[,sum(Volume),by=ExportCountry]
+names(globExpPer)=c("ExportCountry","Volume")
+globExpPer$Perc=(globExpPer$Volume/totalImports)*100
+barplot( globExpPer[globExpPer$Perc>5]$Perc,
+        main = "Export Percentage",
+        xlab = "Country",
+        ylab = "%Export",
+        names.arg = globExpPer[globExpPer$Perc>5]$ExportCountry,
+        col = "darkred",
+        horiz = FALSE,las=2)
+```
+Now we find rank of india. Since India is among the top exporters, we need not plot those with percentages less than 5 to find it's rank.
+```{r}
+
+globExpPer=globExpPer[order(globExpPer$Volume,decreasing=TRUE)]
+barplot( globExpPer[globExpPer$Perc>5]$Perc,
+        main = "Export Percentage",
+        xlab = "Country",
+        ylab = "%Export",
+        names.arg = globExpPer[globExpPer$Perc>5]$ExportCountry,
+        col = "darkred",
+        horiz = FALSE,las=2)
+```
+Thus, we see India is 7th in the world.
+
+## <a name="q3"></a> Question 3
+<hr/>
+
+Q. Find the first three crops having the highest exports from India. Plot their percentage export of the total exports from India.
+
+A.
+Below, we see that some crop names are not available in the dataset. So, We shall not be including that while finding the top crops exported from India.
+```{r}
+topcrop=globtab[globtab$ExportCountry=="India",]
+top=topcrop[,sum(Volume), by=Crop]
+names(top)=c("Crop","Volume")
+top=top[order(top$Volume,decreasing = TRUE)]
+totalImports=sum(top$Volume)
+top
+```
+Soya bean seed takes the lead, Then soya beans and white sugar.
+```{r}
+topp=top[1:4,]
+topp$perc=(topp$Volume/totalImports)*100
+barplot( topp[topp$Crop!="",]$perc,
+        main = "Export Percentage",
+        xlab = "Crop",
+        ylab = "%Export",
+        names.arg = topp[topp$Crop!="",]$Crop,
+        col = "darkred",
+        horiz = FALSE,las=2)
+```
+
+## <a name="q4"></a> Question 4
+<hr/>
+
+Q. Plot the percentage of the class of different crops exported from India.
+
+A.
+```{r}
+top$perc=(top$Volume/totalImports)*100
+barplot( top[top$Crop!="",]$perc,
+        main = "Export Percentage",
+        xlab = "Crop",
+        ylab = "%Export",
+        names.arg = top[top$Crop!="",]$Crop,
+        col = "darkred",
+        horiz = FALSE,las=2)
+```
