@@ -1,23 +1,23 @@
 ++++++++++++++size 10000000
-Thread count: 1 Time taken is: 5.810547
-Thread count: 2 Time taken is: 1.267578
-Thread count: 4 Time taken is: 0.594727
-Thread count: 8 Time taken is: 0.618164
-Thread count: 16 Time taken is: 0.610840
-Thread count: 32 Time taken is: 0.600098
-Thread count: 64 Time taken is: 0.590332
-Thread count: 128 Time taken is: 0.626465
-Thread count: 256 Time taken is: 0.650391
-Thread count: 512 Time taken is: 0.709961
+Thread count: 1 Time taken is: 5.608856
+Thread count: 2 Time taken is: 0.855698
+Thread count: 4 Time taken is: 0.704330
+Thread count: 8 Time taken is: 0.584625
+Thread count: 16 Time taken is: 0.588684
+Thread count: 32 Time taken is: 0.586212
+Thread count: 64 Time taken is: 0.590820
+Thread count: 128 Time taken is: 0.589951
+Thread count: 256 Time taken is: 0.622177
+Thread count: 512 Time taken is: 0.663330
 
 +++++++++++++++size 100000000
-Thread count: 1 Time taken is: 43.244629
-Thread count: 2 Time taken is: 13.688965
-Thread count: 4 Time taken is: 7.655762
-Thread count: 8 Time taken is: 7.410645
-Thread count: 16 Time taken is: 7.040527
-Thread count: 32 Time taken is: 6.863281
-Thread count: 64 Time taken is: 6.920410
-Thread count: 128 Time taken is: 7.220703
-Thread count: 256 Time taken is: 7.261719
-Thread count: 512 Time taken is: 7.357910
+Thread count: 1 Time taken is: 40.406250
+Thread count: 2 Time taken is: 12.852386
+Thread count: 4 Time taken is: 6.379395
+Thread count: 8 Time taken is: 6.572662
+Thread count: 16 Time taken is: 6.568298
+Thread count: 32 Time taken is: 6.539917
+Thread count: 64 Time taken is: 6.551178
+Thread count: 128 Time taken is: 6.557220
+Thread count: 256 Time taken is: 6.590454
+Thread count: 512 Time taken is: 6.658295

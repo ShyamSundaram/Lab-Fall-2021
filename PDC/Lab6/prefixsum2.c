@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <omp.h>
 
-#define N 10000000
+#define N 100000000
 
 int main()
 {
@@ -30,11 +30,11 @@ int main()
         while(d<N)
         {
             int i;
-            #pragma omp parallel for
+            #pragma omp parallel for schedule(guided)
             for(i=d;i<N;++i)
             z[i]=y[i-d];
 
-            #pragma omp parallel for
+            #pragma omp parallel for schedule(guided)
             for(i=d;i<N;++i)
             y[i]+=z[i];
 
