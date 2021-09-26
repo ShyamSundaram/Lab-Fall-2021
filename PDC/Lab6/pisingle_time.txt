@@ -1,0 +1,25 @@
++++++++++++++++++++++++++++++++++++++++++size 1000000
+
+sum= 3.141592 Thread count: 1 Time taken is: 0.090088
+sum= 3.141592 Thread count: 2 Time taken is: 0.088135
+sum= 3.141592 Thread count: 4 Time taken is: 0.052734
+sum= 3.141592 Thread count: 8 Time taken is: 0.046387
+sum= 3.141592 Thread count: 16 Time taken is: 0.060059
+sum= 3.141592 Thread count: 32 Time taken is: 0.033691
+sum= 3.141592 Thread count: 64 Time taken is: 0.034180
+sum= 3.141592 Thread count: 128 Time taken is: 0.034912
+sum= 3.141592 Thread count: 256 Time taken is: 0.039795
+sum= 3.141592 Thread count: 512 Time taken is: 0.048340
+
++++++++++++++++++++++++++++++++++++=size 10000000
+
+sum= 3.141593 Thread count: 1 Time taken is: 0.886230
+sum= 3.141593 Thread count: 2 Time taken is: 0.898926
+sum= 3.141593 Thread count: 4 Time taken is: 0.464844
+sum= 3.141593 Thread count: 8 Time taken is: 0.423828
+sum= 3.141593 Thread count: 16 Time taken is: 0.416992
+sum= 3.141593 Thread count: 32 Time taken is: 0.302734
+sum= 3.141593 Thread count: 64 Time taken is: 0.249023
+sum= 3.141593 Thread count: 128 Time taken is: 0.215332
+sum= 3.141593 Thread count: 256 Time taken is: 0.206543
+sum= 3.141593 Thread count: 512 Time taken is: 0.218262
