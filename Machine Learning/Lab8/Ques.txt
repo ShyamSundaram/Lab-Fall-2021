@@ -1,0 +1,6 @@
+linear regression:
+	check linearity with heatmap
+	find coefficients without any package
+
+decision tree:
+	find entropy, root node and information gain with code and not scikit
