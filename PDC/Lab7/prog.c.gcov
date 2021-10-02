@@ -1,0 +1,417 @@
+        -:    0:Source:prog.c
+        -:    0:Graph:prog.gcno
+        -:    0:Data:prog.gcda
+        -:    0:Runs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include<time.h>
+        -:    4:
+        -:    5:#define M 1000
+        -:    6:#define N 1000
+        -:    7:#define I 1000
+        -:    8:#define V 10000000
+        -:    9:
+function initArray called 11 returned 100% blocks executed 100%
+       11:   10:int** initArray(int r,int c,int u,int l)
+        -:   11:{
+       11:   12:    srand(time(0));
+       11:   12-block  0
+call    0 returned 100%
+call    1 returned 100%
+        -:   13:
+       11:   14:    int** arr=(int**)malloc(r*sizeof(int*));
+    11011:   15:    for(int i=0;i<r;++i)
+    11011:   15-block  0
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+    11000:   16:        arr[i]=(int*)malloc(c*sizeof(int));
+    11000:   16-block  0
+        -:   17:
+        -:   18:
+       11:   19:    if(u!=l && l!=0 && u!=0)                            //initializes each element to a random array if lower (l) and uper (u) vales are different
+       11:   19-block  0
+branch  0 taken 73% (fallthrough)
+branch  1 taken 27%
+        8:   19-block  1
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0%
+        8:   19-block  2
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0%
+     8008:   20:    for(int i=0;i<r;++i)
+        8:   20-block  0
+     8000:   20-block  1
+     8008:   20-block  2
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  8008000:   21:        for(int j=0;j<c;++j)
+     8000:   21-block  0
+  8008000:   21-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  8000000:   22:            arr[i][j]=(rand()%(u-l+1))+l;
+  8000000:   22-block  0
+call    0 returned 100%
+        -:   23:
+        -:   24:
+       11:   25:    if(l==0 && u==0)                                    //initialize elements to 0 if l and u are 0
+       11:   25-block  0
+branch  0 taken 9% (fallthrough)
+branch  1 taken 91%
+        1:   25-block  1
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0%
+     1001:   26:    for(int i=0;i<r;++i)
+        1:   26-block  0
+     1000:   26-block  1
+     1001:   26-block  2
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  1001000:   27:        for(int j=0;j<c;++j)
+     1000:   27-block  0
+  1001000:   27-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  1000000:   28:            arr[i][j]=0;
+  1000000:   28-block  0
+        -:   29:    
+       11:   30:    return arr;
+       11:   30-block  0
+        -:   31:}
+        -:   32:
+function freeArray called 11 returned 100% blocks executed 100%
+       11:   33:void freeArray(int** arr,int r)
+        -:   34:{
+    11011:   35:    for(int i=0;i<r;++i)
+       11:   35-block  0
+    11011:   35-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+    11000:   36:    free(arr[i]);
+    11000:   36-block  0
+        -:   37:
+       11:   38:    free(arr);
+       11:   39:}
+        -:   40:
+function MatAdd called 1 returned 100% blocks executed 100%
+        1:   41:void MatAdd()
+        -:   42:{
+        -:   43:    //init array
+        1:   44:    printf("Starting Matrix addition...\n");
+        1:   44-block  0
+call    0 returned 100%
+        -:   45:
+        1:   46:    printf("Initialising arrays...\n");
+call    0 returned 100%
+        1:   47:    int** a=initArray(M,N,100,1);
+call    0 returned 100%
+        1:   48:    int** b=initArray(M,N,100,1);
+call    0 returned 100%
+        1:   49:    int** c=initArray(M,N,1,1);
+call    0 returned 100%
+        -:   50:
+        1:   51:    printf("Performing addition...\n");
+call    0 returned 100%
+     1001:   52:    for(int i=0;i<M;++i)
+     1000:   52-block  0
+     1001:   52-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  1001000:   53:        for(int  j=0;j<N;++j)
+     1000:   53-block  0
+  1001000:   53-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  1000000:   54:            c[i][j]=a[i][j]+b[i][j];
+  1000000:   54-block  0
+        -:   55:
+        1:   56:    printf("Finished addition...\n");
+        1:   56-block  0
+call    0 returned 100%
+        1:   57:    printf("Freeing Arrays...\n\n");
+call    0 returned 100%
+        1:   58:    freeArray(a,M);
+call    0 returned 100%
+        1:   59:    freeArray(b,M);
+call    0 returned 100%
+        1:   60:    freeArray(c,M);
+call    0 returned 100%
+        1:   61:}
+        -:   62:
+function MatMul called 1 returned 100% blocks executed 100%
+        1:   63:void MatMul()
+        -:   64:{
+        -:   65:    //init array
+        1:   66:    printf("Starting Matrix Multiplication...\n");
+        1:   66-block  0
+call    0 returned 100%
+        -:   67:
+        1:   68:    printf("Initialising arrays...\n");
+call    0 returned 100%
+        1:   69:    int** a=initArray(M,I,100,1);
+call    0 returned 100%
+        1:   70:    int** b=initArray(I,N,100,1);
+call    0 returned 100%
+        1:   71:    int** c=initArray(M,N,0,0);
+call    0 returned 100%
+        -:   72:
+        1:   73:    printf("Performing Multiplication...\n");
+call    0 returned 100%
+     1001:   74:    for(int i=0;i<M;++i)
+     1000:   74-block  0
+     1001:   74-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  1001000:   75:        for(int j=0;j<N;++j)
+     1000:   75-block  0
+  1000000:   75-block  1
+  1001000:   75-block  2
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+1001000000:   76:            for(int k=0;k<I;++k)
+  1000000:   76-block  0
+1001000000:   76-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+1000000000:   77:                c[i][j]+=a[i][k]*b[k][j];
+1000000000:   77-block  0
+        -:   78:
+        -:   79:
+        1:   80:    printf("Finished Multiplication...\n");
+        1:   80-block  0
+call    0 returned 100%
+        1:   81:    printf("Freeing Arrays...\n\n");
+call    0 returned 100%
+        1:   82:    freeArray(a,M);
+call    0 returned 100%
+        1:   83:    freeArray(b,M);
+call    0 returned 100%
+        1:   84:    freeArray(c,M);
+call    0 returned 100%
+        1:   85:}
+        -:   86:
+function MatSub called 1 returned 100% blocks executed 100%
+        1:   87:void MatSub()
+        -:   88:{
+        -:   89:    //init array
+        1:   90:    printf("Starting Matrix Subtraction...\n");
+        1:   90-block  0
+call    0 returned 100%
+        -:   91:
+        1:   92:    printf("Initialising arrays...\n");
+call    0 returned 100%
+        1:   93:    int** a=initArray(M,N,100,1);
+call    0 returned 100%
+        1:   94:    int** b=initArray(M,N,100,1);
+call    0 returned 100%
+        1:   95:    int** c=initArray(M,N,1,1);
+call    0 returned 100%
+        -:   96:
+        1:   97:    printf("Performing subtraction...\n");
+call    0 returned 100%
+     1001:   98:    for(int i=0;i<M;++i)
+     1000:   98-block  0
+     1001:   98-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  1001000:   99:        for(int  j=0;j<N;++j)
+     1000:   99-block  0
+  1001000:   99-block  1
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  1000000:  100:            c[i][j]=a[i][j]-b[i][j];
+  1000000:  100-block  0
+        -:  101:
+        1:  102:    printf("Finished subtraction...\n");
+        1:  102-block  0
+call    0 returned 100%
+        1:  103:    printf("Freeing Arrays...\n\n");
+call    0 returned 100%
+        1:  104:    freeArray(a,M);
+call    0 returned 100%
+        1:  105:    freeArray(b,M);
+call    0 returned 100%
+        1:  106:    freeArray(c,M);
+call    0 returned 100%
+        1:  107:}
+        -:  108:
+function isDiagonal called 1 returned 100% blocks executed 90%
+        1:  109:void isDiagonal()
+        -:  110:{
+        -:  111:    //init array
+        1:  112:    printf("Starting isDiagonal...\n");
+        1:  112-block  0
+call    0 returned 100%
+        1:  113:    int flag=1;
+        1:  114:    printf("Initialising array...\n");
+call    0 returned 100%
+        1:  115:    int** a=initArray(N,N,100,1);
+call    0 returned 100%
+        -:  116:
+        1:  117:    printf("Examining...\n");
+call    0 returned 100%
+       1*:  118:    for(int i=0;i<N;++i)
+    %%%%%:  118-block  0
+        1:  118-block  1
+branch  0 taken 100%
+branch  1 taken 0% (fallthrough)
+        -:  119:    {
+        2:  120:        for(int  j=0;j<N;++j)
+        1:  120-block  0
+        1:  120-block  1
+        2:  120-block  2
+branch  0 taken 100%
+branch  1 taken 0% (fallthrough)
+        2:  121:        if(i!=j && a[i][j]!=0)
+        2:  121-block  0
+branch  0 taken 50% (fallthrough)
+branch  1 taken 50%
+        1:  121-block  1
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0%
+        -:  122:        {
+        1:  123:            flag=1;
+        1:  124:            break;
+        1:  124-block  0
+        -:  125:        }
+        1:  126:        if(flag==1)
+        1:  126-block  0
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:  127:        break;
+        1:  127-block  0
+        -:  128:    }
+        1:  129:    if(flag==1)
+        1:  129-block  0
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:  130:    printf("Not a diagonal matrix\n");
+        1:  130-block  0
+call    0 returned 100%
+        -:  131:    else
+    #####:  132:    printf("Is a diagoal matrix\n");
+    %%%%%:  132-block  0
+call    0 never executed
+        1:  133:    printf("Freeing Array...\n\n");
+        1:  133-block  0
+call    0 returned 100%
+        1:  134:    freeArray(a,N);
+call    0 returned 100%
+        1:  135:}
+        -:  136:
+function isSymmetric called 1 returned 100% blocks executed 90%
+        1:  137:void isSymmetric()
+        -:  138:{
+        -:  139:    //init array
+        1:  140:    printf("Starting isSymmetric...\n");
+        1:  140-block  0
+call    0 returned 100%
+        1:  141:    int flag=1;
+        1:  142:    printf("Initialising array...\n");
+call    0 returned 100%
+        1:  143:    int** a=initArray(N,N,100,1);
+call    0 returned 100%
+        -:  144:
+        1:  145:    printf("Examining...\n");
+call    0 returned 100%
+       1*:  146:    for(int i=0;i<N;++i)
+    %%%%%:  146-block  0
+        1:  146-block  1
+branch  0 taken 100%
+branch  1 taken 0% (fallthrough)
+        -:  147:    {
+        2:  148:        for(int  j=0;j<N;++j)
+        1:  148-block  0
+        1:  148-block  1
+        2:  148-block  2
+branch  0 taken 100%
+branch  1 taken 0% (fallthrough)
+        2:  149:        if(a[i][j]!=a[j][i])
+        2:  149-block  0
+branch  0 taken 50% (fallthrough)
+branch  1 taken 50%
+        -:  150:        {
+        1:  151:            flag=1;
+        1:  152:            break;
+        1:  152-block  0
+        -:  153:        }
+        1:  154:        if(flag==1)
+        1:  154-block  0
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:  155:        break;
+        1:  155-block  0
+        -:  156:    }
+        1:  157:    if(flag==1)
+        1:  157-block  0
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        1:  158:    printf("Not a symmetric matrix\n");
+        1:  158-block  0
+call    0 returned 100%
+        -:  159:    else
+    #####:  160:    printf("Is a symmetric matrix\n");
+    %%%%%:  160-block  0
+call    0 never executed
+        1:  161:    printf("Freeing Array...\n\n");
+        1:  161-block  0
+call    0 returned 100%
+        1:  162:    freeArray(a,N);
+call    0 returned 100%
+        1:  163:}
+        -:  164:
+        -:  165:
+function prefix called 1 returned 100% blocks executed 100%
+        1:  166:void prefix()
+        -:  167:{
+        1:  168:    printf("Initialising arrays...\n");
+        1:  168-block  0
+call    0 returned 100%
+        1:  169:    long *x=(long*)malloc(V*sizeof(long));
+ 10000001:  170:    for(int i=0;i<V;++i)
+ 10000001:  170-block  0
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+ 10000000:  171:    x[i]=i;
+ 10000000:  171-block  0
+        -:  172:
+        1:  173:    long *y=(long*)malloc(V*sizeof(long));
+        -:  174:
+        1:  175:    y[0]=x[0];
+        -:  176:
+        1:  177:    printf("Summing prefixes...\n");
+        1:  177-block  0
+call    0 returned 100%
+ 10000000:  178:    for(int i=1;i<V;++i)
+ 10000000:  178-block  0
+branch  0 taken 100%
+branch  1 taken 1% (fallthrough)
+  9999999:  179:    y[i]=y[i-1]+x[i];
+  9999999:  179-block  0
+        -:  180:
+        1:  181:    printf("Summation done. Freeing arrays...\n\n");
+        1:  181-block  0
+call    0 returned 100%
+        1:  182:    free(x);
+        1:  183:    free(y);
+        1:  184:}
+        -:  185:
+function main called 1 returned 100% blocks executed 100%
+        1:  186:int main()
+        -:  187:{
+        1:  188:    MatMul();
+        1:  188-block  0
+call    0 returned 100%
+        1:  189:    MatAdd();
+call    0 returned 100%
+        1:  190:    MatSub();
+call    0 returned 100%
+        1:  191:    isSymmetric();
+call    0 returned 100%
+        1:  192:    isDiagonal();
+call    0 returned 100%
+        1:  193:    prefix();
+call    0 returned 100%
+        -:  194:    
+        1:  195:    return 0;
+        -:  196:}
