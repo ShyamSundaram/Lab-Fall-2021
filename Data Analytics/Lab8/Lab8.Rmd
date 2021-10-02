@@ -1,0 +1,98 @@
+---
+title: "Lab8"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 27th September, 2021
+### Dr. B. Radhika Selvamani
+<br>
+
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Question 1](#q1) <br>
+2. [Question 2](#q2) <br>
+3. [Question 3](#q3) <br>
+
+## <a name="q1"></a> Question 1
+<hr/>
+
+Q. Clean the given people death and birth data and read the values in to a dataframe.
+
+A.
+```{r}
+(txt <- readLines("PeopleBirthDeathData.txt"))
+T=grepl("%",txt)
+data=txt[!T]
+
+(records <- strsplit(data, split = ","))
+
+formTable <- function(x){
+  out <- character(4)
+  # get names and gender
+  i <- grep("[[:alpha:]]",x)
+ 
+  out[1:2] <- x[i]
+  #clean gender
+  #out[2]<-ifelse(grepl("fem",out[2]),"female","male")
+  
+  # get birth date assuming all birth years to be earlier than 1890
+  i <- which(as.numeric(x) < 1890)
+  out[3] <- ifelse(length(i)>0, x[i], NA)
+  # get death date assuming all death years to be after 1890
+  i <- which(as.numeric(x) > 1890)
+  out[4] <- ifelse(length(i)>0, x[i], NA)
+  out
+}
+
+records <- lapply(records, formTable)
+
+M <- matrix(unlist(records), nrow=length(records), byrow=TRUE)
+
+#convert matrix to data frame
+colnames(M) <- c("name","gender","birth","death")
+daltons = as.data.frame(M, stringsAsFactors=FALSE)
+daltons
+```
+
+## <a name="q2"></a> Question 2
+<hr/>
+
+Q. Convert the name of the person a character vector and the years to numerical vector. Calculate the age of the people and add it as a new column.
+
+A. Name is already character. Just need to convert the years.
+```{r}
+typeof(unlist(daltons['name']))
+daltons['birth']<-as.numeric(unlist(daltons['birth']))
+daltons['death']<-as.numeric(unlist(daltons['death']))
+typeof(unlist(daltons['death']))
+typeof(unlist(daltons['birth']))
+```
+To calculate age:
+```{r}
+daltons<-transform(daltons,age=death-birth)
+daltons
+```
+
+## <a name="q3"></a> Question 3
+<hr/>
+
+Q. Clean the gender data and convert it to a factor with values (male, female and NA)
+
+A.
+
+```{r}
+
+for(i in 1:nrow(daltons))
+{
+        daltons[i,'gender']<-ifelse(grepl("fem",daltons[i,'gender']),"female","male")
+}
+daltons$gender
+daltons
+```
