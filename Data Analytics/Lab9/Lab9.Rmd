@@ -1,0 +1,64 @@
+---
+title: "Lab9"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 4th October, 2021
+### Dr. B. Radhika Selvamani
+<br>
+
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Question 1](#q1) <br>
+2. [Question 2](#q2) <br>
+3. [Question 3](#q3) <br>
+
+## <a name="q1"></a> Question 1
+<hr/>
+
+Q. The data file has yearwise crop production in tons for the various countries. For the given the table change the column name for the years from 2004-05, 2005-06 … to 2005, 2006 ….2012
+
+**Note: R does not allow names and variables to start with a number. Thus, columns are named c2005, c2006...etc instead of 2005,2006.. so on.**
+
+A.
+```{r}
+library(dplyr)
+df=read.csv("YearwiseCropInformation.csv",header=TRUE)
+colnames(df)
+df=df %>% rename(Crop=Crop, 'c2005'=X2004.05 , 'c2006'=X2005.06, 'c2007'=X2006.07, 'c2008'=X2007.08, 'c2009'=X2008.09, 'c2010'=X2009.10, 'c2011'=X2010.11, 'c2012'=X2011.12)
+df
+```
+
+## <a name="q2"></a> Question 2
+<hr/>
+
+Q. Create new column mean, which provides the average crop production over all years. Select the top 5 crops in production. (You may refer to https://dplyr.tidyverse.org/reference/top_n.html) 
+
+A.
+```{r}
+df = df %>% select(Crop,c2005,c2006,c2007,c2008,c2009,c2010,c2011,c2012) %>% mutate(mean=(c2005+c2006+c2007+c2008+c2009+c2010+c2011+c2012)/8)
+df
+```
+The top 5 crops, by mean, are shown below:
+```{r}
+df %>% top_n(5)
+```
+
+## <a name="q3"></a> Question 3
+<hr/>
+
+Q. Draw a line plot for the crop production for the year 2006. The crop should be the x axis and the crop value has to be the y axis.
+
+A.
+```{r}
+library(ggplot2)
+ggplot(data=df,aes(x=Crop,y=c2006,group=1))+geom_line()+geom_point()
+
+```
