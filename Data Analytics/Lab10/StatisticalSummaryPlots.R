@@ -1,0 +1,27 @@
+library(MASS)
+school=painters$School
+school.freq=table(school)
+pie(school.freq)
+school.relfreq = school.freq/nrow(painters)
+barplot(school.freq)
+colors=c("blue","red","green","yellow","violet","orange","cyan")
+lot(school.freq,col=colors)
+tapply(painters$Composition,painters$School,mean)
+duration=faithful$eruptions
+range(duration)
+breaks=seq(1.5,5,5,by=1.5)
+duration.cut=cut(duration,breaks,right=FALSE)
+
+duration.freq=table(duration.cut)
+duration.cumfreq=cumsum(duration.freq)
+
+barplot(duration.cumfreq,col=colors)
+hist(duration,right=FALSE)
+duration.relfreq=duration.freq/nrow(faithful)
+
+cumlfreq0=c(0,duration.cumfreq)
+
+plot(breaks,cumlfreq0,main="Cumuulatove Frequency of faithful eruptions",xlab="Duration Minutes",ylab="faithful eruptions frequency proportions")
+lines(breaks,cumlfreq0)
+stem(duration)
+plot(duration,waiting,xlab="Duration",ylab="Waiting")

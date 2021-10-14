@@ -1,0 +1,133 @@
+---
+title: "Lab10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 11th October, 2021
+### Dr. B. Radhika Selvamani
+<br>
+
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Question 1](#q1) <br>
+2. [Question 2](#q2) <br>
+3. [Question 3](#q3) <br>
+4. [Question 4](#q4) <br>
+5. [Question 5](#q5)
+
+## <a name="q1"></a> Question 1
+<hr/>
+
+Q. For the Insurance data set in MASS library. Identify column types Print the summary statistics of the columns.<br><br>
+A.
+```{r}
+library(MASS)
+data(Insurance)
+head(Insurance,5)
+```
+Types of each column
+```{r}
+str(Insurance)
+```
+We see that District, Group and Age are categorical data types. Holders and Claims are integer.<br>
+Statistical summary
+```{r}
+summary(Insurance)
+```
+
+## <a name="q2"></a> Question 2
+<hr/>
+
+Q. Calculate the frequency , relative frequency and cumulative frequency for any categorical column and plot the bar chart and pie chart. Write your observations<br><br>
+A.
+Let us take the 'Districts' column, which is categorical. It is a factor with 4 levels.<br>
+Frequencies:
+```{r}
+dist_freq = table(Insurance$District)
+dist_freq
+```
+Relative frequencies:
+```{r}
+dist_rel_freq = dist_freq/nrow(Insurance)
+dist_rel_freq
+```
+Cumulative Frequency:
+```{r}
+dist_cum_freq = cumsum(dist_freq)
+dist_cum_freq
+```
+<br>Bar plot of frequencies:
+```{r}
+barplot(dist_freq)
+```
+<br>Bar plot of cumulative frequencies:
+```{r}
+barplot(dist_cum_freq)
+```
+<br>Pie chart of relative frequencies:
+```{r}
+pie(dist_rel_freq)
+```
+<br>From the plots and frequencies listed above, we see that the categories or districts for the entries are equally distributed.
+
+## <a name="q3"></a> Question 3
+<hr/>
+
+Q. For one of the numerical columns split them into sequences. There should be at least 5 intervals. Calculate the frequency of values occurring in each interval and plot a bar plot.<br><br>
+A.
+We shall use the 'Holders' column.
+```{r}
+holders=Insurance$Holders
+range(holders)
+```
+We have values from 3 to 3582. So, let us break it into 5 intervals with each interval having a length of 716 because (3582-3)/5 = 715.8 and we take one higher than the pper limit 3582.
+```{r}
+breaks=seq(3,3583, by=716)
+breaks
+```
+Now we break the columnvalues into these intervals
+```{r}
+holders.cut = cut(holders,breaks,right=FALSE)
+```
+Frequency of each interval
+```{r}
+freq=table(holders.cut)
+freq
+```
+Frequency plot of each interval
+```{r}
+barplot(freq)
+```
+<br>
+
+## <a name="q4"></a> Question 4
+<hr/>
+
+Q. Create a scatter line plot for the cumulative frequency of the numerical column split in question 3.<br><br>
+A.
+```{r}
+cumfreq = cumsum(freq)
+cumfreq=c(0,cumfreq)
+plot(breaks,cumfreq)
+lines(breaks,cumfreq)
+```
+<br>
+
+## <a name="q5"></a> Question 5
+<hr/>
+
+Q. Draw the scatter plot between two numerical columns and infer the correlation between them.<br><br>
+A. The columns we will use are Holders and Claims.
+```{r}
+holders=Insurance$Holders
+claims=Insurance$Claims
+plot(holders,claims)
+```
+<br>We can see that as the Holders' axis value increases, so does Claims'. This is positively correlated.
