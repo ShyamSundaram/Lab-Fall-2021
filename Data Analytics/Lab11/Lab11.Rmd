@@ -1,0 +1,122 @@
+---
+title: "Lab11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 18th October, 2021
+### Dr. B. Radhika Selvamani
+<br>
+
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Question 1](#q1) <br>
+2. [Question 2](#q2) <br>
+3. [Question 3](#q3) <br>
+
+## <a name="q1"></a> Question 1
+<hr/>
+
+Q. Use the dataset markting from the datarium package.<br>
+
+The sales of a product and the advertisement index in facebook, youtube and newspaper have been provided. The column sales is to be predicted using each of the other column as a predictor. Build the linear regression model for each variable and plot the same. Write your observations based on the visuals.
+<br><br>
+A.
+```{r}
+library(tidyverse)
+library(datarium)
+library(ggpubr)
+data("marketing", package = "datarium")
+head(marketing,5)
+```
+There are three attributes: youtube, facebook and newspaper. The target is sales. Each of their regression models are made below to predict sales.<br><br>
+
+### YouTube and Sales
+```{r}
+model1 <- lm(sales ~ youtube, data = marketing)
+model1
+ggplot(marketing, aes(youtube, sales)) +
+  geom_point() +
+  stat_smooth(method = lm)
+```
+<br>The equation will thus be: 0.04754*x+8.43911<br>As the YouTube axis increases in value, so does sales. The mean increases steadily and seems to be correlated higher than Facebook and Newspaper.<br>
+
+### Facebook and Sales
+```{r}
+model2 <- lm(sales ~ facebook, data = marketing)
+model2
+ggplot(marketing, aes(facebook, sales)) +
+  geom_point() +
+  stat_smooth(method = lm)
+```
+<br>The equation will thus be: 0.2025*x+11.174<br>As the Facebook axis increases, there is a general trend of increase in sales. They seem to be slightly correlated but weaker than YouTube.<br>
+
+### Newspaper and Sales
+```{r}
+model3 <- lm(sales ~ newspaper, data = marketing)
+model3
+ggplot(marketing, aes(newspaper, sales)) +
+  geom_point() +
+  stat_smooth(method = lm)
+```
+<br>The equation will thus be: 0.05469*x+14.82169<br> We see that the newspaper and sales axis don't seem to be related to each other. The mean just increases slightly.<br>
+
+## <a name="q2"></a> Question 2
+<hr/>
+
+Q. Discuss the correlation coefficient of each of the predictor to the response variable ‘sales’.<br><br>
+A.
+
+### YouTube and Sales
+```{r}
+cor(marketing$sales,marketing$youtube)
+```
+<br>The correlation is quite high. YouTube and sales are quite strongly positively correlated.<br>
+
+### Facebook and Sales
+```{r}
+cor(marketing$sales,marketing$facebook)
+```
+<br>The correlation is moderate. Facebook and sales are positively correlated ut is moderate.<br>
+
+### Newspaper and Sales
+```{r}
+cor(marketing$sales,marketing$newspaper)
+```
+<br>The correlation is very weak. Newspaper and sales are weakly, positively correlated.<br>
+
+
+## <a name="q3"></a> Question 3
+<hr/>
+
+Q. Summarize the model fit and compare the Residual standard error, multiple R2 and the F1 statistics of each of the column when used to predict the response variable. Write your observations. Rank the variables with respect to their predictability of the response variables<br><br>
+A.
+
+### YouTube and Sales
+```{r}
+summary(model1)
+```
+<br>
+
+### Facebook and Sales
+```{r}
+summary(model2)
+```
+<br>
+
+### Newspaper and Sales
+```{r}
+summary(model3)
+```
+<br>
+The R-Squared value gives us a way of evaluating the overall performance of a model. We see that YouTube has a higher R-Squared value than Facebook, which is in turn higher than Newspaper's model. The absolute values of the minimum and maximum of the YouTube model are closer to each other than those of the Facbook and Newspaper models.<br>
+All these observations mean that model1, which is, the YouTube-Sales model is a better fit than the other two, i.e., YouTube attribute is a strong predictor of Sales target. Thus, the rankings of the predictors are as follows:<br>
+1. YouTube<br>
+2. Facebook<br>
+3. Newspaper
