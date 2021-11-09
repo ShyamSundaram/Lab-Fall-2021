@@ -1,0 +1,157 @@
+09-11-21, 16:56:23
+JPEG (jpg), header: \xFF\xD8\xFF[\xC0\xC4\xDB\xDD\xE0-\xE5\xE7\xE8\xEA-\xEE\xFE], default size: 2097152
+PNG (png), header: \x89PNG\x0D\x0A\x1A\x0A, default size: 1048576
+GIF (gif), header: GIF8[79]a, default size: 2097152
+High Efficiency Image (heic), header: (ftypheic|ftypmif1), default size: 1000000
+Thumbcache fragment (cmmm), header: CMMM..\x00\x00.[^\x00], default size: 2097152
+TIFF/NEF/CR2/DNG (tif), header: (\x49\x49\x2A\x00)|(\x4D\x4D\x00\x2A), default size: 25165824
+Bitmap (bmp), header: BM.....\x00.\x00....[\x0C\x28\x38\x40\x6C\x7C]\x00\x00\x00, default size: 1048576
+Paint Shop Pro (psp), header: (Paint Shop Pro Im)|(~BK\x00), default size: 2097152
+Canon Raw (crw), header: HEAPCCDR, default size: 8200000
+Adobe Photoshop (psd), header: 8BPS\x00\x01\x00\x00\x00\x00\x00\x00, default size: 10485760
+Icon (ico), header: \x00\x00\x01\x00[\x01-\x15]\x00(\x10\x10|\x20\x20|\x30\x30|\x40\x40|\x80\x80).\x00[\x00\x01], default size: 1024
+Enhanced Metafile (emf), header:  EMF\x00\x00\x01\x00, default size: 1048576
+Artwork cache (itc2), header: \x00\x00\x01\x1Citch, default size: 802400
+Corel Photo-Paint (cpt), header: CPT[789]FILE[\x01-\x0F]\x00\x00\x00, default size: 3145728
+Corel Draw (cdr), header: RIFF....CDR[ 3-G]vrsn\x02\x00\x00\x00, default size: 1048576
+Corel Binary Metafile (cmx), header: CMX1, default size: 1048576
+Freehand drawing (v3) (fh3), header: FH31, default size: 1048576
+Freehand drawing (fh9), header: AGD[1-4], default size: 600000
+Google SketchUp  (skp), header: \xFF\xFE\xFF\x0ES\x00k\x00e\x00t\x00c\x00h\x00U\x00p\x00\x20\x00M\x00o\x00d\x00e\x00l\x00\xFF\xFE\xFF.\x7B\x00[567], default size: 4194304
+SketchUp (v8 up) (skp), header: \xFF\xFE\xFF\x0ES\x00k\x00e\x00t\x00c\x00h\x00U\x00p\x00\x20\x00M\x00o\x00d\x00e\x00l\x00\xFF\xFE\xFF.\x7B\x00[0-489], footer: \x9A\x99\x99\x99\x99\x99\xE9\x3F.{12}, default size: 4194304
+AutoCAD Drawing (dwg), header: AC10[01][0-5]\x00, default size: 5242880
+AutoCAD Drawing (dwg), header: AC10(18|24|27)\x00, default size: 5242880
+Drawing Exchange Format (dxf), header: \x20{0,3}\x30(\x0D\x0A|\x0A|\x0D)SECTION, default size: 1048576
+Encapsulated PostScript (eps), header: \xC5\xD0\xD3\xC6, default size: 1048576
+JPEG (Base64) (b64), header: /9j/4[\x0A\x0Da-zA-Z0-9\+/]{256}, default size: 1048576
+PNG (Base64) (b64), header: iVBORw0[\x0A\x0Da-zA-Z0-9\+/]{256}, default size: 1048576
+Sony RAW (arw), header: \x05\x00\x00\x00AW1\x2E, default size: 16882074
+Fuji Raw (raf), header: FUJIFILMCCD-RAW, default size: 9600000
+Minolta Dimage RAW image (mrw), header: \x00MRM, default size: 6900000
+WordPerfect graphics (wpg1), header: \xFFWPC...\x00\x01\x16, default size: 600000
+The GIMP image (xcf), header: gimp\x20xcf\x20(file|v001|v002|v003), default size: 1048576
+LuraWave JPEG-2000 bitmap (jp2), header: \x00\x00\x00\x0C\x6A\x50\x20\x20\x0D\x0A......ftypjp2 , default size: 5442880
+Xara X drawing (xara), header: XARA\xA3\xA3\x0D, default size: 1200000
+High Dynamic Range (hdr), header: \#\?RADIANCE\x0A, default size: 8400000
+Kodak Cineon (cin), header: \x80\x2A\x5F\xD7\x00\x00\x08\x00\x00\x00\x04\x00\x00\x00\x04\x00\x00\x00\x00\x00, default size: 1048576
+Digital Picture Exchange (dpx), header: (SDPX|XPDS)\x00...V#\x2E, default size: 7635174
+Micrographix Graphic (drw1), header: \x01\xFF\x02\x04\x03\x02, default size: 1200000
+Freehand (MX) Project (fh10), header: \x1C\x01\x00\x00\x02\x00\x04\x1C\x01\x14\x00\x02\x00\x14\x1C\x01\x16\x00\x02\x00, default size: 2097152
+Photoshop Large Document (psb), header: 8BPS\x00\x02\x00\x00\x00\x00\x00\x00\x00, default size: 8194304
+WebP Image (webp), header: RIFF....WEBP, default size: 24576
+ZbThumbnail (info), header: zbex\x04\x00\x00\x4C, default size: 1500000
+Adobe Bridge Cache (bct), header: \x6C\x6E\x62\x74\x02\x00\x00\x00, default size: 10485760
+Account Picture (accountpicture-ms), header: 1SPS\x18\xB0\x8B\x0B\x25\x27\x44\x4B\x92\xBA\x79\x33, default size: 1048576
+MSO Document Image (mdi), header: EP\*\x00, default size: 2097152
+PaperPort scanned (max1), header: ViG..\x1A, default size: 1048576
+Kies thumb (tec1), header: \xFF\xD9...[\x00-\x03]\xFF\xD8\xFF, footer: \xFF\xD9, default size: 1048576
+PC Paintbrush (pcx), header: \x0A\x05\x01\x08, default size: 524288
+BBThumbs.dat (bbthumbs), header: \x24\x05\x20\x03[\x07\x08]\x01\x00, default size: 2097152
+SymbianOS Multi BitMap (mbm), header: \x37\x00\x00\x10........9d9G, default size: 72474
+Graphics Metafile (wmf), header: \xD7\xCD\xC6\x9A\x00\x00, default size: 1048576
+Windows 3 Metafile (wmf), header: \x01\x00\x09\x00\x00\x03, default size: 1048576
+Calamus Vector Graphic (cvg), header: CALAMUSCVG, default size: 1048576
+OpenGL texture (ktx), header: \ABKTX 11, footer: bvx$, default size: 1048576
+Adobe Acrobat (pdf), header: %PDF\x2D[12]\x2E, default size: 1048576
+Unicode UTF-16LE (txt), header: \xFF\xFE[\x09\x0A\x0D\x20-\x3C\x40-\x7E\xC0-\xDC]\x00[^\x00]\x00, default size: 1048576
+Text UTF-8 (txt), header: \xEF\xBB\xBF[\x09\x0A\x0D\x20-\x3C\x40-\x7E\xC0-\xDC], default size: 1048576
+OLE2/MS Office (ole2), header: \xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1, default size: 1048576
+MS Office 2007+ (docx), header: _Types\]\.xml, default size: 1048576
+OpenOffice (odt), header: Zip Archive, default size: 1048576
+Rich Text Format (rtf), header: \{\\rtf, default size: 1048576
+MS Access (mdb), header: \x00\x01\x00\x00Standard Jet, default size: 1048576
+MS Access 2007 (accdb), header: \x00\x01\x00\x00Standard ACE DB, default size: 8388608
+WordPerfect document (wpd), header: \xFFWPC...[\x00-\x02]\x01\x0A, default size: 300000
+MS OneNote (one), header: \xE4\x52\x5C\x7B\x8C\xD8\xA7\x4D\xAE\xB1\x53\x78\xD0\x29\x96\xD3, default size: 3145728
+PostScript/Adobe (ps), header: %!PS-Adobe, default size: 1048576
+Quicken (qdf), header: \xAC\x9E\xBD\x8F, default size: 8388608
+Quicken (qsd), header: QW Ver\. , default size: 370000
+QuickBooks Backup (qbb), header: \x45\x86\x00\x00\x06\x00\x02\x00, default size: 8388608
+PDF (Base64) (b64), header: JVBERi[\x0A\x0Da-zA-Z0-9\+/]{256}, default size: 1048576
+OLE2 (Base64) (b64), header: 0M8R4KGx[\x0A\x0Da-zA-Z0-9\+/]{256}, default size: 1048576
+Quattro Pro Notebook 6.0 (wb2), header: \x00\x00\x02\x00[\x01\x02]\x10\xC9\x00\x02\x00\x00\x06, default size: 2097152
+FileMaker Pro 7 (fp7), header: \x00\x01\x00\x00\x00\x02\x00\x01\x00\x05\x00\x02\x00\x02\xC0HBAM7, default size: 4194304
+FileMaker Pro database (fp5), header: \x00\x01\x00\x00\x00\x02\x00\x01\x00\x05\x00\x02\x00\x02\xC0, default size: 4194304
+RagTime Document (rtd), header: \x43\x23\x2B\x44\xA4\x43\x4D\xA5\x48\x64\x72, default size: 524288
+MS Money (mny), header: \x00\x01\x00\x00MSISAM, default size: 8388608
+MS Word 6.0 (doc2), header: \x12\x34\x56\x78\x90\xFF, default size: 60000
+MS Word (MacBinary) (doc3), header: BNMSWD...\x00, default size: 1048576
+MS Write (wri), header: [\x31\x32]\xBE\x00\x00\x00\xAB\x00\x00\x00\x00\x00\x00, default size: 200000
+Lotus WordPro v9 (lwp), header: WordPro[\x00\x0D], footer: \xA4\x43\x4D\xA5\x48\x64\x72\xD7\x01\x01\x01\x00\x02\x00\x00\x00.{8}, default size: 1500000
+Lotus 123 v9 (123), header: \x00\x00\x1A\x00[\x03\x05]\x10\x04, footer: \xA4\x43\x4D\xA5\x48\x64\x72\xD7\x01\x01\x01\x00\x02\x00\x00\x00.{8}, default size: 2097152
+Lotus 123 v3-5 (wk3), header: \x00\x00\x1A\x00[\x00\x02]\x10\x04\x00, default size: 800000
+Lotus 123 v1 (wk1), header: \x00\x00\x02\x00\x06\x04\x06\x00\x08\x00\x00\x00\x00\x00, default size: 524288
+Microsoft Project (mpx), header: MPX[, ], default size: 262144
+Claris Works document (cwk), header: [\x00\x03\x04]BOBO, default size: 600000
+Claris Works word processor (cwk), header: WORDBOBO, default size: 1048576
+Claris Works text (MacBinar (cwk), header: CWWPBOBO, default size: 1048576
+DJVU (djvu), header: AT&TFORM, default size: 5242880
+Pocket Word (pwi), header: \x7B\x5Cpwi\x15\x00\x00\x01, default size: 500000
+TextMaker Document (tmd), header: MV\x00\xFF\x0C\x00[\x01\x0E]\x00, default size: 1048576
+MS Works (wks1), header: \xFF\x00\x02\x00\x04\x04\x05\x54\x02\x00..\x26\x54\x02\x00\x00\x00\x06\x00\x08, default size: 262144
+KWord (kwd), header: KOffice application/x-kword, default size: 1048576
+Zip Archive (zip), header: PK\x03\x04|PK00|PK\x05\x06, default size: 4194304
+MP3 ID3 v2/3/4 (mp3), header: ID3[\x02-\x04]\x00[\x00\x20\x40\x80][\x00\x01], default size: 6000000
+MP3 general (mp3), header: \xFF[\xE2\xE3\xF2\xF3\xFA\xFB][\x10-\x1B\x20-\x2B\x30-\x3B\x40-\x4B\x50-\x5B\x60-\x6B\x70-\x7B\x80-\x8B\x90-\x9B\xA0-\xAB\xB0-\xBB\xC0-\xCB\xD0-\xDB\xE0-\xEB], default size: 1048576
+Wave (wav), header: RIFF....WAVE(fmt |JUNK|LIST|bext|fact), default size: 1048576
+Audio Video Interleave (avi), header: RIFF....(LIST|JUNK|AVI ), default size: 10000000
+MPEG (mpg), header: \x00\x00\x01\xBA, default size: 8388608
+Blu-ray (m2ts), header: \x47\x40\x00\x10.{188}\x47, default size: 8388608
+QuickTime Movie (mov), header: (moov|skip|mdat), default size: 10000000
+QuickTime MOV(1) (mov), header: \x00\x00\x00(\x14pnot......PICT|\x08wide), default size: 10000000
+QuickTime MOV (mov), header: ftypqt  , default size: 10000000
+QuickTime 3GP (3gp), header: ftypisom, default size: 10000000
+QuickTime 3GP (3gp), header: ftyp3gp, default size: 10000000
+QuickTime 3GP (3gp), header: ftypmmp4, default size: 10000000
+QuickTime 3G2 (3g2), header: ftyp3g2a, default size: 10000000
+QuickTime M4A (m4a), header: ftypM4A\x20, default size: 10000000
+QuickTime M4V (m4v), header: ftypM4V[P\x20], default size: 10000000
+QuickTime MP4 (mp4), header: ftyp(mp41|avc1|MSNV|FACE|mobi), default size: 10000000
+QuickTime MP4 (mp4), header: ftyp(mp|MP)42, default size: 10000000
+QuickTime MP4 (mp4), header: ftypdash, default size: 10000000
+Matroska (mkv), header: (matroska|\x01\x42\xF7\x81\x01\x42\xF2\x81), default size: 10485760
+Windows Media (asf), header: \x30\x26\xB2\x75\x8E\x66\xCF\x11\xA6\xD9\x00\xAA\x00\x62\xCE\x6C, default size: 10000000
+Ogg Vorbis Audio (ogg), header: OggS\x00\x02.{22}\x01vorbis, default size: 8388608
+Ogg Video (ogv), header: OggS\x00\x02.{22}(\x01video|\x80theora|fishead), default size: 8388608
+Audacity (au), header: dns\..{20}AudacityBlockFile, default size: 2097152
+Adaptive Multi Rate audio (amr), header: \x23!AMR\x0A, default size: 1048576
+MediaPlayer Playlist (wpl), header: <\?wpl version=, footer: </smil>\x0D\x0A, default size: 100000
+M3U playlist (m3u), header: \#EXTM3U, default size: 1048576
+Flash Video (flv), header: FLV\x01[\x00\x01\x04\x05\x0D], default size: 10000000
+Flash MP4 video (f4v), header: ftyp(f4v|F4V)\x20, default size: 10000000
+Video surveillance (mp4s), header: IMKH\x01\x01\x00\x00, default size: 104857600
+Director - Shockwave movie (dcr), header: XFIR...\x00MDGF, default size: 3670016
+Windows Television (wtv), header: \xB7\xD8\x00\x20\x37\x49\xDA\x11\xA6\x4E\x00\x07\xE9\x5E\xAD\x8D, default size: 10485760
+Real Media (rm), header: \.RMF, default size: 100000000
+MIDI (mid), header: MThd, default size: 300000
+WebM Video (webm), header: \x1A\x45\xDF\xA3\x01\x00\x00\x00, default size: 33554432
+Compact Disc Digital Audio  (cda), header: RIFF....CDDAfmt, default size: 1048576
+AMR-WB Audio (awb), header: \x23!AMR-WB\x0A, default size: 1048576
+Audacity Block (auf), header: AudacityBlockFile, default size: 16000
+Sony Compressed Voice (dvf), header: MS_VOICE.{8}SONY CORPORATION, default size: 12582912
+AU Format Sound (snd), header: \x53\x54\x45\x56\x45\x02\x48\x80, default size: 1048576
+NeXT_Sun uLaw-AUdio-format (ulaw), header: \.snd\x00\x00[\x00\x01], default size: 1048576
+Audio Interchange (aif), header: FORM....AIFF, default size: 1048576
+Audio Interchange (compress (aifc), header: FORM....AIFC, default size: 1048576
+4X Movie (4xm), header: 4XMVLIST, default size: 1048576
+PixelMetrics (cwm), header: elmetrics\.com\x2E\x2E\x2E, default size: 209715200
+
+C:\Files\Academics\VIT\Lab\Digital Forensics\Lab12\12-carve-ext2\12-carve-ext2.dd
+Scope: 0000000 - 7B5D3FF
+Search all at sector boundaries
+
+With this evaluation version you cannot save files that are larger than 200 KB.
+
+0280400 - 0283439: 000021.gif (corrupt?)
+0285400 - 02AD425: 000022.bmp
+02ADC00 - 02B0DFF: 000023.doc
+02B1400 - 02B43FF: 000024.jpg (corrupt?)
+02B8C00 - 02BF409: 000025.pdf
+02BF800 - 02C190E: 000026.jpg
+02C1C00 - 0305006: 000027.pdf (not saved, > 200 KB) (corrupt?)
+0376400 - 03793FF: 000028.jpg (corrupt?)
+0397400 - 03A75FF: 000029.xls (corrupt?)
+039B400 - 039F7FF: 000030.ole2 (corrupt?)
+
+09-11-21, 16:56:23
+10 file headers were found. 9 files were recovered. 6 are supposedly incomplete or corrupt.
