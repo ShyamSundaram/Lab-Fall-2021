@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-const int n = 479; //height of image
-const int m = 500; //width of image
+const int n = 225; //height of image
+const int m = 225; //width of image
 
 void readMatrix(int matrix[n][m],int color)
 {

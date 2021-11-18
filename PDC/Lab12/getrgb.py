@@ -1,10 +1,10 @@
 import numpy as np
 from PIL import Image
 
-img=Image.open('img1.jpg')
+img=Image.open('images.jpeg')
 arr=np.array(img)
 print(arr.shape)
-print(arr)
+# print(arr)
 
 r=open("r.txt","a")
 g=open("g.txt","a")
