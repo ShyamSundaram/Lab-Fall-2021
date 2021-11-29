@@ -1,0 +1,83 @@
+---
+title: "Lab12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 20th November, 2021
+### Dr. B. Radhika Selvamani
+<br>
+
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Question 1](#q1) <br>
+2. [Question 2](#q2) <br>
+
+## <a name="q1"></a> Question 1
+<hr/>
+
+Q.Create a vector of all possible outcomes of throwing two dies.<br>
+
+For eg.,<br>
+1 ,1<br>
+1,2<br>
+1,3…..<br>
+Create a table which shows the sum of the two dies and the  probability of getting all possible sums starting from 2 till 12.
+
+<br><br>
+A.
+```{r}
+m <- matrix(1/36, nrow=6, ncol=6)
+su=rep(0,12)
+for (i in 1:6)
+{
+  for(j in 1:6)
+  {
+    su[i+j]=m[i,j]+su[i+j]
+  }
+}
+su[2:12]
+```
+The array above shows the probability of getting a sum from 2 to 12 with a apair of dice.<br><br>
+
+#
+## <a name="q2"></a> Question 2
+<hr/>
+
+Q. A lucky draw organized by Company A has the following rules<br>
+
+a.	If three consecutive numbers are even the player loses Rs.1000<br>
+b.	 If three consecutive numbers are odd the player gains Rs.1000<br>
+
+For a given sequence of numbers, find out how much the player has lost or gained at the end.<br><br>
+A.
+
+```{r}
+sequ<-c(7,1,5,3,2,4,8,3)
+points<-0
+iter<-length(sequ)-2
+for (i in 1:iter)
+{
+  
+  if (all((sequ[i:(i+2)]%%2)==0))
+    {points=points-1000}
+  else if (all((sequ[i:(i+2)]%%2)!=0))
+  {
+    points=points+1000
+  }
+}
+
+points
+```
+<br>Total points are shown above. He gained 1000 points because:<br>
+1. 7,1,5 gains 1000. Total=1000<br>
+2. 1,5,3 gains 1000. Total=2000<br>
+3. 5,3,2 doesn't change anything. similarly 3,2,4 doesn't affect anything.<br>
+4. 2,4,8 loses 1000. Total=1000.<br>
+5. 5,8,3 doesn't change anything.<br>
