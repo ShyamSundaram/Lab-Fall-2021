@@ -1,0 +1,8 @@
+influence of season
+visualize the crime points on map
+analyze correlation between attributes
+plot between count and attributes (like race, age, gender, borough)
+
+#might use Random forest
+
+pd_cd, cmplt to date and time

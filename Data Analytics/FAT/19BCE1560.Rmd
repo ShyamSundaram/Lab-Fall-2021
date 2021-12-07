@@ -1,0 +1,139 @@
+---
+title: "FAT Lab FDA"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### S Shyam Sundaram
+### 19BCE1560
+### 6th December, 2021
+### Dr. B. Radhika Selvamani
+<br>
+```{r}
+library(dplyr)
+library(tidyverse)
+```
+## Index
+<hr/>
+Click to go to the respective Question <br>
+1. [Part 1](#p1) <br>
+2. [Part 2](#p2) <br>
+
+## <a name="p1"></a> Part 1
+<hr/>
+
+a. Read the given table. Print the number of rows and colums. Order the table based on volume.
+Remove duplicates and print the number of rows and columns
+
+A.
+```{r}
+df=read.csv("treesQ1.csv",header=TRUE)
+colnames(df)
+df = df %>% 
+  rename(
+    Girth = X..Girth..in..,
+    Height=X..Height..ft..,
+    Volume=X..Volume.ft.3..
+    )
+nrow(df)
+ncol(df)
+```
+
+Order by Volume
+
+```{r}
+df=df[order(df$Volume),]
+df
+```
+
+Remove duplicates
+
+```{r}
+df=df[!duplicated(df),]
+df
+```
+
+Number of rows and columns
+
+```{r}
+nrow(df)
+ncol(df)
+```
+
+b. Add a new column “grade” which categorizes the tree based on the volume as below 20
+(SMALL) Below 30 and 20 and above (MEDIUM), above 30 (LARGE)<br>
+
+
+```{r}
+df$grade = cut(df$Volume,breaks=c(-Inf,20,30,Inf), labels=c("SMALL","MEDIUM","LARGE"))
+df
+```
+
+c. Group by the table by column “grade” and and calculate the mean girth and height within each
+category. Draw a box plot for the same.<br>
+
+```{r}
+grp=df %>% group_by(grade) %>% summarise(avg_girth=mean(Girth),avg_height=mean(Height))
+grp
+```
+
+Boxplot
+
+```{r}
+boxplot(Girth~grade,data=df,xlab="Grade",ylab="Girth")
+boxplot(Height~grade,data=df,xlab="Grade",ylab="Height")
+```
+
+## <a name="p2"></a> Question 2
+<hr/>
+
+a. For the given table airtravels some values of missing.
+Please fill them using mean imputation and linear regression imputation.
+Identify the closest match among both
+
+A.
+```{r}
+df=read.csv("airtravelQ1.csv",header=TRUE)
+
+df = df %>% 
+  rename(
+    Month = Month,
+    X1958=X..1958.,
+    X1959=X..1959.
+    )
+df
+sum(is.na(df))
+```
+
+Mean imputation of X1958
+
+```{r}
+df1=df
+df1$X1958[is.na(df1$X1958)]=mean(df1$X1958,na.rm=TRUE)
+df1
+```
+
+Linear regression imputation
+
+```{r}
+lm(X1958~X1959,data=df1)
+```
+
+So using the coefficient and intercept
+
+```{r}
+df1=df
+for(i in 1:nrow(df1))
+{
+  if(is.na(df1$X1958[i]))
+  {
+    df1$X1958[i]=(0.748*df1$X1959[i])+(64.047)
+  }
+}
+df1
+```
+
+The mean imputation is worse because it does not preserve any existing relationship between variables. Thus, linear regression imputation is the better method.

@@ -1,0 +1,15 @@
+reg num name
+
+question num and ques
+
+aim
+
+code
+
+html, pdf, jupyternb
+
+pdf: moodle and vtop
+moodle: html and jupyter notebook
+
+vtop: only pdf
+lms: html, nb, pdf
