@@ -1,0 +1,45 @@
+default
+--------------------------------------
+
+
+
+guided
+--------------------------------------
+Thread count: 1 Time taken is: 1.391602 Number of combinations: 236786
+Thread count: 2 Time taken is: 0.704590 Number of combinations: 236786
+Thread count: 4 Time taken is: 0.436523 Number of combinations: 236786
+Thread count: 8 Time taken is: 0.371094 Number of combinations: 236786
+Thread count: 16 Time taken is: 0.399902 Number of combinations: 236786
+Thread count: 32 Time taken is: 0.396484 Number of combinations: 236786
+Thread count: 64 Time taken is: 0.380859 Number of combinations: 236786
+Thread count: 128 Time taken is: 0.381836 Number of combinations: 236786
+Thread count: 256 Time taken is: 0.398926 Number of combinations: 236786
+Thread count: 512 Time taken is: 0.408691 Number of combinations: 236786
+
+
+static
+---------------------------------------
+Thread count: 1 Time taken is: 1.545410 Number of combinations: 240645
+Thread count: 2 Time taken is: 0.783203 Number of combinations: 240645
+Thread count: 4 Time taken is: 0.484863 Number of combinations: 240645
+Thread count: 8 Time taken is: 0.398926 Number of combinations: 240645
+Thread count: 16 Time taken is: 0.399902 Number of combinations: 240645
+Thread count: 32 Time taken is: 0.381348 Number of combinations: 240645
+Thread count: 64 Time taken is: 0.389648 Number of combinations: 240645
+Thread count: 128 Time taken is: 0.379883 Number of combinations: 240645
+Thread count: 256 Time taken is: 0.395996 Number of combinations: 240645
+Thread count: 512 Time taken is: 0.407227 Number of combinations: 240645
+
+
+dynamic
+----------------------------------------
+Thread count: 1 Time taken is: 2.043457 Number of combinations: 235767
+Thread count: 2 Time taken is: 2.308594 Number of combinations: 235767
+Thread count: 4 Time taken is: 2.050293 Number of combinations: 235767
+Thread count: 8 Time taken is: 1.274414 Number of combinations: 235767
+Thread count: 16 Time taken is: 1.215820 Number of combinations: 235767
+Thread count: 32 Time taken is: 1.961914 Number of combinations: 235767
+Thread count: 64 Time taken is: 1.239746 Number of combinations: 235767
+Thread count: 128 Time taken is: 1.220703 Number of combinations: 235767
+Thread count: 256 Time taken is: 1.243652 Number of combinations: 235767
+Thread count: 512 Time taken is: 1.270508 Number of combinations: 235767
